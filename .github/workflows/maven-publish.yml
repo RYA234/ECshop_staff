@@ -36,8 +36,8 @@ jobs:
     - name: Beanstalk Deploy
       uses: einaregilsson/beanstalk-deploy@v20
       with:
-        aws_access_key: ${{ AKIARTKN2SQVOER2Q3R3}}
-        aws_secret_key: ${{ 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}}
+        aws_access_key: ${{ AKIARTKN2SQVOER2Q3R3 }}
+        aws_secret_key: ${{ p12hE4OUckuhajHKzwQokouTgu7U4hfxv5Bb53I7 }}
         application_name: Samplel
         environment_name: Samplel-env
         version_label: ${{ github.run_number }}
