@@ -32,3 +32,15 @@ jobs:
       run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
       env:
         GITHUB_TOKEN: ${{ github.token }}
+
+    - name: Beanstalk Deploy
+      uses: einaregilsson/beanstalk-deploy@v20
+      with:
+        aws_access_key: ${{ AKIARTKN2SQVOER2Q3R3}}
+        aws_secret_key: ${{ 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}}
+        application_name: demo-app
+        environment_name: DemoApp-env
+        version_label: ${{ github.run_number }}
+        region: ap-northeast-1
+        deployment_package: target/demo-0.0.1-SNAPSHOT.jar
+    
