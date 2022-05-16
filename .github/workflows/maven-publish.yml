@@ -38,8 +38,8 @@ jobs:
       with:
         aws_access_key: ${{ AKIARTKN2SQVOER2Q3R3}}
         aws_secret_key: ${{ p12hE4OUckuhajHKzwQokouTgu7U4hfxv5Bb53I7}}
-        application_name: demo-app
-        environment_name: DemoApp-env
+        application_name: Samplel
+        environment_name: Samplel-env
         version_label: ${{ github.run_number }}
         region: ap-northeast-1
         deployment_package: target/demo-0.0.1-SNAPSHOT.jar
