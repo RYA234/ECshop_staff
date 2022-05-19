@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+<head>
+    <meta charset="UTF-8"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>ECショップ画面</title>
+    <!-- 個別CSS読込 -->
+    <link th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css}" rel="stylesheet" >
+</head>
+</head>
+<body>
+<div class="text-center">
+    <div class="mb-6">
+<h2>ECショップ画面</h2>
+
+
+</br>
+        <div style="display:inline-flex">
+        <form method="post" th:action="${INDEX_TO_STAFF_NAME}">
+        <button class="btn btn-primary" type="submit" th:name="${PARAM_INDEX_TO_STAFF_LIST}">
+            スタッフ向け
+        </button>
+            </form>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <form method="post" action = "user/user_list">
+    <button class="btn btn-primary" type="submit" name="user">
+        ユーザー向け
+    </button>
+        </br>
+        github URL
+        </form>
+            <div th:text="${PARAM_INDEX_TO_STAFF_LIST}"></div>
+</div>
+</div>
+</body>
+</html>
