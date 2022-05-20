@@ -11,20 +11,17 @@ public class IndexController {
 
 
     @GetMapping("/index")
-    public String home() {
-   // public String home(Model model) {
+    //public String home() {
+    public String home(Model model) {
        String Hello ="aaa";
        String Hell = "bbad";
-        String HELLO_NAME = "HELLO_NAME";
-      String Hello_ATTRIBUTE = "hello";
-        //model.addAttribute("hello", "Heldsddddsdslo Thsd!!");
-        //model.addAttribute(Hello, Hell);
+       String HELLO_NAME = "HELLO_NAME";
+       String Hello_ATTRIBUTE = "hello";
         //model.addAttribute(INDEX_TO_STAFF_NAME,STAFF_LIST_URL);
        // model.addAttribute(HELLO_NAME, Hello_ATTRIBUTE);
-        //model.addAttribute(INDEX_TO_STAFF_NAME,STAFF_LIST_URL);
-        //model.addAttribute(MvcStatic.Staff.INDEX_TO_STAFF_NAME, MvcStatic.Staff.STAFF_LIST_URL);
-        //model.addAttribute(PARAM_INDEX_TO_STAFF_LIST,PARAM_INDEX_TO_STAFF_LIST);
-        //model.addAttribute(MvcStatic.Staff.PARAM_INDEX_TO_STAFF_LIST,MvcStatic.Staff.PARAM_INDEX_TO_STAFF_LIST);
+
+        model.addAttribute(MvcStatic.Staff.STAFF_LIST_NAME, MvcStatic.Staff.STAFF_LIST_URL);
+        model.addAttribute(MvcStatic.Staff.PARAM_INDEX_TO_STAFF_LIST,MvcStatic.Staff.PARAM_INDEX_TO_STAFF_LIST);
         return "/index/index";
     }
     public enum ATTRIBUTE
@@ -32,16 +29,7 @@ public class IndexController {
         ID
     }
 
-    @RequestMapping(value = MvcStatic.Staff.STAFF_LIST_URL, params = MvcStatic.Staff.PARAM_INDEX_TO_STAFF_LIST, method = RequestMethod.POST)
-    //@RequestMapping(value = STAFF_LIST_URL, params = PARAM_INDEX_TO_STAFF_LIST, method = RequestMethod.POST)
-    public String postStaffList(Model model)
-    {
-        System.out.println("aaa");
-        model.addAttribute(MvcStatic.Staff.Add.STAFF_ADD_NAME,MvcStatic.Staff.Add.STAFF_ADD_URL);
-        model.addAttribute(MvcStatic.Staff.Add.PARAM_STAFF_LIST_TO_ADD,MvcStatic.Staff.Add.PARAM_STAFF_LIST_TO_ADD);
 
-        return MvcStatic.Staff.STAFF_LIST_URL;
-    }
 
 
 

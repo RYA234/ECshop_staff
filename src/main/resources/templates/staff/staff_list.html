@@ -20,9 +20,18 @@
     <button class="btn btn-primary" type="submit" th:name="${PARAM_STAFF_LIST_TO_ADD}">
         追加
     </button>
-
-
         </form>
+        <form method="post" th:action="${STAFF_EDIT_NAME}">
+            &nbsp;&nbsp;&nbsp;&nbsp;
+    <button class="btn btn-primary" type="submit" th:name="${PARAM_STAFF_LIST_TO_EDIT}">
+        編集
+    </button>
+        </form>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+    <button class="btn btn-primary" type="submit" th:name="${PARAM_STAFF_LIST_TO_DELETE}">
+        削除
+    </button>
+
     </div>
 </div>
 

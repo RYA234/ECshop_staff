@@ -15,33 +15,33 @@
     スタッフ追加画面です。
     </br>
 
-    <div class="mb-6">
-        </br>スタッフ名</br>
-        <div class="row justify-content-center">
-        <div class="row">
-        <div class="col-xs-3">
-        <input type ="text" name="title" class="form-control" ><br />
-
-        パスワード</br>
-
-    <input type ="password" name="pass" class="form-control"><br />
-
-        </div>
-        </div>
-    </div>
-    </div>
-
-
     <!-- ↓formでも改行しない方法-->
-    <div style="display:inline-flex">
-    <form method="post" action="/staff_check">
-        <button class="btn btn-primary" type="submit" name="fromList">
+
+    <form method="post" th:action="${STAFF_ADD_CHECK_NAME}">
+        <div class="mb-6">
+            </br>スタッフ名</br>
+            <div class="row justify-content-center">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <input type ="text" name="title" class="form-control" ><br />
+
+                        パスワード</br>
+
+                        <input type ="password" name="pass" class="form-control"><br />
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="display:inline-flex">
+        <button class="btn btn-primary" type="submit" th:name="${PARAM_STAFF_ADD_TO_CHECK}">
             OK
         </button>
     </form>
         &nbsp;&nbsp;&nbsp;&nbsp;
-    <form method="post" action="/staff_back">
-        <button class="btn btn-primary" type="submit" name="back">
+    <form method="post" th:action="${STAFF_LIST_NAME}">
+        <button class="btn btn-primary" type="submit" th:name="${PARAM_STAFF_ADD_BACK}">
             戻る
         </button>
     </form>
