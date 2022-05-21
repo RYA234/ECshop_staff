@@ -14,6 +14,11 @@
 <div class="text-center">
     スタッフ一覧画面です。
     </br>
+    <tr th:each="item: ${staffList}">
+        <div th:text ="${item.id}"></div>
+        <div th:text ="${item.name}"></div>
+    </tr>>
+
 
     <div style="display:inline-flex">
         <form method="post" th:action="${STAFF_ADD_NAME}">
