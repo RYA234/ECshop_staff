@@ -20,4 +20,10 @@ public class StaffServiceImpl implements StaffService
             System.out.println("問題なし！");
         return StaffMapper.staffFindMany();
     }
+
+    @Override
+    public void addStaff(MStaff staff)
+    {
+        StaffMapper.staffInsertOne(staff);
+    }
 }

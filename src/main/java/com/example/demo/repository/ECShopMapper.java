@@ -9,4 +9,5 @@ import java.util.List;
 public interface ECShopMapper
 {
     public List<MStaff> staffFindMany();
+    public void staffInsertOne(MStaff staff);
 }

@@ -73,6 +73,11 @@ public class StaffController
         model.addAttribute(MvcStatic.Staff.Add.STAFF_ADD_NAME,MvcStatic.Staff.Add.STAFF_ADD_URL);
         model.addAttribute(MvcStatic.Staff.Add.PARAM_STAFF_CHECK_BACK,MvcStatic.Staff.Add.PARAM_STAFF_CHECK_BACK);
 
+        MStaff teststaff  = new MStaff();
+        teststaff.setName("aa");
+        teststaff.setPassword("bbbb");
+        staffService.addStaff(teststaff);
+
         return MvcStatic.Staff.Add.STAFF_ADD_CHECK_URL;
     }
 

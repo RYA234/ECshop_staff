@@ -55,10 +55,13 @@ public class StaffControllerTest
         this.loginMvc.perform(get("/index"))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(model().attribute("STAFF_LIST_NAME", "/staff/staff_list")
+                .andExpect(model().attribute("STAFF_LIST_NAME", "/staff/staff_list"))
+                .andExpect(model().attribute("PARAM_INDEX_TO_STAFF_LIST", "PARAM_INDEX_TO_STAFF_LIST")
                 //.andExpect(model().attribute(MvcStatic.Staff.PARAM_INDEX_TO_STAFF_LIST,MvcStatic.Staff.PARAM_INDEX_TO_STAFF_LIST)
                 );
     }
+
+
 
 
 
