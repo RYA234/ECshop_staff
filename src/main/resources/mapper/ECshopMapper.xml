@@ -11,11 +11,25 @@
         <result column="password" property="password" />
     </resultMap>
 
-
+    <!-- スタッフ複数件表示 -->
     <select id="staffFindMany" resultType="com.example.demo.domain.model.MStaff">
         select
         *
         from
         m_staff
     </select>
+
+    <insert id="staffInsertOne">
+        insert into m_staff(
+          id
+        , name
+        , password
+        )
+        values (
+          #{id}
+        , #{name}
+        , #{password}
+        )
+    </insert>
+
 </mapper>
