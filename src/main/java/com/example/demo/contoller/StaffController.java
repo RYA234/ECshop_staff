@@ -24,7 +24,7 @@ public class StaffController
    private ModelMapper modelMapper;
 
     @RequestMapping(value = MvcStatic.Staff.Add.STAFF_ADD_URL,params = MvcStatic.Staff.Add.PARAM_STAFF_LIST_TO_ADD, method = RequestMethod.POST)
-
+    //@RequestMapping(value = "staff/staff_add" ,params = MvcStatic.Staff.Add.PARAM_STAFF_LIST_TO_ADD, method = RequestMethod.POST)
     public String postStaffListToAdd(Model model)
     {
         System.out.println("bbbv");
@@ -35,6 +35,7 @@ public class StaffController
         model.addAttribute(MvcStatic.Staff.Add.PARAM_STAFF_ADD_BACK,MvcStatic.Staff.Add.PARAM_STAFF_ADD_BACK);
 
         return MvcStatic.Staff.Add.STAFF_ADD_URL;
+        //return "staff/staff_add";
     }
 
 
@@ -55,7 +56,7 @@ public class StaffController
         model.addAttribute(MvcStatic.Staff.Delete.STAFF_DELETE_NAME,MvcStatic.Staff.Delete.STAFF_DELETE_URL);
         model.addAttribute(MvcStatic.Staff.Delete.PARAM_STAFF_LIST_TO_DELETE,MvcStatic.Staff.Delete.PARAM_STAFF_LIST_TO_DELETE);
         System.out.println("zzzz");
-        MStaff staff = modelMapper.map(form, MStaff.class);
+       // MStaff staff = modelMapper.map(form, MStaff.class);
         List<MStaff> staffList = staffService.getStaffs();
         System.out.println(staffList);
         model.addAttribute("staffList", staffList);

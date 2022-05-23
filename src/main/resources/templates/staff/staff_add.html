@@ -16,8 +16,8 @@
     </br>
 
     <!-- ↓formでも改行しない方法-->
-
-    <form method="post" th:action="${STAFF_ADD_CHECK_NAME}">
+    <form method="post" th:action=${#strings.prepend(STAFF_ADD_CHECK_NAME,'/')}>
+<!--    <form method="post" th:action="${STAFF_ADD_CHECK_NAME}">-->
         <div class="mb-6">
             </br>スタッフ名</br>
             <div class="row justify-content-center">

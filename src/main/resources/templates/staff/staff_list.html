@@ -18,10 +18,11 @@
         <div th:text ="${item.id}"></div>
         <div th:text ="${item.name}"></div>
     </tr>>
-
+    <div th:text=${#strings.prepend(STAFF_ADD_NAME,'/')}></div>
+    <div th:text="${STAFF_ADD_NAME}"></div>
 
     <div style="display:inline-flex">
-        <form method="post" th:action="${STAFF_ADD_NAME}">
+        <form method="post" th:action=${#strings.prepend(STAFF_ADD_NAME,'/')}>
     <button class="btn btn-primary" type="submit" th:name="${PARAM_STAFF_LIST_TO_ADD}">
         追加
     </button>
