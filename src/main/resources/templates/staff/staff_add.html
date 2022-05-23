@@ -16,19 +16,17 @@
     </br>
 
     <!-- ↓formでも改行しない方法-->
-    <form method="post" th:action=${#strings.prepend(STAFF_ADD_CHECK_NAME,'/')}>
+
+    <form method="post" th:action=${#strings.prepend(STAFF_ADD_CHECK_NAME,'/')} class="form-control" th:object="${StaffListForm}">
 <!--    <form method="post" th:action="${STAFF_ADD_CHECK_NAME}">-->
         <div class="mb-6">
             </br>スタッフ名</br>
             <div class="row justify-content-center">
                 <div class="row">
                     <div class="col-xs-3">
-                        <input type ="text" name="title" class="form-control" ><br />
-
+                        <input type ="text" name="name" class="form-control" ><br />
                         パスワード</br>
-
-                        <input type ="password" name="pass" class="form-control"><br />
-
+                        <input type ="password" name="password" class="form-control"><br />
                     </div>
                 </div>
             </div>
@@ -40,12 +38,12 @@
         </button>
     </form>
         &nbsp;&nbsp;&nbsp;&nbsp;
-    <form method="post" th:action="${STAFF_LIST_NAME}">
+    <form method="post" th:action=${#strings.prepend(STAFF_ADD_NAME,'/')} >
         <button class="btn btn-primary" type="submit" th:name="${PARAM_STAFF_ADD_BACK}">
             戻る
         </button>
     </form>
-        <div>
+
 </div>
 
 

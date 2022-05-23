@@ -14,15 +14,19 @@
 <div class="text-center">
     スタッフ追加確認画面です。
     </br>
-
+    <div th:text ="${name}" class="form-control" ></div> </br>
     <div style="display:inline-flex">
-        <form method="post" th:action=${#strings.prepend(STAFF_ADD_DONE_NAME,'/')}>
+        <form method="post" th:action=${#strings.prepend(STAFF_ADD_DONE_NAME,'/')} class="form-control" th:object="${StaffListForm}">
+            <input type ="hidden" name ="name" th:value="${name}">
+            <input type ="hidden" name ="password" th:value="${password}">
+
 <!--        <form method="post" th:action="${STAFF_ADD_DONE_NAME}">-->
+
             <button class="btn btn-primary" type="submit" th:name="${PARAM_STAFF_CHECK_TO_DONE}">
                 OK
             </button>
         </form>
-        <form method="post" th:action="${STAFF_ADD_NAME}">
+        <form method="post" th:action=${#strings.prepend(STAFF_ADD_NAME,'/')}>
             &nbsp;&nbsp;&nbsp;&nbsp;
             <button class="btn btn-primary" type="submit" th:name="${PARAM_STAFF_CHECK_BACK}">
                 戻る

@@ -15,8 +15,8 @@
     スタッフ一覧画面です。
     </br>
     <tr th:each="item: ${staffList}">
-        <div th:text ="${item.id}"></div>
-        <div th:text ="${item.name}"></div>
+        <div th:text ="${item.id}" class="form-control" ></div>
+        <div th:text ="${item.name}" class="form-control" ></div>
     </tr>>
     <div th:text=${#strings.prepend(STAFF_ADD_NAME,'/')}></div>
     <div th:text="${STAFF_ADD_NAME}"></div>
