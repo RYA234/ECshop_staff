@@ -2,7 +2,7 @@ package com.example.demo.contoller;
 
 import com.example.demo.domain.model.MStaff;
 import com.example.demo.form.StaffListForm;
-import com.example.demo.service.StaffService;
+import com.example.demo.repository.service.StaffService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

@@ -1,4 +1,4 @@
-package com.example.demo.service;
+package com.example.demo.repository.service;
 
 import com.example.demo.domain.model.MStaff;
 
