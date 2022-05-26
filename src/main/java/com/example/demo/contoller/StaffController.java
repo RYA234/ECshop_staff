@@ -17,7 +17,7 @@ import java.util.List;
 
 public class StaffController
 {
-
+    StaffController(){};
     @Autowired
     private StaffService staffService;
     @Autowired
