@@ -14,31 +14,45 @@
 <div class="text-center">
     スタッフ一覧画面です。
     </br>
-    <tr th:each="item: ${staffList}">
-        <div th:text ="${item.id}" class="form-control" ></div>
-        <div th:text ="${item.name}" class="form-control" ></div>
-    </tr>>
+    <form method="post" th:action=${#strings.prepend(STAFF_LIST_NAME,'/')} class="form-control" th:object="${StaffListForm}">
+    <div>
+        <table class="table table-sm">
+        <thead>
+        <tr>
+            <th>選択 </th>
+            <th>id </th>
+            <th>名前</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item: ${staffList}">
+           <td> <input type="radio" name="radio" th:value="${item.id}"></td>
+            <td th:text ="${item.id}"></td>
+            <td th:text ="${item.name}">f</td>
+         </tr>>
+        </tbody>>
+    </table>
+    </div>
     <div th:text=${#strings.prepend(STAFF_ADD_NAME,'/')}></div>
     <div th:text="${STAFF_ADD_NAME}"></div>
 
     <div style="display:inline-flex">
-        <form method="post" th:action=${#strings.prepend(STAFF_ADD_NAME,'/')}>
+
     <button class="btn btn-primary" type="submit" th:name="${PARAM_STAFF_LIST_TO_ADD}">
         追加
     </button>
-        </form>
-        <form method="post" th:action="${STAFF_EDIT_NAME}">
-            &nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;
     <button class="btn btn-primary" type="submit" th:name="${PARAM_STAFF_LIST_TO_EDIT}">
         編集
     </button>
-        </form>
+
             &nbsp;&nbsp;&nbsp;&nbsp;
     <button class="btn btn-primary" type="submit" th:name="${PARAM_STAFF_LIST_TO_DELETE}">
         削除
     </button>
 
     </div>
+    </form>
 </div>
 
 

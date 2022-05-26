@@ -8,4 +8,5 @@ public class StaffListForm
     private Integer id;
     private String name;
     private String password;
+    private String radio;
 }
