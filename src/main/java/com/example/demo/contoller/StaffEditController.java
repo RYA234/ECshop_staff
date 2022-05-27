@@ -44,7 +44,37 @@ public class StaffEditController {
 
     @RequestMapping(value = MvcStatic.Staff.Edit.STAFF_EDIT_CHECK_URL, params = MvcStatic.Staff.Edit.PARAM_STAFF_EDIT_TO_CHECK, method = RequestMethod.POST)
     public String postStaffEditToCheck(Model model, StaffListForm form) {
+        System.out.println("staff_editからstaff_edit_checkに移動しました");
+        System.out.println(form.getName());
+        System.out.println(form.getId());
+        System.out.println(form.getPassword());
 
+
+        model.addAttribute("id", form.getId());
+        model.addAttribute("name", form.getName());
+        model.addAttribute("password", form.getPassword());
+        model.addAttribute(MvcStatic.Staff.Edit.STAFF_EDIT_DONE_NAME, MvcStatic.Staff.Edit.STAFF_EDIT_DONE_URL);
+        model.addAttribute(MvcStatic.Staff.Edit.PARAM_STAFF_EDIT_CHECK_TO_DONE,MvcStatic.Staff.Edit.PARAM_STAFF_EDIT_CHECK_TO_DONE);
         return MvcStatic.Staff.Edit.STAFF_EDIT_CHECK_URL;
+    }
+
+    @RequestMapping(value = MvcStatic.Staff.Edit.STAFF_EDIT_DONE_URL, params = MvcStatic.Staff.Edit.PARAM_STAFF_EDIT_CHECK_TO_DONE, method = RequestMethod.POST)
+    public String postStaffEditCheckToDone(Model model, StaffListForm form)
+    {
+        System.out.println("スタッフ編集確認画面からスタッフ編集完了画面へ遷移します");
+        model.addAttribute(MvcStatic.Staff.STAFF_LIST_NAME,MvcStatic.Staff.STAFF_LIST_URL);
+        model.addAttribute(MvcStatic.Staff.Edit.PARAM_STAFF_EDIT_DONE_BACK,MvcStatic.Staff.Edit.PARAM_STAFF_EDIT_DONE_BACK);
+        System.out.println(form.getName());
+
+        int intId = Integer.valueOf(form.getId());
+        MStaff staff = MStaff.builder()
+                        .id(intId)
+                        .name(form.getName())
+                        .password(form.getPassword())
+                        .build();
+        System.out.println(staff);
+        staffEditService.updateStaffone(intId,form.getName(), form.getPassword());
+
+        return MvcStatic.Staff.Edit.STAFF_EDIT_DONE_URL;
     }
 }
