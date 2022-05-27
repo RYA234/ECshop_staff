@@ -15,13 +15,14 @@
     スタッフ編集画面です。
     </br>
 
-    <form method="post" th:action=${#strings.prepend(STAFF_EDIT_CHECK_NAME,'/')}>
+    <form method="post" th:action=${#strings.prepend(STAFF_EDIT_CHECK_NAME,'/')} class="form-control" th:object="${StaffListForm}">
         <div class="mb-6">
             <div class="row justify-content-center">
                 <div class="row">
                     <div class="col-xs-3">
                         </br>名前</br>
-                        <input type="text" field="name" th:value="${name}" class="form-control"> </br>
+                        <input type="hidden" name="id" th:value="${id}" class="form-control"> </br>
+                        <input type="text" name="name" th:value="${name}" class="form-control"> </br>
                         パスワード</br>
                         <input type ="password" name="password" th:value="${password}" class="form-control"></br>
                     </div>
