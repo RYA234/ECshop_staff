@@ -4,8 +4,9 @@ spring:
   #
   datasource:
     # initialization-mode: always
-    url: jdbc:mysql://aasfjipizluevw.cvdtfnwyixqf.ap-northeast-1.rds.amazonaws.com:3306/ebdb
-    username: root
+    # url: jdbc:mysql://aasfjipizluevw.cvdtfnwyixqf.ap-northeast-1.rds.amazonaws.com:3306/ebdb
+    url: jdbc:mysql://localhost:3306/db_name
+    username: admin
     password: root1234
     driver-class-name: com.mysql.cj.jdbc.Driver
     initialize: true
