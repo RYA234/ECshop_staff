@@ -10,4 +10,6 @@ public interface ECShopMapper
 {
     public List<MStaff> staffFindMany();
     public void staffInsertOne(MStaff staff);
+    public MStaff staffFindOne(Integer id);
+    public void updateStaff(MStaff staff);
 }

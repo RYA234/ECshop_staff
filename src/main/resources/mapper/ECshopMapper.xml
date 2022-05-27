@@ -18,7 +18,7 @@
         from
         m_staff
     </select>
-
+    <!-- スタッフ1件追加 -->
     <insert id="staffInsertOne">
         insert into m_staff(
           id
@@ -31,5 +31,35 @@
         , #{password}
         )
     </insert>
+
+    <!-- スタッフ１件の情報を取得   -->
+    <select id="staffFindOne" resultType="com.example.demo.domain.model.MStaff">
+        select
+            *
+        from
+        m_staff
+            where
+                id = #{id}
+    </select>
+
+
+    <!-- スタッフ１件の更新 -->
+    <update id="staffUpdate">
+    update
+        m_staff
+    set
+        name = #{name}
+    ,   password = #{password}
+    where
+        id = #{id}
+    </update>
+
+    <!-- スタッフ１件削除 -->
+    <delete id="staffDelete">
+        delete from
+            m_staff
+        where
+            id = #{id}
+    </delete>
 
 </mapper>
