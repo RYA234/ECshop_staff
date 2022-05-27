@@ -26,4 +26,16 @@ public class StaffServiceImpl implements StaffService
     {
         StaffMapper.staffInsertOne(staff);
     }
+
+    @Override
+    public MStaff getStaff(Integer id)
+    {
+        return StaffMapper.staffFindOne(id);
+    }
+    public void updateStaffone(Integer id,
+                               String name,
+                               String password)
+    {
+        StaffMapper.staffUpdate(id,name,password);
+    }
 }

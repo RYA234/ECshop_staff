@@ -10,5 +10,7 @@ public interface StaffService
     public void addStaff(MStaff staff);
 
     public MStaff getStaff(Integer id);
-    public void updateStaffone(MStaff staff);
+    public void updateStaffone(Integer id,
+                               String name,
+                               String password);
 }
