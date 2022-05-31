@@ -1,8 +1,8 @@
-package com.example.demo.repository.service.impliment;
+package com.example.demo.service.impliment;
 
 import com.example.demo.domain.model.MStaff;
 import com.example.demo.repository.ECShopMapper;
-import com.example.demo.repository.service.StaffService;
+import com.example.demo.service.StaffService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
