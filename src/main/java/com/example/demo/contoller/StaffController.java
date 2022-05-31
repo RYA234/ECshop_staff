@@ -2,7 +2,7 @@ package com.example.demo.contoller;
 
 import com.example.demo.domain.model.MStaff;
 import com.example.demo.form.StaffListForm;
-import com.example.demo.repository.service.StaffService;
+import com.example.demo.service.StaffService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,10 +10,22 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.thymeleaf.spring5.expression.Mvc;
 
 import java.util.List;
 
+/**
+ * スタッフ追加機能のコントローラーです。
+ *
+ * スタッフ追加画面： @
+ *
+ * スタッフ追加確認画面：
+ *
+ * スタッフ追加完了画面：
+ *
+ *
+ * @author RYA234
+ *
+ */
 @Controller
 
 public class StaffController
@@ -24,6 +36,21 @@ public class StaffController
     @Autowired
    private ModelMapper modelMapper;
 
+    /**
+     *スタッフ一覧画面からスタッフ画面追加に遷移するコントローラーです。<br>
+     *
+     * 遷移前URL：{@value com.example.demo.contoller.MvcStatic.Staff#STAFF_LIST_URL}	<br>
+     * 遷移後URL：{@value com.example.demo.contoller.MvcStatic.Staff.Add#STAFF_ADD_URL}		<br>
+     *　html側のURLとform actionの変数はthymeleafを使ってJavaの変数から渡しています。
+     *
+     * @param model Viewに渡す変数
+     * 　　　　　	<p>1.遷移先のURL<br>
+     * 				     2.formアクションの値 </p>
+     *
+     * @return　PARAM_STAFF_LIST_TO_ADD= {@value com.example.demo.contoller.MvcStatic.Staff.Add#STAFF_ADD_URL}:遷移先URL
+     *テストコード記入済み
+     *
+     */
     @RequestMapping(value = MvcStatic.Staff.Add.STAFF_ADD_URL,params = MvcStatic.Staff.Add.PARAM_STAFF_LIST_TO_ADD, method = RequestMethod.POST)
     public String postStaffListToAdd(Model model)
     {
@@ -38,7 +65,7 @@ public class StaffController
     }
 
 
-    //@RequestMapping(value = STAFF_LIST_URL, params = PARAM_INDEX_TO_STAFF_LIST, method = RequestMethod.POST)
+
 
     @RequestMapping(value = MvcStatic.Staff.STAFF_LIST_URL, params = MvcStatic.Staff.PARAM_INDEX_TO_STAFF_LIST, method = RequestMethod.POST)
     public String postStaffList(@ModelAttribute StaffListForm form, Model model)
@@ -62,6 +89,21 @@ public class StaffController
 
         return MvcStatic.Staff.STAFF_LIST_URL;
     }
+    /**
+     *スタッフ追加画面からスタッフ追加確認画面に遷移するコントローラーです。<br>
+     *
+     * 遷移前URL：{@value com.example.demo.contoller.MvcStatic.Staff.Add#STAFF_ADD_URL}	<br>
+     * 遷移後URL：{@value com.example.demo.contoller.MvcStatic.Staff.Add#STAFF_ADD_CHECK_URL}		<br>
+     *　html側のURLとform actionの変数はthymeleafを使ってJavaの変数から渡しています。
+     *
+     * @param model Viewに渡す変数
+     * 　　　　　	<p>1.遷移先のURL<br>
+     * 				     2.formアクションの値 </p>
+     *
+     * @return　STAFF_ADD_CHECK_URL= {@value com.example.demo.contoller.MvcStatic.Staff.Add#STAFF_ADD_CHECK_URL}:遷移先URL
+     *
+     *テストコード記入済み
+     */
     @RequestMapping(value = MvcStatic.Staff.Add.STAFF_ADD_CHECK_URL, params = MvcStatic.Staff.Add.PARAM_STAFF_ADD_TO_CHECK, method = RequestMethod.POST)
     public String postStaffAddToCheck(Model model,@ModelAttribute StaffListForm form)
     {
@@ -91,6 +133,21 @@ public class StaffController
         return MvcStatic.Staff.Add.STAFF_ADD_CHECK_URL;
     }
 
+    /**
+     *スタッフ追加画面からスタッフ一覧画面に戻るコントローラーです。<br>
+     *
+     * 遷移前URL：{@value com.example.demo.contoller.MvcStatic.Staff.Add#STAFF_ADD_URL}	<br>
+     * 遷移後URL：{@value com.example.demo.contoller.MvcStatic.Staff#STAFF_LIST_URL}		<br>
+     *　html側のURLとform actionの変数はthymeleafを使ってJavaの変数から渡しています。
+     *
+     * @param model Viewに渡す変数
+     * 　　　　　	<p>1.遷移先のURL<br>
+     * 				     2.formアクションの値 </p>
+     *
+     * @return　STAFF_LIST_URL= {@value com.example.demo.contoller.MvcStatic.Staff.Add#STAFF_LIST_URL}:遷移先URL
+     *
+     *テストコード記入済み
+     */
     @RequestMapping(value = MvcStatic.Staff.STAFF_LIST_URL, params = MvcStatic.Staff.Add.PARAM_STAFF_ADD_BACK, method = RequestMethod.POST)
     public String postStaffAddBack(Model model)
     {
@@ -111,7 +168,21 @@ public class StaffController
         model.addAttribute("staffList", staffList);
         return MvcStatic.Staff.STAFF_LIST_URL;
     }
-
+    /**
+     *スタッフ追加確認画面からスタッフ追加画面に戻るコントローラーです。<br>
+     *
+     * 遷移前URL：{@value com.example.demo.contoller.MvcStatic.Staff.Add#STAFF_ADD_CHECK_URL}	<br>
+     * 遷移後URL：{@value com.example.demo.contoller.MvcStatic.Staff.Add#STAFF_ADD_URL}		<br>
+     *　html側のURLとform actionの変数はthymeleafを使ってJavaの変数から渡しています。
+     *
+     * @param model Viewに渡す変数
+     * 　　　　　	<p>1.遷移先のURL<br>
+     * 				     2.formアクションの値 </p>
+     *
+     * @return　STAFF_ADD_URL= {@value com.example.demo.contoller.MvcStatic.Staff.Add#STAFF_ADD_URL}:遷移先URL
+     *
+     *テストコード記入済み
+     */
     @RequestMapping(value = MvcStatic.Staff.Add.STAFF_ADD_URL, params = MvcStatic.Staff.Add.PARAM_STAFF_CHECK_BACK, method = RequestMethod.POST)
     public String postStaffCheckBack(Model model) {
         model.addAttribute(MvcStatic.Staff.Add.STAFF_ADD_CHECK_NAME, MvcStatic.Staff.Add.STAFF_ADD_CHECK_URL);
@@ -123,6 +194,21 @@ public class StaffController
         return MvcStatic.Staff.Add.STAFF_ADD_URL;
     }
 
+    /**
+     *スタッフ追加確認画面からスタッフ追加完了画面に戻るコントローラーです。<br>
+     *
+     * 遷移前URL：{@value com.example.demo.contoller.MvcStatic.Staff.Add#STAFF_ADD_CHECK_URL}	<br>
+     * 遷移後URL：{@value com.example.demo.contoller.MvcStatic.Staff.Add#STAFF_ADD_DONE_URL}		<br>
+     *　html側のURLとform actionの変数はthymeleafを使ってJavaの変数から渡しています。
+     *
+     * @param model Viewに渡す変数
+     * 　　　　　	<p>1.遷移先のURL<br>
+     * 				     2.formアクションの値 </p>
+     *
+     * @return　STAFF_ADD_DONE_URL= {@value com.example.demo.contoller.MvcStatic.Staff.Add#STAFF_ADD_DONE_URL}:遷移先URL
+     *
+     *テストコード記入済み
+     */
     @RequestMapping(value = MvcStatic.Staff.Add.STAFF_ADD_DONE_URL, params = MvcStatic.Staff.Add.PARAM_STAFF_CHECK_TO_DONE, method = RequestMethod.POST)
     public String postStaffCheckToDone(Model model,@ModelAttribute StaffListForm form)
     {
@@ -139,6 +225,21 @@ public class StaffController
         return MvcStatic.Staff.Add.STAFF_ADD_DONE_URL;
     }
 
+    /**
+     *スタッフ追加完了画面からスタッフ一覧画面に戻るコントローラーです。<br>
+     *
+     * 遷移前URL：{@value com.example.demo.contoller.MvcStatic.Staff.Add#STAFF_ADD_DONE_URL}	<br>
+     * 遷移後URL：{@value com.example.demo.contoller.MvcStatic.Staff#STAFF_LIST_URL}		<br>
+     *　html側のURLとform actionの変数はthymeleafを使ってJavaの変数から渡しています。
+     *
+     * @param model Viewに渡す変数
+     * 　　　　　	<p>1.遷移先のURL<br>
+     * 				     2.formアクションの値 </p>
+     *
+     * @return　STAFF_LIST_URL= {@value com.example.demo.contoller.MvcStatic.Staff#STAFF_LIST_URL}:遷移先URL
+     *
+     *
+     */
     @RequestMapping(value = MvcStatic.Staff.STAFF_LIST_URL,params = MvcStatic.Staff.Add.PARAM_STAFF_DONE_BACK,method = RequestMethod.POST)
     public String postStaffDoneToList(Model model)
     {
