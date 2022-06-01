@@ -164,6 +164,7 @@ public class StaffController
 
         model.addAttribute(MvcStatic.Staff.Delete.STAFF_DELETE_NAME,MvcStatic.Staff.Delete.STAFF_DELETE_URL);
         model.addAttribute(MvcStatic.Staff.Delete.PARAM_STAFF_LIST_TO_DELETE,MvcStatic.Staff.Delete.PARAM_STAFF_LIST_TO_DELETE);
+        model.addAttribute(MvcStatic.Staff.Reference.PARAM_STAFF_LIST_TO_REFERENCE, MvcStatic.Staff.Reference.PARAM_STAFF_LIST_TO_REFERENCE );
         System.out.println("zzzz");
 
 
@@ -257,6 +258,10 @@ public class StaffController
 
         model.addAttribute(MvcStatic.Staff.Delete.STAFF_DELETE_NAME,MvcStatic.Staff.Delete.STAFF_DELETE_URL);
         model.addAttribute(MvcStatic.Staff.Delete.PARAM_STAFF_LIST_TO_DELETE,MvcStatic.Staff.Delete.PARAM_STAFF_LIST_TO_DELETE);
+
+        model.addAttribute(MvcStatic.Staff.Reference.STAFF_REFERENCE_NAME,MvcStatic.Staff.Reference.STAFF_REFERENCE_URL);
+        model.addAttribute(MvcStatic.Staff.Reference.PARAM_STAFF_LIST_TO_REFERENCE, MvcStatic.Staff.Reference.PARAM_STAFF_LIST_TO_REFERENCE );
+
         System.out.println("zzzz");
 
         List<MStaff> staffList = staffService.getStaffs();
