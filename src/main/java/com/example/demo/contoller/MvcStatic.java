@@ -13,6 +13,8 @@ public class MvcStatic
         public static final String STAFF_LIST_NAME = "STAFF_LIST_NAME";
         public static final String STAFF_LIST_URL = "staff/staff_list";
         public static final String PARAM_INDEX_TO_STAFF_LIST = "PARAM_INDEX_TO_STAFF_LIST";
+        public static final String PARAM_STAFF_LIST = "PARAM_STAFF_LIST";
+
         public class Add
         {
             public static final String STAFF_ADD_NAME = "STAFF_ADD_NAME";
@@ -53,18 +55,23 @@ public class MvcStatic
         class Delete
         {
             public static final String STAFF_DELETE_NAME = "STAFF_DELETE_NAME";
-            public static final String STAFF_DELETE_URL = "/staff/staff_delete";
-            public static final String STAFF_DELETE_DONE_NAME = "STAFF_DELETE_NAME";
-            public static final String STAFF_DELETE_DONE_URL = "/staff/staff_delete";
+            public static final String STAFF_DELETE_URL = "staff/staff_delete";
+
+            public static final String STAFF_DELETE_DONE_NAME = "STAFF_DELETE_DONE_NAME";
+            public static final String STAFF_DELETE_DONE_URL = "staff/staff_delete_done";
 
             public static final String PARAM_STAFF_LIST_TO_DELETE = "PARAM_STAFF_LIST_TO_DELETE";
             public static final String PARAM_STAFF_DELETE_TO_DONE = "PARAM_STAFF_DELETE_TO_DONE";
             public static final String PARAM_STAFF_DELETE_BACK = "PARAM_STAFF_DELETE_BACK";
             public static final String PARAM_STAFF_DELETE_DONE_BACK = "PARAM_STAFF_DELETE_DONE_BACK";
         }
-        class Ref
+        class Reference
         {
+            public static final String STAFF_REFERENCE_NAME ="STAFF_REFERENCE_NAME";
+            public static final String STAFF_REFERENCE_URL ="staff/staff_reference";
 
+            public static final String PARAM_STAFF_LIST_TO_REFERENCE = "PARAM_STAFF_LIST_TO_REFERENCE";
+            public static final String PARAM_STAFF_REFERENCE_BACK = "PARAM_STAFF_REFERENCE_BACK";
         }
     }
     class Product

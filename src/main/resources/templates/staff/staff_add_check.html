@@ -16,7 +16,7 @@
     </br>
     <div th:text ="${name}" class="form-control" ></div> </br>
     <div style="display:inline-flex">
-        <form method="post" th:action=${#strings.prepend(STAFF_ADD_DONE_NAME,'/')} class="form-control" th:object="${StaffListForm}">
+        <form method="post" th:action=${#strings.prepend(STAFF_ADD_DONE_NAME,'/')} th:object="${StaffListForm}">
             <input type ="hidden" name ="name" th:value="${name}">
             <input type ="hidden" name ="password" th:value="${password}">
 

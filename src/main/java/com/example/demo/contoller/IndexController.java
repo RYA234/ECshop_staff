@@ -21,7 +21,7 @@ public class IndexController {
        // model.addAttribute(HELLO_NAME, Hello_ATTRIBUTE);
 
         model.addAttribute(MvcStatic.Staff.STAFF_LIST_NAME, MvcStatic.Staff.STAFF_LIST_URL);
-        model.addAttribute(MvcStatic.Staff.PARAM_INDEX_TO_STAFF_LIST,MvcStatic.Staff.PARAM_INDEX_TO_STAFF_LIST);
+        model.addAttribute(MvcStatic.Staff.PARAM_STAFF_LIST,MvcStatic.Staff.PARAM_STAFF_LIST);
         return "/index/index";
     }
     public enum ATTRIBUTE

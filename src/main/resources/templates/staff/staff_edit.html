@@ -15,7 +15,7 @@
     スタッフ編集画面です。
     </br>
     <!--th:objectについてstaffListFormはJavaのStaffListFormに相当（頭文字が小文字に変化するので注意） -->
-    <form method="post"  th:object="${staffListForm}"th:action=${#strings.prepend(STAFF_EDIT_CHECK_NAME,'/')} class="form-control" >
+    <form method="post"  th:object="${staffListForm}" th:action=${#strings.prepend(STAFF_EDIT_CHECK_NAME,'/')} class="form-control" >
         <div class="mb-6">
             <div class="row justify-content-center">
                 <div class="row">
@@ -38,7 +38,7 @@
     </form>
     &nbsp;&nbsp;&nbsp;&nbsp;
     <form method="post" th:action=${#strings.prepend(STAFF_LIST_NAME,'/')} >
-            <button class="btn btn-primary" type="submit" th:name="${PARAM_STAFF_EDIT_DONE_BACK}">
+        <button class="btn btn-primary" type="submit" th:name="${PARAM_STAFF_LIST}">
                 戻る
             </button>
 

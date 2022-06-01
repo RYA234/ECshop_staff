@@ -51,16 +51,18 @@ public class StaffController
      *テストコード記入済み
      *
      */
-    @RequestMapping(value = MvcStatic.Staff.Add.STAFF_ADD_URL,params = MvcStatic.Staff.Add.PARAM_STAFF_LIST_TO_ADD, method = RequestMethod.POST)
+    @RequestMapping(value = MvcStatic.Staff.STAFF_LIST_URL,params = MvcStatic.Staff.Add.PARAM_STAFF_LIST_TO_ADD, method = RequestMethod.POST)
     public String postStaffListToAdd(Model model)
     {
-        System.out.println("bbbv");
+        System.out.println("スタッフ一覧からスタッフ追加画面");
         model.addAttribute(MvcStatic.Staff.Add.STAFF_ADD_CHECK_NAME,MvcStatic.Staff.Add.STAFF_ADD_CHECK_URL);
         model.addAttribute(MvcStatic.Staff.Add.PARAM_STAFF_ADD_TO_CHECK,MvcStatic.Staff.Add.PARAM_STAFF_ADD_TO_CHECK);
 
         model.addAttribute(MvcStatic.Staff.STAFF_LIST_NAME,MvcStatic.Staff.STAFF_LIST_URL);
-        model.addAttribute(MvcStatic.Staff.Add.PARAM_STAFF_ADD_BACK,MvcStatic.Staff.Add.PARAM_STAFF_ADD_BACK);
+        model.addAttribute(MvcStatic.Staff.PARAM_STAFF_LIST,MvcStatic.Staff.PARAM_STAFF_LIST);
 
+
+        System.out.println("bbwqqwqwbv");
         return MvcStatic.Staff.Add.STAFF_ADD_URL;
     }
 
@@ -148,9 +150,11 @@ public class StaffController
      *
      *テストコード記入済み
      */
-    @RequestMapping(value = MvcStatic.Staff.STAFF_LIST_URL, params = MvcStatic.Staff.Add.PARAM_STAFF_ADD_BACK, method = RequestMethod.POST)
-    public String postStaffAddBack(Model model)
+    @RequestMapping(value = MvcStatic.Staff.STAFF_LIST_URL, params = MvcStatic.Staff.PARAM_STAFF_LIST, method = RequestMethod.POST)
+    public String postStaffList(Model model)
     {
+        System.out.println("スタッフ一覧画面に遷移します。");
+
         model.addAttribute(MvcStatic.Staff.Add.STAFF_ADD_NAME,MvcStatic.Staff.Add.STAFF_ADD_URL);
         model.addAttribute(MvcStatic.Staff.Add.PARAM_STAFF_LIST_TO_ADD,MvcStatic.Staff.Add.PARAM_STAFF_LIST_TO_ADD);
 
@@ -189,8 +193,7 @@ public class StaffController
         model.addAttribute(MvcStatic.Staff.Add.PARAM_STAFF_ADD_TO_CHECK, MvcStatic.Staff.Add.PARAM_STAFF_ADD_TO_CHECK);
 
         model.addAttribute(MvcStatic.Staff.STAFF_LIST_NAME, MvcStatic.Staff.STAFF_LIST_URL);
-        model.addAttribute(MvcStatic.Staff.Add.PARAM_STAFF_ADD_BACK, MvcStatic.Staff.Add.PARAM_STAFF_ADD_BACK);
-
+        model.addAttribute(MvcStatic.Staff.PARAM_STAFF_LIST,MvcStatic.Staff.PARAM_STAFF_LIST);
         return MvcStatic.Staff.Add.STAFF_ADD_URL;
     }
 
@@ -222,6 +225,7 @@ public class StaffController
         staffService.addStaff(staff);
         model.addAttribute(MvcStatic.Staff.STAFF_LIST_NAME, MvcStatic.Staff.STAFF_LIST_URL);
         model.addAttribute(MvcStatic.Staff.Add.PARAM_STAFF_DONE_BACK, MvcStatic.Staff.Add.PARAM_STAFF_DONE_BACK);
+        model.addAttribute(MvcStatic.Staff.PARAM_STAFF_LIST,MvcStatic.Staff.PARAM_STAFF_LIST);
         return MvcStatic.Staff.Add.STAFF_ADD_DONE_URL;
     }
 
