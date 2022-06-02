@@ -25,9 +25,10 @@
         </button>
             </form>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <form method="post" action = "user/user_list">
-    <button class="btn btn-primary" type="submit" name="user">
-        ユーザー向けaa
+
+        <form method="post" th:action=${#strings.prepend(PRODUCT_LIST_NAME,'/')}>
+    <button class="btn btn-primary" type="submit" th:name="${PARAM_PRODUCT_LIST}">
+        商品機能
     </button>
         </br>
         github URL

@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"></meta>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>スタッフ一覧</title>
+    <title>商品追加完了画面</title>
     <!-- 個別CSS読込 -->
     <link th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css}" rel="stylesheet" >
 
@@ -13,14 +12,13 @@
 <body>
 
 <div class="text-center">
-    スタッフ参照画面です。
+    商品追加完了画面です。
     </br>
 
     <!-- ↓formでも改行しない方法-->
-    &nbsp;&nbsp;&nbsp;&nbsp;
-    <form method="post" th:action=${#strings.prepend(STAFF_LIST_NAME,'/')} >
-        <button class="btn btn-primary" type="submit" th:name="${PARAM_STAFF_LIST}">
-            戻る
+    <form method="post" th:action=${#strings.prepend(PRODUCT_LIST_NAME,'/')} >
+        <button class="btn btn-primary" type="submit" th:name="${PARAM_PRODUCT_LIST}">
+            商品一覧に戻る
         </button>
     </form>
 
