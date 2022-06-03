@@ -16,15 +16,19 @@
     スタッフ参照画面です。
     </br>
 
+
     <!-- ↓formでも改行しない方法-->
     &nbsp;&nbsp;&nbsp;&nbsp;
-    <form method="post" th:action=${#strings.prepend(STAFF_LIST_NAME,'/')} >
+    <form method="post" th:action=${#strings.prepend(STAFF_LIST_NAME,'/')} th:object="${StaffListForm}">
+        <div th:text ="${name}"> </div>
+        <div th:text ="${id}" name ="${id}"> </div>
+
         <button class="btn btn-primary" type="submit" th:name="${PARAM_STAFF_LIST}">
             戻る
         </button>
     </form>
 
-</div>
+
 
 
 </body>

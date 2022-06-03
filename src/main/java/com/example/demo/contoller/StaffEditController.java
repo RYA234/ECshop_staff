@@ -91,7 +91,19 @@ public class StaffEditController {
         System.out.println(form.getId());
         System.out.println(form.getPassword());
 
+        model.addAttribute(MvcStatic.Staff.Edit.STAFF_EDIT_DONE_NAME, MvcStatic.Staff.Edit.STAFF_EDIT_DONE_URL);
+        model.addAttribute(MvcStatic.Staff.Edit.PARAM_STAFF_EDIT_CHECK_TO_DONE,MvcStatic.Staff.Edit.PARAM_STAFF_EDIT_CHECK_TO_DONE);
+
+        model.addAttribute(MvcStatic.Staff.Edit.STAFF_EDIT_NAME, MvcStatic.Staff.Edit.STAFF_EDIT_URL);
+        model.addAttribute(MvcStatic.Staff.Edit.PARAM_STAFF_EDIT_CHECK_BACK,MvcStatic.Staff.Edit.PARAM_STAFF_EDIT_CHECK_BACK);
+
+
         if(bindingResult.hasErrors()){
+            model.addAttribute(MvcStatic.Staff.Edit.STAFF_EDIT_NAME, MvcStatic.Staff.Edit.STAFF_EDIT_URL);
+            model.addAttribute(MvcStatic.Staff.Edit.PARAM_STAFF_EDIT_TO_CHECK, MvcStatic.Staff.Edit.PARAM_STAFF_EDIT_TO_CHECK);
+
+            model.addAttribute(MvcStatic.Staff.STAFF_LIST_NAME,MvcStatic.Staff.STAFF_LIST_URL);
+            model.addAttribute(MvcStatic.Staff.PARAM_STAFF_LIST,MvcStatic.Staff.PARAM_STAFF_LIST);
             return MvcStatic.Staff.Edit.STAFF_EDIT_URL;
         }
 
@@ -99,11 +111,6 @@ public class StaffEditController {
         model.addAttribute("id", form.getId());
         model.addAttribute("name", form.getName());
         model.addAttribute("password", form.getPassword());
-        model.addAttribute(MvcStatic.Staff.Edit.STAFF_EDIT_DONE_NAME, MvcStatic.Staff.Edit.STAFF_EDIT_DONE_URL);
-        model.addAttribute(MvcStatic.Staff.Edit.PARAM_STAFF_EDIT_CHECK_TO_DONE,MvcStatic.Staff.Edit.PARAM_STAFF_EDIT_CHECK_TO_DONE);
-
-        model.addAttribute(MvcStatic.Staff.Edit.STAFF_EDIT_NAME, MvcStatic.Staff.Edit.STAFF_EDIT_URL);
-        model.addAttribute(MvcStatic.Staff.Edit.PARAM_STAFF_EDIT_CHECK_BACK,MvcStatic.Staff.Edit.PARAM_STAFF_EDIT_CHECK_BACK);
 
         return MvcStatic.Staff.Edit.STAFF_EDIT_CHECK_URL;
     }

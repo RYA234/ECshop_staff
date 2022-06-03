@@ -7,6 +7,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -39,13 +40,18 @@ public class StaffDeleteController {
     public String postStaffListtoDelete(Model model, StaffListForm form)
     {
         System.out.println("スタッフ一覧画面からスタッフ削除画面に遷移します");
+        System.out.println(form.getRadio());
+        int selectedId = Integer.valueOf(form.getRadio());
+        MStaff selectedStaff = MStaff.builder().build();
+        selectedStaff = staffDeleteService.getStaff(selectedId);
+        model.addAttribute("name", selectedStaff.getName());
+        model.addAttribute("id",selectedStaff.getId());
 
         model.addAttribute(MvcStatic.Staff.Delete.STAFF_DELETE_DONE_NAME,MvcStatic.Staff.Delete.STAFF_DELETE_DONE_URL);
         model.addAttribute(MvcStatic.Staff.STAFF_LIST_NAME,MvcStatic.Staff.STAFF_LIST_URL);
-
         model.addAttribute(MvcStatic.Staff.Delete.PARAM_STAFF_DELETE_TO_DONE,MvcStatic.Staff.Delete.PARAM_STAFF_DELETE_TO_DONE);
+
         model.addAttribute(MvcStatic.Staff.Delete.PARAM_STAFF_DELETE_BACK,MvcStatic.Staff.Delete.PARAM_STAFF_DELETE_BACK);
-//        model.addAttribute(MvcStatic.Staff.Delete);
 //        model.addAttribute();
 //        model.addAttribute();
 
@@ -73,15 +79,11 @@ public class StaffDeleteController {
     {
         System.out.println("スタッフ削除画面からスタッフ削除完了画面に遷移します");
 
+        System.out.println(form.getId());
+        staffDeleteService.deleteStaffone(form.getId());
+
         model.addAttribute(MvcStatic.Staff.STAFF_LIST_NAME,MvcStatic.Staff.STAFF_LIST_URL);
         model.addAttribute(MvcStatic.Staff.Delete.PARAM_STAFF_DELETE_DONE_BACK,MvcStatic.Staff.Delete.PARAM_STAFF_DELETE_DONE_BACK);
-
-
-//        model.addAttribute(MvcStatic.Staff.Delete.PARAM_STAFF_DELETE_TO_DONE,MvcStatic.Staff.Delete.PARAM_STAFF_DELETE_TO_DONE);
-//        model.addAttribute(MvcStatic.Staff.Delete.PARAM_STAFF_DELETE_BACK,MvcStatic.Staff.Delete.PARAM_STAFF_DELETE_BACK);
-//        model.addAttribute(MvcStatic.Staff.Delete);
-//        model.addAttribute();
-//        model.addAttribute();
 
         return MvcStatic.Staff.Delete.STAFF_DELETE_DONE_URL;
     }
@@ -143,11 +145,10 @@ public class StaffDeleteController {
      *
      */
     @RequestMapping(value = MvcStatic.Staff.STAFF_LIST_URL, params = MvcStatic.Staff.Delete.PARAM_STAFF_DELETE_DONE_BACK, method = RequestMethod.POST)
-    public String postStaffDeleteDoneBack(Model model, StaffListForm form)
+    public String postStaffDeleteDoneBack(Model model,@ModelAttribute StaffListForm form)
     {
         System.out.println("スタッフ削除確認画面からスタッフ一覧画面に遷移します");
 
-        System.out.println("スタッフ編集画面からスタッフリストに戻ります。");
         model.addAttribute(MvcStatic.Staff.Add.STAFF_ADD_NAME,MvcStatic.Staff.Add.STAFF_ADD_URL);
         model.addAttribute(MvcStatic.Staff.Add.PARAM_STAFF_LIST_TO_ADD,MvcStatic.Staff.Add.PARAM_STAFF_LIST_TO_ADD);
 

@@ -13,4 +13,5 @@ public interface StaffService
     public void updateStaffone(Integer id,
                                String name,
                                String password);
+    public void deleteStaffone(Integer id);
 }

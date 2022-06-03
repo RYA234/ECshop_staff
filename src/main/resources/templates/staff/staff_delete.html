@@ -17,7 +17,10 @@
 
     <!-- ↓formでも改行しない方法-->
 
-    <form method="post" th:action=${#strings.prepend(STAFF_DELETE_DONE_NAME,'/')} class="form-control">
+    <form method="post" th:action=${#strings.prepend(STAFF_DELETE_DONE_NAME,'/')} th:object="${StaffListForm}">
+        名前：<div th:text="${name}"></div>
+        <input type ="hidden" name ="id" th:value="${id}">
+
         <!--    <form method="post" th:action="${STAFF_ADD_CHECK_NAME}">-->
         <div style="display:inline-flex">
             <button class="btn btn-primary" type="submit" th:name="${PARAM_STAFF_DELETE_TO_DONE}">

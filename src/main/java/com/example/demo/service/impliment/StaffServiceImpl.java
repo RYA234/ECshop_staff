@@ -38,4 +38,9 @@ public class StaffServiceImpl implements StaffService
     {
         StaffMapper.staffUpdate(id,name,password);
     }
+
+    public void deleteStaffone(Integer id)
+    {
+     StaffMapper.staffDelete(id);
+    }
 }
