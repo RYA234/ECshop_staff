@@ -15,4 +15,8 @@ public interface ECShopMapper
     public void staffUpdate(@Param("id") Integer id,
                             @Param("name") String name,
                             @Param("password") String password);
+
+    public void staffDelete(Integer id);
+    
+
 }
