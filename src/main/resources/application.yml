@@ -5,11 +5,11 @@ spring:
   datasource:
     # initialization-mode: always
 #   ↓自宅デスクトップ用
-#    url: jdbc:mysql://aasfjipizluevw.cvdtfnwyixqf.ap-northeast-1.rds.amazonaws.com:3306/ebdb
+    url: jdbc:mysql://aasfjipizluevw.cvdtfnwyixqf.ap-northeast-1.rds.amazonaws.com:3306/ebdb
     # url: jdbc:mysql://localhost:3306/db_name
-    url: jdbc:mysql://ecshop2.cvdtfnwyixqf.ap-northeast-1.rds.amazonaws.com:3306/db_name
-#    username: root
-    username: admin
+#    url: jdbc:mysql://ecshop2.cvdtfnwyixqf.ap-northeast-1.rds.amazonaws.com:3306/db_name
+    username: root
+#    username: admin
     password: root1234
     driver-class-name: com.mysql.cj.jdbc.Driver
     initialize: true

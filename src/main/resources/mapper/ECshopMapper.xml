@@ -62,4 +62,66 @@
             id = #{id}
     </delete>
 
+    <!-- マッピング定義(商品) -->
+    <resultMap type="com.example.demo.domain.model.MStaff" id="product">
+        <id column="code" property="code" />
+        <result column="name" property="name" />
+        <result column="price" property="price" />
+        <result column="gazou" property="gazou" />
+    </resultMap>
+
+    <!-- 商品複数件表示 -->
+    <select id="productFindMany" resultType="com.example.demo.domain.model.MProduct">
+        select
+        *
+        from
+        m_product
+    </select>
+    <!-- 商品1件追加 -->
+    <insert id="productInsertOne">
+        insert into m_product(
+        code
+        , name
+        , price
+        , gazou
+        )
+        values (
+        #{code}
+        , #{name}
+        , #{price}
+        , #{gazou}
+        )
+    </insert>
+
+    <!-- 商品１件の情報を取得   -->
+    <select id="productFindOne" resultType="com.example.demo.domain.model.MProduct">
+        select
+        *
+        from
+        m_product
+        where
+        code = #{code}
+    </select>
+
+
+    <!-- 商品１件の更新 -->
+    <update id="productUpdate">
+        update
+        m_product
+        set
+              name = #{name}
+        ,   price = #{price}
+        ,   gazou = #{gazou}
+        where
+        code = #{code}
+    </update>
+
+    <!-- 商品１件削除 -->
+    <delete id="productDelete">
+        delete from
+        m_product
+        where
+        code = #{code}
+    </delete>
+
 </mapper>
