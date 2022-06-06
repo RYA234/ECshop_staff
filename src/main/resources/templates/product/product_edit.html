@@ -1,39 +1,35 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"></meta>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>商品編集画面</title>
     <!-- 個別CSS読込 -->
     <link th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css}" rel="stylesheet" >
 
 </head>
-</head>
 <body>
 
 <div class="text-center">
     商品編集画面です。
-    </br>
     <form method="post"  th:object="${productListForm}" th:action=${#strings.prepend(PRODUCT_EDIT_CHECK_NAME,'/')} class="form-control" >
     <!-- ↓formでも改行しない方法-->
     <div class="mb-6">
         <div class="row justify-content-center">
             <div class="row">
                 <div class="col-xs-3">
-                    </br>名前</br>
-                    <input type="hidden" th:field ="*{code}"  class="form-control"> </br>
-                    <input type="text"  th:field ="*{name}" class="form-control" th:errorclass="is-invalid"> </br>
-<!--                    <td class="invalid-feedback" th:errors="*{name}">Name Error</td>-->
-                    価格</br>
-                    <input type ="text" name="price" value="price" th:field="*{price}"  class="form-control" th:errorclass="is-invalid"></br>
-<!--                    <td class="invalid-feedback" th:errors="*{password}">Password Error</td>-->
+                    名前
+                    <input type="hidden" th:field ="*{code}" class="form-control">
+
+                    <input class="form-control" th:errorclass="is-invalid" th:field="*{name}" type="text">
+                    <p class="invalid-feedback" th:errors="*{name}">Name Error</p>
+
+                    価格
+                    <input type ="text" name="price" value="price" th:field="*{price}" class="form-control" th:errorclass="is-invalid">
+                    <p class="invalid-feedback" th:errors="*{price}">Price Error</p>
                 </div>
             </div>
         </div>
     </div>
-    </form>
-
-    <form method="post" th:object="${productListForm}" th:action=${#strings.prepend(PRODUCT_EDIT_CHECK_NAME,'/')} class="form-control">
         <!--    <form method="post" th:action="${STAFF_ADD_CHECK_NAME}">-->
         <div style="display:inline-flex">
             <button class="btn btn-primary" type="submit" th:name="${PARAM_PRODUCT_EDIT_TO_CHECK}">
@@ -46,8 +42,7 @@
             戻る
         </button>
     </form>
-
-</div>
+        </div>
 
 
 </body>

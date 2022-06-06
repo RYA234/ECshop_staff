@@ -1,32 +1,38 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"></meta>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>スタッフ一覧</title>
+    <title>商品編集確認画面です。</title>
     <!-- 個別CSS読込 -->
     <link th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css}" rel="stylesheet" >
 
 </head>
-</head>
 <body>
 
 <div class="text-center">
-    スタッフ削除画面です。
-    </br>
+    商品編集確認画面です。
 
-    <!-- ↓formでも改行しない方法-->
 
-    <form method="post" th:action=${#strings.prepend(STAFF_DELETE_DONE_NAME,'/')} class="form-control">
-        <!--    <form method="post" th:action="${STAFF_ADD_CHECK_NAME}">-->
+    <form method="post" th:object="${productListForm}" th:action=${#strings.prepend(PRODUCT_EDIT_DONE_NAME,'/')} class="form-control">
+        商品名
+        <div><p th:text = "*{name}"></p></div>
+        価格
+        <div><p th:text = "*{price}"></p></div>
+        画像
+<!--        <div><p th:text = "*{gazou}"></p></div>-->
+        <div><input type="hidden" th:field = "*{code}"></div>
+        <div><input type="hidden" th:field = "*{name}"></div>
+        <div><input type="hidden" th:field = "*{price}"></div>
+<!--        <div><input type="hidden" th:field = "*{gazou}"></div>-->
+
         <div style="display:inline-flex">
-            <button class="btn btn-primary" type="submit" th:name="${PARAM_STAFF_DELETE_TO_DONE}">
+            <button class="btn btn-primary" type="submit" th:name="${PARAM_PRODUCT_EDIT_CHECK_TO_DONE}">
                 OK
             </button>
     </form>
     &nbsp;&nbsp;&nbsp;&nbsp;
-    <form method="post" th:action=${#strings.prepend(STAFF_LIST_NAME,'/')} >
-        <button class="btn btn-primary" type="submit" th:name="${PARAM_STAFF_DELETE_BACK}">
+    <form method="post" th:action=${#strings.prepend(PRODUCT_LIST_NAME,'/')} >
+        <button class="btn btn-primary" type="submit" th:name="${PARAM_PRODUCT_EDIT_CHECK_BACK}">
             戻る
         </button>
     </form>
