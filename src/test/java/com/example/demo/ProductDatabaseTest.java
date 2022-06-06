@@ -28,7 +28,6 @@ import java.util.List;
 public class ProductDatabaseTest {
     @Autowired
     private ProductService productService;
-
     @Test
     @DisplayName("データベース商品が追加されるか確認")
     @DatabaseSetup("/testdata/ProductServiceTest/init-data")

@@ -1,9 +1,13 @@
 package com.example.demo.contoller;
 
 //import com.example.demo.domain.model.MProduct;
+import com.example.demo.domain.model.MProduct;
 import com.example.demo.domain.model.MStaff;
 import com.example.demo.form.ProductListForm;
 import com.example.demo.form.StaffListForm;
+import com.example.demo.service.ProductService;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,6 +19,12 @@ import java.util.List;
 @Controller
 public class ProductController
 {
+
+    @Autowired
+    private ProductService productService;
+    @Autowired
+    private ModelMapper modelMapper;
+
     //    @RequestMapping(value = MvcStatic.Staff.Add.STAFF_ADD_DONE_URL, params = MvcStatic.Staff.Add.PARAM_STAFF_CHECK_TO_DONE, method = RequestMethod.POST)
 //    public String postStaffCheckToDone(Model model, @ModelAttribute StaffListForm form){
 //
@@ -37,7 +47,7 @@ public class ProductController
      * 　　　　　	<p>1.遷移先のURL<br>
      * 				     2.formアクションの値 </p>
      *
-     * @return　PRODUCT_LIST_URL = {@value com.example.demo.contoller.MvcStatic.Product#PRODUCT_LIST_URL}:遷移先URL
+     * @return {@value com.example.demo.contoller.MvcStatic.Product#PRODUCT_LIST_URL}:遷移先URL
      *
      *
      */
@@ -59,8 +69,9 @@ public class ProductController
         model.addAttribute(MvcStatic.Product.Reference.PRODUCT_REFERENCE_NAME,MvcStatic.Product.Reference.PRODUCT_REFERENCE_URL);
         model.addAttribute(MvcStatic.Product.Reference.PARAM_PRODUCT_LIST_TO_REFERENCE,MvcStatic.Product.Reference.PARAM_PRODUCT_LIST_TO_REFERENCE);
 
-//        model.addAttribute();
-//        model.addAttribute();
+        List<MProduct> productList = productService.getProducts();
+        System.out.println(productList);
+        model.addAttribute("productList", productList);
 
         return MvcStatic.Product.PRODUCT_LIST_URL;
     }
@@ -75,9 +86,7 @@ public class ProductController
      * @param model Viewに渡す変数
      * 　　　　　	<p>1.遷移先のURL<br>
      * 				     2.formアクションの値 </p>
-     *
-     * @return　PRODUCT_DELETE_URL= {@value com.example.demo.contoller.MvcStatic.Product.Delete#PRODUCT_DELETE_URL}:遷移先URL
-     *
+     * @return {@value com.example.demo.contoller.MvcStatic.Product.Delete#PRODUCT_DELETE_URL}:遷移先URL
      *
      */
     @RequestMapping(value = MvcStatic.Product.PRODUCT_LIST_URL, params = MvcStatic.Product.Delete.PARAM_PRODUCT_LIST_TO_DELETE, method = RequestMethod.POST)
@@ -109,7 +118,7 @@ public class ProductController
      * 　　　　　	<p>1.遷移先のURL<br>
      * 				     2.formアクションの値 </p>
      *
-     * @return　PRODUCT_DELETE_DONE_URL= {@value com.example.demo.contoller.MvcStatic.Product.Delete#PRODUCT_DELETE_DONE_URL}:遷移先URL
+     * @return {@value com.example.demo.contoller.MvcStatic.Product.Delete#PRODUCT_DELETE_DONE_URL}:遷移先URL
      *
      *
      */
@@ -142,7 +151,7 @@ public class ProductController
      * 　　　　　	<p>1.遷移先のURL<br>
      * 				     2.formアクションの値 </p>
      *
-     * @return　PRODUCT_LIST_URL= {@value com.example.demo.contoller.MvcStatic.Product#PRODUCT_LIST_URL}:遷移先URL
+     * @return {@value com.example.demo.contoller.MvcStatic.Product#PRODUCT_LIST_URL}:遷移先URL
      *
      *
      */
@@ -183,7 +192,7 @@ public class ProductController
      * 　　　　　	<p>1.遷移先のURL<br>
      * 				     2.formアクションの値 </p>
      *
-     * @return　PRODUCT_LIST_URL= {@value com.example.demo.contoller.MvcStatic.Product#PRODUCT_LIST_URL}:遷移先URL
+     * @return {@value com.example.demo.contoller.MvcStatic.Product#PRODUCT_LIST_URL}:遷移先URL
      *
      *
      */

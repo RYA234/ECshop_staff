@@ -6,5 +6,6 @@ public class ProductListForm
     private String name;
 
     private Integer price;
-    private String imageurl;
+    private String gazou;
+    private String radio;
 }
