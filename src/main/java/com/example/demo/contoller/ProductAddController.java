@@ -1,8 +1,14 @@
 package com.example.demo.contoller;
 
+import com.example.demo.domain.model.MProduct;
+import com.example.demo.form.ProductListForm;
 import com.example.demo.form.StaffListForm;
+import com.example.demo.service.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -40,6 +46,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class ProductAddController {
 
+    @Autowired
+    ProductService productAddService;
+
 /**
  *商品一覧画面から商品追加画面に遷移するコントローラーです。<br>
  *
@@ -51,12 +60,12 @@ public class ProductAddController {
  * 　　　　　	<p>1.遷移先のURL<br>
  * 				     2.formアクションの値 </p>
  *
- * @return　PRODUCT_ADD_URL= {@value com.example.demo.contoller.MvcStatic.Product.Add#PRODUCT_ADD_URL}:遷移先URL
+ * @return {@value com.example.demo.contoller.MvcStatic.Product.Add#PRODUCT_ADD_URL}:遷移先URL
  *テストコード記入済み
  *
  */
     @RequestMapping(value = MvcStatic.Product.PRODUCT_LIST_URL, params = MvcStatic.Product.Add.PARAM_PRODUCT_LIST_TO_ADD, method = RequestMethod.POST)
-    public String postProductListToAdd(Model model, @ModelAttribute StaffListForm form){
+    public String postProductListToAdd(Model model, @ModelAttribute ProductListForm form){
 
         System.out.println("商品一覧画面から商品追加画面に遷移します。");
         model.addAttribute(MvcStatic.Product.Add.PRODUCT_ADD_CHECK_NAME,MvcStatic.Product.Add.PRODUCT_ADD_CHECK_URL);
@@ -84,20 +93,31 @@ public class ProductAddController {
      * 　　　　　	<p>1.遷移先のURL<br>
      * 				     2.formアクションの値 </p>
      *
-     * @return　PRODUCT_ADD_CHECK_URL= {@value com.example.demo.contoller.MvcStatic.Product.Add#PRODUCT_ADD_CHECK_URL}:遷移先URL
+     * @return {@value com.example.demo.contoller.MvcStatic.Product.Add#PRODUCT_ADD_CHECK_URL}:遷移先URL
      *
      *
      */
     @RequestMapping(value = MvcStatic.Product.Add.PRODUCT_ADD_CHECK_URL, params = MvcStatic.Product.Add.PARAM_PRODUCT_ADD_TO_CHECK, method = RequestMethod.POST)
-    public String postProductAddToCheck(Model model, @ModelAttribute StaffListForm form){
+    public String postProductAddToCheck(Model model, @ModelAttribute @Validated ProductListForm form, BindingResult bindingResult){
 
         System.out.println("商品追加画面から商品追加確認画面に遷移します。");
+        System.out.println(form);
         model.addAttribute(MvcStatic.Product.Add.PRODUCT_ADD_DONE_NAME, MvcStatic.Product.Add.PRODUCT_ADD_DONE_URL);
         model.addAttribute(MvcStatic.Product.Add.PARAM_PRODUCT_CHECK_TO_DONE,MvcStatic.Product.Add.PARAM_PRODUCT_CHECK_TO_DONE);
 
         model.addAttribute(MvcStatic.Product.Add.PRODUCT_ADD_NAME, MvcStatic.Product.Add.PRODUCT_ADD_URL);
         model.addAttribute(MvcStatic.Product.Add.PARAM_PRODUCT_CHECK_BACK, MvcStatic.Product.Add.PARAM_PRODUCT_CHECK_BACK);
+        if(bindingResult.hasErrors())
+        {
+            System.out.println("エラーが発生しました。");
+            model.addAttribute(MvcStatic.Product.Add.PRODUCT_ADD_CHECK_NAME,MvcStatic.Product.Add.PRODUCT_ADD_CHECK_URL);
+            model.addAttribute(MvcStatic.Product.Add.PARAM_PRODUCT_ADD_TO_CHECK, MvcStatic.Product.Add.PARAM_PRODUCT_ADD_TO_CHECK);
+            model.addAttribute(MvcStatic.Product.PRODUCT_LIST_NAME,MvcStatic.Product.PRODUCT_LIST_URL);
+            model.addAttribute(MvcStatic.Product.PARAM_PRODUCT_LIST,MvcStatic.Product.PARAM_PRODUCT_LIST);
+            return MvcStatic.Product.Add.PRODUCT_ADD_URL;
+        }
 
+        model.addAttribute(form);
 //        model.addAttribute(MvcStatic.Product);
 
         return MvcStatic.Product.Add.PRODUCT_ADD_CHECK_URL;
@@ -115,16 +135,24 @@ public class ProductAddController {
  * 　　　　　	<p>1.遷移先のURL<br>
  * 				     2.formアクションの値 </p>
  *
- * @return　PRODUCT_URL= {@value com.example.demo.contoller.MvcStatic.Product#PRODUCT_LIST_URL}:遷移先URL
+ * @return {@value com.example.demo.contoller.MvcStatic.Product#PRODUCT_LIST_URL}:遷移先URL
  *
  *
  */
     @RequestMapping(value = MvcStatic.Product.Add.PRODUCT_ADD_DONE_URL, params = MvcStatic.Product.Add.PARAM_PRODUCT_CHECK_TO_DONE, method = RequestMethod.POST)
-    public String postProductCheckToDone(Model model, @ModelAttribute StaffListForm form){
+    public String postProductCheckToDone(Model model, @ModelAttribute ProductListForm form){
 
         System.out.println("商品追加確認画面から商品追加完了画面に遷移します。");
+        System.out.println(form);
         model.addAttribute(MvcStatic.Product.PRODUCT_LIST_NAME, MvcStatic.Product.PRODUCT_LIST_URL);
         model.addAttribute(MvcStatic.Product.PARAM_PRODUCT_LIST, MvcStatic.Product.PARAM_PRODUCT_LIST);
+
+        MProduct product = MProduct.builder()
+                .name(form.getName())
+                .price(form.getPrice())
+                .gazou(form.getGazou())
+                .build();
+        productAddService.addProduct(product);
 
         return MvcStatic.Product.Add.PRODUCT_ADD_DONE_URL;
     }
@@ -140,12 +168,12 @@ public class ProductAddController {
      * 　　　　　	<p>1.遷移先のURL<br>
      * 				     2.formアクションの値 </p>
      *
-     * @return　PRODUCT_ADD_URL= {@value com.example.demo.contoller.MvcStatic.Product.Add#PRODUCT_ADD_URL}:遷移先URL
+     * @return {@value com.example.demo.contoller.MvcStatic.Product.Add#PRODUCT_ADD_URL}:遷移先URL
      *
      *
      */
     @RequestMapping(value = MvcStatic.Product.Add.PRODUCT_ADD_URL, params = MvcStatic.Product.Add.PARAM_PRODUCT_CHECK_BACK, method = RequestMethod.POST)
-    public String postProductAddCheckBack(Model model, @ModelAttribute StaffListForm form){
+    public String postProductAddCheckBack(Model model, @ModelAttribute ProductListForm form){
 
         System.out.println("商品追加確認画面から商品追加画面に戻ります。");
         model.addAttribute(MvcStatic.Product.Add.PRODUCT_ADD_CHECK_NAME,MvcStatic.Product.Add.PRODUCT_ADD_CHECK_URL);

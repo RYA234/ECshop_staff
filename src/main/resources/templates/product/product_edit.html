@@ -14,10 +14,26 @@
 <div class="text-center">
     商品編集画面です。
     </br>
-
+    <form method="post"  th:object="${productListForm}" th:action=${#strings.prepend(PRODUCT_EDIT_CHECK_NAME,'/')} class="form-control" >
     <!-- ↓formでも改行しない方法-->
+    <div class="mb-6">
+        <div class="row justify-content-center">
+            <div class="row">
+                <div class="col-xs-3">
+                    </br>名前</br>
+                    <input type="hidden" th:field ="*{code}"  class="form-control"> </br>
+                    <input type="text"  th:field ="*{name}" class="form-control" th:errorclass="is-invalid"> </br>
+<!--                    <td class="invalid-feedback" th:errors="*{name}">Name Error</td>-->
+                    価格</br>
+                    <input type ="text" name="price" value="price" th:field="*{price}"  class="form-control" th:errorclass="is-invalid"></br>
+<!--                    <td class="invalid-feedback" th:errors="*{password}">Password Error</td>-->
+                </div>
+            </div>
+        </div>
+    </div>
+    </form>
 
-    <form method="post" th:action=${#strings.prepend(PRODUCT_EDIT_CHECK_NAME,'/')} class="form-control">
+    <form method="post" th:object="${productListForm}" th:action=${#strings.prepend(PRODUCT_EDIT_CHECK_NAME,'/')} class="form-control">
         <!--    <form method="post" th:action="${STAFF_ADD_CHECK_NAME}">-->
         <div style="display:inline-flex">
             <button class="btn btn-primary" type="submit" th:name="${PARAM_PRODUCT_EDIT_TO_CHECK}">

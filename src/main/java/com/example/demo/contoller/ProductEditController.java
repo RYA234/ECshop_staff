@@ -1,6 +1,13 @@
 package com.example.demo.contoller;
 
+import com.example.demo.domain.model.MProduct;
+import com.example.demo.domain.model.MStaff;
+import com.example.demo.form.ProductListForm;
 import com.example.demo.form.StaffListForm;
+import com.example.demo.service.ProductService;
+import org.apache.ibatis.annotations.Param;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -10,6 +17,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class ProductEditController {
 
+    @Autowired
+    private ProductService productEditService;
+
+    @Autowired
+    private ModelMapper modelMapper;
+    
     /**
      *商品一覧画面から商品編集画面に遷移するコントローラーです。<br>
      *
@@ -26,7 +39,7 @@ public class ProductEditController {
      *
      */
     @RequestMapping(value = MvcStatic.Product.PRODUCT_LIST_URL, params = MvcStatic.Product.Edit.PARAM_PRODUCT_LIST_TO_EDIT, method = RequestMethod.POST)
-    public String postProductListToEdit(Model model, @ModelAttribute StaffListForm form){
+    public String postProductListToEdit(Model model,ProductListForm form){
 
         System.out.println("商品一覧画面から商品編集画面に遷移します。");
         model.addAttribute(MvcStatic.Product.Edit.PRODUCT_EDIT_CHECK_NAME,MvcStatic.Product.Edit.PRODUCT_EDIT_CHECK_URL);
@@ -35,10 +48,22 @@ public class ProductEditController {
 
         model.addAttribute(MvcStatic.Product.PRODUCT_LIST_NAME,MvcStatic.Product.PRODUCT_LIST_URL);
         model.addAttribute(MvcStatic.Product.PARAM_PRODUCT_LIST,MvcStatic.Product.PARAM_PRODUCT_LIST);
+        System.out.println(form.getRadio());
 
-//        model.addAttribute();
-//        model.addAttribute();
-//        model.addAttribute();
+        int selectedId = Integer.valueOf(form.getRadio());
+        MProduct selectedProduct = MProduct.builder().build();
+        selectedProduct = productEditService.getProduct(selectedId);
+
+        form.setCode(selectedProduct.getCode());
+        form.setName(selectedProduct.getName());
+        form.setPrice(selectedProduct.getPrice());
+        form.setGazou(selectedProduct.getGazou());
+        model.addAttribute(form);
+
+//        model.addAttribute("id", selectedProduct.getId());
+//        model.addAttribute("name", selectedProduct.getName());
+//        model.addAttribute("password", selectedProduct.getPassword());
+
         return MvcStatic.Product.Edit.PRODUCT_EDIT_URL;
     }
 

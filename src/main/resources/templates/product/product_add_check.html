@@ -16,8 +16,18 @@
 
     <!-- ↓formでも改行しない方法-->
 
-    <form method="post" th:action=${#strings.prepend(PRODUCT_ADD_DONE_NAME,'/')} class="form-control">
+    <form method="post"  th:action="${#strings.prepend(PRODUCT_ADD_DONE_NAME,'/')}" class="form-control" th:object ="${productListForm}">
         <!--    <form method="post" th:action="${STAFF_ADD_CHECK_NAME}">-->
+        商品名
+        <div><p th:text = "*{name}"></p></div>
+        価格
+        <div><p th:text = "*{price}"></p></div>
+        画像
+        <div><p th:text = "*{gazou}"></p></div>
+
+        <div><input type="hidden" th:field = "*{name}"></div>
+        <div><input type="hidden" th:field = "*{price}"></div>
+        <div><input type="hidden" th:field = "*{gazou}"></div>
         <div style="display:inline-flex">
             <button class="btn btn-primary" type="submit" th:name="${PARAM_PRODUCT_CHECK_TO_DONE}">
                 OK
@@ -29,6 +39,7 @@
             戻る
         </button>
     </form>
+        </div>
 
 </div>
 
