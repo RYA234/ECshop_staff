@@ -2,16 +2,26 @@ package com.example.demo.contoller;
 
 import com.example.demo.domain.model.MProduct;
 import com.example.demo.form.ProductListForm;
-import com.example.demo.form.StaffListForm;
 import com.example.demo.service.ProductService;
+import com.example.demo.storage.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Random;
+import java.util.stream.Collectors;
 
 //public class ControllerTemplate
 //{
@@ -49,7 +59,14 @@ public class ProductAddController {
     @Autowired
     ProductService productAddService;
 
-/**
+    private final StorageService storageService;
+
+    @Autowired
+    public ProductAddController(StorageService storageService) {
+        this.storageService = storageService;
+    }
+
+    /**
  *商品一覧画面から商品追加画面に遷移するコントローラーです。<br>
  *
  * 遷移前URL：{@value com.example.demo.contoller.MvcStatic.Product#PRODUCT_LIST_URL}	<br>
@@ -98,7 +115,7 @@ public class ProductAddController {
      *
      */
     @RequestMapping(value = MvcStatic.Product.Add.PRODUCT_ADD_CHECK_URL, params = MvcStatic.Product.Add.PARAM_PRODUCT_ADD_TO_CHECK, method = RequestMethod.POST)
-    public String postProductAddToCheck(Model model, @ModelAttribute @Validated ProductListForm form, BindingResult bindingResult){
+    public String postProductAddToCheck( Model model, @ModelAttribute @Validated ProductListForm form, BindingResult bindingResult) throws IOException {
 
         System.out.println("商品追加画面から商品追加確認画面に遷移します。");
         System.out.println(form);
@@ -117,10 +134,47 @@ public class ProductAddController {
             return MvcStatic.Product.Add.PRODUCT_ADD_URL;
         }
 
+       // Resource image = form.getFile().getResource();
+//        System.out.println(file.getOriginalFilename());
+//        System.out.println(file.getSize());
+//        System.out.println();
+        Random random = new Random();
+//
+//        String imageFilename = "temp" + Integer.valueOf(random * 100000);
+//        File newFile =
+        Path goal = storageService.load(form.getFile().getResource().getFilename());
+         storageService.store(form.getFile());
+
+         String newPath = "tmp" + String.valueOf(random.nextInt(10000)) +".png";
+         Path oldPath = Paths.get("upload-dir/"+form.getFile().getResource().getFilename());
+        Path source = Paths.get("upload-dir/tmp.png");
+        File oldFile = new File(goal.toString());
+        Files.move(oldPath,oldPath.resolveSibling(newPath));
+
+//        storageService.load();
+
+//        if(oldFile.exists()){
+//
+//        }else{
+//            System.out.println("エラーが発生");
+//        }
         model.addAttribute(form);
-//        model.addAttribute(MvcStatic.Product);
+        model.addAttribute("files", storageService.loadAll().map(
+                        path -> MvcUriComponentsBuilder.fromMethodName(ProductAddController.class,
+                                "serveFile", path.getFileName().toString()).build().toUri().toString())
+                .collect(Collectors.toList()));
+        System.out.println("エラーが発生");
 
         return MvcStatic.Product.Add.PRODUCT_ADD_CHECK_URL;
+    }
+
+    @GetMapping("/files/{filename:.+}")
+    @ResponseBody
+    public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
+
+        Resource file = storageService.loadAsResource(filename);
+        return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
+                "attachment; filename=\"" + file.getFilename() + "\"").body(file);
     }
 
 

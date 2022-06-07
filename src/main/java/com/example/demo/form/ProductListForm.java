@@ -1,6 +1,7 @@
 package com.example.demo.form;
 
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotEmpty;
@@ -18,4 +19,6 @@ public class ProductListForm
 
     private String gazou;
     private String radio;
+    private MultipartFile file;
+
 }
