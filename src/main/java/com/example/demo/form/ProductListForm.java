@@ -21,4 +21,5 @@ public class ProductListForm
     private String radio;
     private MultipartFile file;
 
+
 }

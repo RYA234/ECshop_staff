@@ -22,6 +22,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Random;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 //public class ControllerTemplate
 //{
@@ -144,9 +145,10 @@ public class ProductAddController {
 //        File newFile =
         Path goal = storageService.load(form.getFile().getResource().getFilename());
          storageService.store(form.getFile());
-
          String newPath = "tmp" + String.valueOf(random.nextInt(10000)) +".png";
-         Path oldPath = Paths.get("upload-dir/"+form.getFile().getResource().getFilename());
+//          String newPath = "tmp.png";
+
+          Path oldPath = Paths.get("upload-dir/"+form.getFile().getResource().getFilename());
         Path source = Paths.get("upload-dir/tmp.png");
         File oldFile = new File(goal.toString());
         Files.move(oldPath,oldPath.resolveSibling(newPath));
@@ -159,10 +161,16 @@ public class ProductAddController {
 //            System.out.println("エラーが発生");
 //        }
         model.addAttribute(form);
-        model.addAttribute("files", storageService.loadAll().map(
-                        path -> MvcUriComponentsBuilder.fromMethodName(ProductAddController.class,
-                                "serveFile", path.getFileName().toString()).build().toUri().toString())
-                .collect(Collectors.toList()));
+        form.setGazou(newPath);
+//        model.addAttribute("files", storageService.loadAll().map(
+//                        path -> MvcUriComponentsBuilder.fromMethodName(ProductAddController.class,
+//                                "serveFile", path.getFileName().toString()).build().toUri().toString())
+//                .collect(Collectors.toList()));
+//        Path uploadURL = Paths.get("http://localhost:5000/files/" + newPath );
+
+//        画像のURLを渡している。
+        String uploadURL = "http:\\\\localhost:5000\\files\\" + newPath;
+        model.addAttribute("file", uploadURL);
         System.out.println("エラーが発生");
 
         return MvcStatic.Product.Add.PRODUCT_ADD_CHECK_URL;
@@ -194,17 +202,23 @@ public class ProductAddController {
  *
  */
     @RequestMapping(value = MvcStatic.Product.Add.PRODUCT_ADD_DONE_URL, params = MvcStatic.Product.Add.PARAM_PRODUCT_CHECK_TO_DONE, method = RequestMethod.POST)
-    public String postProductCheckToDone(Model model, @ModelAttribute ProductListForm form){
+    public String postProductCheckToDone(Model model, @ModelAttribute ProductListForm form) throws IOException {
 
         System.out.println("商品追加確認画面から商品追加完了画面に遷移します。");
         System.out.println(form);
         model.addAttribute(MvcStatic.Product.PRODUCT_LIST_NAME, MvcStatic.Product.PRODUCT_LIST_URL);
         model.addAttribute(MvcStatic.Product.PARAM_PRODUCT_LIST, MvcStatic.Product.PARAM_PRODUCT_LIST);
-
+        Random random = new Random();
+        String newPath = String.valueOf(random.nextInt(10000000)) +".png";
+        Path oldPath = Paths.get("upload-dir",form.getGazou());
+        Path source = Paths.get("upload-dir/tmp.png");
+//        File oldFile = new File(goal.toString());
+        Files.move (oldPath,oldPath.resolveSibling(newPath));
+        System.out.println("商品追加確認画面から商品追加完了画面に遷移します。");
         MProduct product = MProduct.builder()
                 .name(form.getName())
                 .price(form.getPrice())
-                .gazou(form.getGazou())
+                .gazou(newPath)
                 .build();
         productAddService.addProduct(product);
 
