@@ -11,7 +11,7 @@
 
 <div class="text-center">
     商品編集画面です。
-    <form method="post"  th:object="${productListForm}" th:action=${#strings.prepend(PRODUCT_EDIT_CHECK_NAME,'/')} class="form-control" >
+    <form method="post"  th:object="${productListForm}" th:action=${#strings.prepend(PRODUCT_EDIT_CHECK_NAME,'/')}  enctype="multipart/form-data" class="form-control" >
     <!-- ↓formでも改行しない方法-->
     <div class="mb-6">
         <div class="row justify-content-center">
@@ -26,6 +26,15 @@
                     価格
                     <input type ="text" name="price" value="price" th:field="*{price}" class="form-control" th:errorclass="is-invalid">
                     <p class="invalid-feedback" th:errors="*{price}">Price Error</p>
+
+                        <input type ="file"  th:field = "*{file}">
+                    <div>
+                        <ul>
+                            <img height="200" th:src="${file}" width="200"/>
+                        </ul>
+                    </div>
+                    ↑現時点の画像
+
                 </div>
             </div>
         </div>

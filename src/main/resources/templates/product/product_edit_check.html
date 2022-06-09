@@ -8,12 +8,11 @@
 
 </head>
 <body>
-
 <div class="text-center">
     商品編集確認画面です。
 
 
-    <form method="post" th:object="${productListForm}" th:action=${#strings.prepend(PRODUCT_EDIT_DONE_NAME,'/')} class="form-control">
+    <form method="post" th:object="${productListForm}" enctype="multipart/form-data"  th:action=${#strings.prepend(PRODUCT_EDIT_DONE_NAME,'/')} class="form-control">
         商品名
         <div><p th:text = "*{name}"></p></div>
         価格
@@ -23,7 +22,14 @@
         <div><input type="hidden" th:field = "*{code}"></div>
         <div><input type="hidden" th:field = "*{name}"></div>
         <div><input type="hidden" th:field = "*{price}"></div>
+        <div><input type="hidden" th:field = "*{gazou}"></div>
+        <div><input type="hidden" th:field = "*{tmpFileName}"></div>
 <!--        <div><input type="hidden" th:field = "*{gazou}"></div>-->
+        <div>
+            <ul>
+                <img height="200" th:src="${file}" th:text="${file}" width="200"/>
+            </ul>
+        </div>
 
         <div style="display:inline-flex">
             <button class="btn btn-primary" type="submit" th:name="${PARAM_PRODUCT_EDIT_CHECK_TO_DONE}">

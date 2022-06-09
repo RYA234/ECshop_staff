@@ -134,32 +134,20 @@ public class ProductAddController {
             model.addAttribute(MvcStatic.Product.PARAM_PRODUCT_LIST,MvcStatic.Product.PARAM_PRODUCT_LIST);
             return MvcStatic.Product.Add.PRODUCT_ADD_URL;
         }
-
-       // Resource image = form.getFile().getResource();
-//        System.out.println(file.getOriginalFilename());
-//        System.out.println(file.getSize());
-//        System.out.println();
         Random random = new Random();
-//
-//        String imageFilename = "temp" + Integer.valueOf(random * 100000);
-//        File newFile =
         Path goal = storageService.load(form.getFile().getResource().getFilename());
          storageService.store(form.getFile());
          String newPath = "tmp" + String.valueOf(random.nextInt(10000)) +".png";
-//          String newPath = "tmp.png";
-
           Path oldPath = Paths.get("upload-dir/"+form.getFile().getResource().getFilename());
-        Path source = Paths.get("upload-dir/tmp.png");
         File oldFile = new File(goal.toString());
         Files.move(oldPath,oldPath.resolveSibling(newPath));
-
 //        storageService.load();
-
 //        if(oldFile.exists()){
 //
 //        }else{
 //            System.out.println("エラーが発生");
 //        }
+        form.setGazou(newPath);
         model.addAttribute(form);
         form.setGazou(newPath);
 //        model.addAttribute("files", storageService.loadAll().map(
@@ -168,7 +156,9 @@ public class ProductAddController {
 //                .collect(Collectors.toList()));
 //        Path uploadURL = Paths.get("http://localhost:5000/files/" + newPath );
 
-//        画像のURLを渡している。
+//        画像のURLを渡している
+
+        //Todo httpを変数で表示できるようにする。（デプロイ後も対応するようにする）
         String uploadURL = "http:\\\\localhost:5000\\files\\" + newPath;
         model.addAttribute("file", uploadURL);
         System.out.println("エラーが発生");
@@ -179,7 +169,6 @@ public class ProductAddController {
     @GetMapping("/files/{filename:.+}")
     @ResponseBody
     public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
-
         Resource file = storageService.loadAsResource(filename);
         return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
                 "attachment; filename=\"" + file.getFilename() + "\"").body(file);
@@ -211,7 +200,6 @@ public class ProductAddController {
         Random random = new Random();
         String newPath = String.valueOf(random.nextInt(10000000)) +".png";
         Path oldPath = Paths.get("upload-dir",form.getGazou());
-        Path source = Paths.get("upload-dir/tmp.png");
 //        File oldFile = new File(goal.toString());
         Files.move (oldPath,oldPath.resolveSibling(newPath));
         System.out.println("商品追加確認画面から商品追加完了画面に遷移します。");
