@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>カート商品一覧</title>
+    <!-- 個別CSS読込 -->
+    <link th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css}" rel="stylesheet" >
+
+</head>
+</head>
+<body>
+
+<div class="text-center">
+    商品詳細画面です。
+    </br>
+    <a  text="aaaa" href="/shop/shop_cartin">カートに入れる </a>
+
+    <form method="post" action="aaa" class="form-control" th:object="${productListForm}">
+        商品コード
+        <p th:text="*{code}" ></p>
+        商品名
+        <p th:text="*{name}" ></p>
+        価格
+        <p th:text="*{price}" ></p>
+        画像
+        <p th:text="*{name}" ></p>
+        </div>
+    </form>
+</div>
+
+
+</body>
+</html>

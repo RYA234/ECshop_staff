@@ -1,0 +1,13 @@
+.table1{
+	border: 1px solid #aaa;
+	border-collapse:collapse;
+	writing-mode: vertical-lr;	/* 追加 */
+}
+.table1 th, .table1 td{
+	border: 1px solid #aaa;
+	padding:4px;
+	writing-mode: horizontal-tb;	/* 追加 */
+}
+.table1 th{
+	background-color: #ccc;
+}

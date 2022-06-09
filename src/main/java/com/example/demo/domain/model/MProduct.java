@@ -7,8 +7,8 @@ import lombok.Data;
 @Data
 public class MProduct
 {
-   private int code;
-    private String name;
-    private int price;
-    private String gazou;
+    int code;
+    String name;
+    int price;
+    String gazou;
 }
