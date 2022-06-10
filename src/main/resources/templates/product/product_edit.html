@@ -19,7 +19,7 @@
                 <div class="col-xs-3">
                     名前
                     <input type="hidden" th:field ="*{code}" class="form-control">
-
+                    <input type="hidden" th:field ="*{gazou}" class="form-control">
                     <input class="form-control" th:errorclass="is-invalid" th:field="*{name}" type="text">
                     <p class="invalid-feedback" th:errors="*{name}">Name Error</p>
 

@@ -228,6 +228,18 @@ public class ProductController
         model.addAttribute(MvcStatic.Product.PARAM_PRODUCT_LIST,MvcStatic.Product.PARAM_PRODUCT_LIST);
         model.addAttribute(MvcStatic.Product.PRODUCT_LIST_NAME,MvcStatic.Product.PRODUCT_LIST_URL);
 
+        MProduct selectedProduct = MProduct.builder().build();
+        selectedProduct = productService.getProduct(Integer.valueOf(form.getRadio()));
+
+        form.setCode(selectedProduct.getCode());
+        form.setName(selectedProduct.getName());
+        form.setPrice(selectedProduct.getPrice());
+        form.setGazou(selectedProduct.getGazou());
+
+        //Todo エラー処理していないので注意
+        String uploadURL = "http:\\\\localhost:5000\\files\\" + form.getGazou() ;
+        model.addAttribute(form);
+        model.addAttribute("file", uploadURL);
 
 //        model.addAttribute(MvcStatic.Product.Delete);
 //        model.addAttribute();
