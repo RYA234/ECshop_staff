@@ -14,6 +14,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 @Controller
@@ -99,9 +103,18 @@ public class ProductController
 
         model.addAttribute(MvcStatic.Product.Delete.PARAM_PRODUCT_DELETE_TO_DONE,MvcStatic.Product.Delete.PARAM_PRODUCT_DELETE_TO_DONE);
         model.addAttribute(MvcStatic.Product.Delete.PARAM_PRODUCT_DELETE_BACK,MvcStatic.Product.Delete.PARAM_PRODUCT_DELETE_BACK);
-//        model.addAttribute(MvcStatic.Product.Delete);
-//        model.addAttribute();
-//        model.addAttribute();
+        MProduct selectedProduct = MProduct.builder().build();
+        selectedProduct = productService.getProduct(Integer.valueOf(form.getRadio()));
+
+        form.setCode(selectedProduct.getCode());
+        form.setName(selectedProduct.getName());
+        form.setPrice(selectedProduct.getPrice());
+        form.setGazou(selectedProduct.getGazou());
+
+        //Todo エラー処理していないので注意
+        String uploadURL = "http:\\\\localhost:5000\\files\\" + form.getGazou() ;
+        model.addAttribute(form);
+        model.addAttribute("file", uploadURL);
 
         return MvcStatic.Product.Delete.PRODUCT_DELETE_URL;
     }
@@ -123,12 +136,16 @@ public class ProductController
      *
      */
     @RequestMapping(value = MvcStatic.Product.Delete.PRODUCT_DELETE_DONE_URL, params = MvcStatic.Product.Delete.PARAM_PRODUCT_DELETE_TO_DONE, method = RequestMethod.POST)
-    public String postProductDeleteToDone(Model model, ProductListForm form)
-    {
+    public String postProductDeleteToDone(Model model, ProductListForm form) throws IOException {
         System.out.println("商品削除画面から商品削除完了画面に遷移します");
 
         model.addAttribute(MvcStatic.Product.PRODUCT_LIST_NAME,MvcStatic.Product.PRODUCT_LIST_URL);
-        model.addAttribute(MvcStatic.Product.Delete.PARAM_PRODUCT_DELETE_DONE_BACK,MvcStatic.Product.Delete.PARAM_PRODUCT_DELETE_DONE_BACK);
+        model.addAttribute(MvcStatic.Product.PARAM_PRODUCT_LIST,MvcStatic.Product.PARAM_PRODUCT_LIST);
+//        model.addAttribute(MvcStatic.Product.Delete.PARAM_PRODUCT_DELETE_DONE_BACK,MvcStatic.Product.Delete.PARAM_PRODUCT_DELETE_DONE_BACK);
+
+        Path deletePath = Paths.get("upload-dir",form.getGazou());
+        Files.delete(deletePath);
+        productService.deleteProductone(form.getCode());
 
 
 //        model.addAttribute(MvcStatic.Product.Delete.PARAM_PRODUCT_DELETE_TO_DONE,MvcStatic.Product.Delete.PARAM_PRODUCT_DELETE_TO_DONE);
@@ -170,7 +187,8 @@ public class ProductController
 
         model.addAttribute(MvcStatic.Product.Delete.PRODUCT_DELETE_NAME,MvcStatic.Product.Delete.PRODUCT_DELETE_URL);
         model.addAttribute(MvcStatic.Product.Delete.PARAM_PRODUCT_LIST_TO_DELETE,MvcStatic.Product.Delete.PARAM_PRODUCT_LIST_TO_DELETE);
-//        System.out.println("zzzz");
+
+        //        System.out.println("zzzz");
 //
 //        List<MProduct> productList = productDeleteService.getProducts();
 //        System.out.println(productList);
