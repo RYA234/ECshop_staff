@@ -119,7 +119,6 @@ public class ProductAddController {
     public String postProductAddToCheck( Model model, @ModelAttribute @Validated ProductListForm form, BindingResult bindingResult) throws IOException {
 
         System.out.println("商品追加画面から商品追加確認画面に遷移します。");
-        System.out.println(form);
         model.addAttribute(MvcStatic.Product.Add.PRODUCT_ADD_DONE_NAME, MvcStatic.Product.Add.PRODUCT_ADD_DONE_URL);
         model.addAttribute(MvcStatic.Product.Add.PARAM_PRODUCT_CHECK_TO_DONE,MvcStatic.Product.Add.PARAM_PRODUCT_CHECK_TO_DONE);
 
@@ -134,19 +133,15 @@ public class ProductAddController {
             model.addAttribute(MvcStatic.Product.PARAM_PRODUCT_LIST,MvcStatic.Product.PARAM_PRODUCT_LIST);
             return MvcStatic.Product.Add.PRODUCT_ADD_URL;
         }
+
         Random random = new Random();
         Path goal = storageService.load(form.getFile().getResource().getFilename());
          storageService.store(form.getFile());
          String newPath = "tmp" + String.valueOf(random.nextInt(10000)) +".png";
-          Path oldPath = Paths.get("upload-dir/"+form.getFile().getResource().getFilename());
+         Path oldPath = Paths.get("upload-dir/"+form.getFile().getResource().getFilename());
         File oldFile = new File(goal.toString());
         Files.move(oldPath,oldPath.resolveSibling(newPath));
-//        storageService.load();
-//        if(oldFile.exists()){
-//
-//        }else{
-//            System.out.println("エラーが発生");
-//        }
+
         form.setGazou(newPath);
         model.addAttribute(form);
         form.setGazou(newPath);
