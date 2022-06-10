@@ -61,6 +61,7 @@ public class StaffControllerTest
     @Test
     @DisplayName("indexのコントローラーModelのテスト")
     public void indexModelTest() throws Exception
+
     {
         this.loginMvc.perform(get("/index"))
                 .andDo(print())
@@ -88,6 +89,7 @@ public class StaffControllerTest
     }
     @Test
     @DisplayName("スタッフ一覧画面からスタッフ追加画面へ_Model確認")
+
     public void staffListToAddModelTest() throws Exception
     {
         loginMvc.perform

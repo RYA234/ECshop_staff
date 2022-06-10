@@ -141,4 +141,8 @@ public class MvcStatic
             public static final String PARAM_PRODUCT_REFERENCE_BACK = "PARAM_PRODUCT_REFERENCE_BACK";
         }
     }
+    class Shop
+    {
+
+    }
 }

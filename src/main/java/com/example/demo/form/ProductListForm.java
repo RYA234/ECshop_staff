@@ -8,6 +8,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Null;
 import javax.validation.constraints.Size;
 
+
 @Data
 public class ProductListForm
 {
@@ -17,11 +18,11 @@ public class ProductListForm
     private String name;
     private Integer price;
 
+
     private String gazou;
     private String radio;
     private MultipartFile file;
 
     private String tmpFileName;
-
 
 }
