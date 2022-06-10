@@ -30,3 +30,11 @@ zaa
 JUnitを使ってテストコード導入 </br>
 サーバーを構築した。</br>
 助長性を持たせて稼働率をあげた
+
+### SQL文メモ
+CREATE TABLE `db_name`.`m_product` (
+`code` INT NOT NULL AUTO_INCREMENT,
+`name` VARCHAR(45) NULL,
+`price` INT NULL,
+`gazou` VARCHAR(45) NULL,
+PRIMARY KEY (`code`));

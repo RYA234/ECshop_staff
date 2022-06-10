@@ -14,10 +14,24 @@
 <div class="text-center">
     商品削除画面です。
     </br>
-
     <!-- ↓formでも改行しない方法-->
+    <form method="post" th:action=${#strings.prepend(PRODUCT_DELETE_DONE_NAME,'/')} class="form-control" th:object="${productListForm}">
 
-    <form method="post" th:action=${#strings.prepend(PRODUCT_DELETE_DONE_NAME,'/')} class="form-control">
+        <div><input type="hidden" th:field = "*{code}"></div>
+        <div><input type="hidden" th:field = "*{name}"></div>
+        <div><input type="hidden" th:field = "*{price}"></div>
+        <div><input type="hidden" th:field = "*{gazou}"></div>
+        <div><input type="hidden" th:field = "*{tmpFileName}"></div>
+
+        <div><p th:text = "*{name}"></p></div>
+        価格
+        <div><p th:text = "*{price}"></p></div>
+        画像
+        <div>
+            <ul>
+                <img height="200" th:src="${file}" th:text="${file}" width="200"/>
+            </ul>
+        </div>
         <!--    <form method="post" th:action="${PRODUCT_ADD_CHECK_NAME}">-->
         <div style="display:inline-flex">
             <button class="btn btn-primary" type="submit" th:name="${PARAM_PRODUCT_DELETE_TO_DONE}">

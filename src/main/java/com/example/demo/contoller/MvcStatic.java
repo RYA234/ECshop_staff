@@ -74,7 +74,7 @@ public class MvcStatic
             public static final String PARAM_STAFF_REFERENCE_BACK = "PARAM_STAFF_REFERENCE_BACK";
         }
     }
-    class Product
+    public class Product
     {
         public static final String INDEX_TO_PRODUCT_NAME = "INDEX_TO_PRODUCT_NAME";
         public static final String PRODUCT_LIST_NAME = "PRODUCT_LIST_NAME";
