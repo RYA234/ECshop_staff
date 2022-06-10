@@ -13,19 +13,27 @@
 
 <div class="text-center">
   商品参照画面です。
-  </br>
 
   <!-- ↓formでも改行しない方法-->
 
   &nbsp;&nbsp;&nbsp;&nbsp;
-  <form method="post" th:action=${#strings.prepend(PRODUCT_LIST_NAME,'/')} >
+  <form method="post" th:action=${#strings.prepend(PRODUCT_LIST_NAME,'/')}　　th:object="${productListForm}" >
+
+    </br>
+      商品名
+      <div><p th:text = "*{name}"></p></div>
+      価格
+      <div><p th:text = "*{price}"></p></div>
+      画像
+    <div>
+      <ul>
+        <img height="200" th:src="${file}" th:text="${file}" width="200"/>
+      </ul>
+    </div>
     <button class="btn btn-primary" type="submit" th:name="${PARAM_PRODUCT_LIST}">
       商品一覧へ戻る
     </button>
   </form>
-
 </div>
-
-
 </body>
 </html>

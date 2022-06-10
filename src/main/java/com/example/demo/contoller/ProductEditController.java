@@ -170,9 +170,8 @@ public class ProductEditController {
         Path oldPath = Paths.get("upload-dir",form.getTmpFileName());
 //        File oldFile = new File(goal.toString());
         Files.move (oldPath,oldPath.resolveSibling(newPath));
-        //todo ファイルの削除を実行するとエラーになる
-       // Path deletePath = Paths.get("upload-dir",form.getGazou());
-        //Files.delete(deletePath);
+       Path deletePath = Paths.get("upload-dir",form.getGazou());
+        Files.delete(deletePath);
         productEditService.updateProductone(form.getCode(),
                 form.getName(),
                 form.getPrice(),
@@ -193,8 +192,6 @@ public class ProductEditController {
      * 				     2.formアクションの値 </p>
      *
      * @return {@value com.example.demo.contoller.MvcStatic.Product.Edit#PRODUCT_EDIT_URL}:遷移先URL
-     *
-     *
      */
     @RequestMapping(value = MvcStatic.Product.Edit.PRODUCT_EDIT_URL, params = MvcStatic.Product.Edit.PARAM_PRODUCT_EDIT_CHECK_BACK, method = RequestMethod.POST)
     public String postProductEditCheckBack(Model model, @ModelAttribute ProductListForm form){
