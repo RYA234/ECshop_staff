@@ -28,24 +28,24 @@ import java.util.List;
 public class ProductDatabaseTest {
     @Autowired
     private ProductService productService;
-    @Test
-    @DisplayName("データベース商品が追加されるか確認")
-    @DatabaseSetup("/testdata/ProductServiceTest/init-data")
-    @ExpectedDatabase(value = "/testdata/ProductServiceTest/after-create-data", assertionMode = DatabaseAssertionMode.NON_STRICT_UNORDERED)
-        // テスト実行後に１件データが追加されていること
-    void productAddCheck() {
-        MProduct newProduct = MProduct.builder()
-                .code(3)
-                .name("zyx")
-                .price(220)
-                .gazou("").build();
-
-        productService.addProduct(newProduct);
-        Assertions.assertEquals(3, newProduct.getCode());
-        Assertions.assertEquals("zyx", newProduct.getName());
-        Assertions.assertEquals(220, newProduct.getPrice());
-        Assertions.assertEquals("nnn", newProduct.getGazou());
-    }
+//    @Test
+//    @DisplayName("データベース商品が追加されるか確認")
+//    @DatabaseSetup("/testdata/ProductServiceTest/init-data")
+//    @ExpectedDatabase(value = "/testdata/ProductServiceTest/after-create-data", assertionMode = DatabaseAssertionMode.NON_STRICT_UNORDERED)
+//        // テスト実行後に１件データが追加されていること
+//    void productAddCheck() {
+//        MProduct newProduct = MProduct.builder()
+//                .code(3)
+//                .name("zyx")
+//                .price(220)
+//                .gazou("").build();
+//
+//        productService.addProduct(newProduct);
+//        Assertions.assertEquals(3, newProduct.getCode());
+//        Assertions.assertEquals("zyx", newProduct.getName());
+//        Assertions.assertEquals(220, newProduct.getPrice());
+//        Assertions.assertEquals("nnn", newProduct.getGazou());
+//    }
 
 
     @Test
