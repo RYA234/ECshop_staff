@@ -221,7 +221,6 @@ public class StaffController
                 .build();
         staffService.addStaff(staff);
         model.addAttribute(MvcStatic.Staff.STAFF_LIST_NAME, MvcStatic.Staff.STAFF_LIST_URL);
-        model.addAttribute(MvcStatic.Staff.Add.PARAM_STAFF_DONE_BACK, MvcStatic.Staff.Add.PARAM_STAFF_DONE_BACK);
         model.addAttribute(MvcStatic.Staff.PARAM_STAFF_LIST,MvcStatic.Staff.PARAM_STAFF_LIST);
         return MvcStatic.Staff.Add.STAFF_ADD_DONE_URL;
     }
@@ -241,30 +240,7 @@ public class StaffController
      *
      *
      */
-    @RequestMapping(value = MvcStatic.Staff.STAFF_LIST_URL,params = MvcStatic.Staff.Add.PARAM_STAFF_DONE_BACK,method = RequestMethod.POST)
-    public String postStaffDoneToList(Model model)
-    {
-        System.out.println("タスク追加画面からリストに戻ります。");
-        model.addAttribute(MvcStatic.Staff.Add.STAFF_ADD_NAME,MvcStatic.Staff.Add.STAFF_ADD_URL);
-        model.addAttribute(MvcStatic.Staff.Add.PARAM_STAFF_LIST_TO_ADD,MvcStatic.Staff.Add.PARAM_STAFF_LIST_TO_ADD);
 
-
-        model.addAttribute(MvcStatic.Staff.Edit.STAFF_EDIT_NAME,MvcStatic.Staff.Edit.STAFF_EDIT_URL);
-        model.addAttribute(MvcStatic.Staff.Edit.PARAM_STAFF_LIST_TO_EDIT,MvcStatic.Staff.Edit.PARAM_STAFF_LIST_TO_EDIT);
-
-        model.addAttribute(MvcStatic.Staff.Delete.STAFF_DELETE_NAME,MvcStatic.Staff.Delete.STAFF_DELETE_URL);
-        model.addAttribute(MvcStatic.Staff.Delete.PARAM_STAFF_LIST_TO_DELETE,MvcStatic.Staff.Delete.PARAM_STAFF_LIST_TO_DELETE);
-
-        model.addAttribute(MvcStatic.Staff.Reference.STAFF_REFERENCE_NAME,MvcStatic.Staff.Reference.STAFF_REFERENCE_URL);
-        model.addAttribute(MvcStatic.Staff.Reference.PARAM_STAFF_LIST_TO_REFERENCE, MvcStatic.Staff.Reference.PARAM_STAFF_LIST_TO_REFERENCE );
-
-        System.out.println("zzzz");
-
-        List<MStaff> staffList = staffService.getStaffs();
-        System.out.println(staffList);
-        model.addAttribute("staffList", staffList);
-        return MvcStatic.Staff.STAFF_LIST_URL;
-    }
 
 
 
