@@ -3,6 +3,7 @@ package com.example.demo;
 
 import com.example.demo.contoller.MvcStatic;
 import com.example.demo.contoller.StaffController;
+import com.example.demo.form.StaffListForm;
 import com.example.demo.service.StaffService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -33,6 +34,9 @@ public class StaffControllerTest
     StaffController testIndexController;
     @Mock
     StaffService staffService;
+
+    StaffListForm staffListForm = new StaffListForm();
+
     @BeforeEach
     void setup()
     {
@@ -41,13 +45,17 @@ public class StaffControllerTest
         this.loginMvc = MockMvcBuilders.standaloneSetup(testIndexController).build();
         //model().attribute(MvcStatic.Staff.INDEX_TO_STAFF_NAME, MvcStatic.Staff.STAFF_LIST_URL);
         //model().attribute(MvcStatic.Staff.PARAM_INDEX_TO_STAFF_LIST,MvcStatic.Staff.PARAM_INDEX_TO_STAFF_LIST);
-
+        staffListForm.setId(1);
+        staffListForm.setName("test");
+        staffListForm.setPassword("pass");
+        staffListForm.setRadio("1");
+        model().attribute("staffListForm",staffListForm);
     }
 
 
 
     @Test
-    @DisplayName("indexのコントローラーテスト")
+    @DisplayName("01.indexのコントローラーテスト")
     public void indexControllerTest() throws Exception {
        System.out.println("aaa");
 
@@ -59,7 +67,7 @@ public class StaffControllerTest
 
     }
     @Test
-    @DisplayName("indexのコントローラーModelのテスト")
+    @DisplayName("02.indexのコントローラーModelのテスト")
     public void indexModelTest() throws Exception
 
     {
@@ -73,7 +81,7 @@ public class StaffControllerTest
     }
 
     @Test
-    @DisplayName("スタッフ一覧画面からスタッフ追加画面へ_Viewのform_postからController")
+    @DisplayName("03.スタッフ一覧画面からスタッフ追加画面HTTPステータスコード確認")
     public void staffListToAddControllerTest() throws Exception
     {
         loginMvc.perform
@@ -82,42 +90,56 @@ public class StaffControllerTest
                 .param(MvcStatic.Staff.Add.PARAM_STAFF_LIST_TO_ADD,MvcStatic.Staff.Add.PARAM_STAFF_LIST_TO_ADD)
                 )
                 .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(model().attribute("STAFF_ADD_CHECK_NAME","staff/staff_add_check")
-
+                .andExpect(status().isOk()
                 );
     }
     @Test
-    @DisplayName("スタッフ一覧画面からスタッフ追加画面へ_Model確認")
+    @DisplayName("04.スタッフ一覧画面からスタッフ追加画面へ_Model確認")
 
     public void staffListToAddModelTest() throws Exception
     {
         loginMvc.perform
                         (
-                                MockMvcRequestBuilders.post("/staff/staff_add")
+                                MockMvcRequestBuilders.post("/staff/staff_list")
                                         .param(MvcStatic.Staff.Add.PARAM_STAFF_LIST_TO_ADD,MvcStatic.Staff.Add.PARAM_STAFF_LIST_TO_ADD)
                         )
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(model().attribute("STAFF_ADD_CHECK_NAME","staff/staff_add_check"))
                 .andExpect(model().attribute("PARAM_STAFF_ADD_TO_CHECK","PARAM_STAFF_ADD_TO_CHECK"))
-                .andExpect(model().attribute("PARAM_STAFF_ADD_BACK","PARAM_STAFF_ADD_BACK")
+
+                .andExpect(model().attribute("STAFF_LIST_NAME","staff/staff_list"))
+                .andExpect(model().attribute("PARAM_STAFF_LIST","PARAM_STAFF_LIST")
                 );
     }
 
     @Test
-    @DisplayName("スタッフ一覧画面からスタッフ追加画面へ返り値の確認")
+    @DisplayName("05.スタッフ一覧画面からスタッフ追加画面へ返り値の確認")
     public void staffListToAddReturn() throws Exception
     {
         loginMvc.perform
                         (
-                                MockMvcRequestBuilders.post("/staff/staff_add")
+                                MockMvcRequestBuilders.post("/staff/staff_list")
                                         .param(MvcStatic.Staff.Add.PARAM_STAFF_LIST_TO_ADD,MvcStatic.Staff.Add.PARAM_STAFF_LIST_TO_ADD)
                         )
                 .andDo(print())
                 .andExpect(forwardedUrl("staff/staff_add")
-
                 );
+    }
+
+    @Test
+    @DisplayName("03.スタッフ追加画面からスタッフ追加確認画面HTTPステータスコード確認")
+    public void staffAddToCheckHttpCheck() throws Exception
+    {
+        loginMvc.perform
+                        (
+                                MockMvcRequestBuilders.post("/staff/staff_add_check")
+                                        .param(MvcStatic.Staff.Add.PARAM_STAFF_ADD_TO_CHECK,MvcStatic.Staff.Add.PARAM_STAFF_ADD_TO_CHECK)
+                        )
+                .andDo(print())
+                .andExpect(status().isOk()
+                );
+
     }
 
 }

@@ -34,7 +34,7 @@ public class StaffController
     @Autowired
     private StaffService staffService;
     @Autowired
-   private ModelMapper modelMapper;
+    private ModelMapper modelMapper;
 
     /**
      *スタッフ一覧画面からスタッフ画面追加に遷移するコントローラーです。<br>
@@ -60,9 +60,6 @@ public class StaffController
 
         model.addAttribute(MvcStatic.Staff.STAFF_LIST_NAME,MvcStatic.Staff.STAFF_LIST_URL);
         model.addAttribute(MvcStatic.Staff.PARAM_STAFF_LIST,MvcStatic.Staff.PARAM_STAFF_LIST);
-
-
-        System.out.println("bbwqqwqwbv");
         return MvcStatic.Staff.Add.STAFF_ADD_URL;
     }
 
@@ -166,7 +163,6 @@ public class StaffController
         model.addAttribute(MvcStatic.Staff.Delete.PARAM_STAFF_LIST_TO_DELETE,MvcStatic.Staff.Delete.PARAM_STAFF_LIST_TO_DELETE);
         model.addAttribute(MvcStatic.Staff.Reference.PARAM_STAFF_LIST_TO_REFERENCE, MvcStatic.Staff.Reference.PARAM_STAFF_LIST_TO_REFERENCE );
         System.out.println("zzzz");
-
 
         List<MStaff> staffList = staffService.getStaffs();
         System.out.println(staffList);
