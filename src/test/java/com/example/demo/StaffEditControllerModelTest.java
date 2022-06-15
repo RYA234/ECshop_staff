@@ -17,6 +17,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -36,8 +37,9 @@ public class StaffEditControllerModelTest {
     StaffEditController testIndexController;
     @Mock
     StaffService staffService;
-    @Mock
-    StaffListForm staffListForm = new StaffListForm();
+
+
+    StaffListForm staffListForm= new StaffListForm();
 
     @BeforeEach
     void setup()
@@ -47,10 +49,10 @@ public class StaffEditControllerModelTest {
         this.staffMvc = MockMvcBuilders.standaloneSetup(testIndexController).build();
         //model().attribute(MvcStatic.Staff.INDEX_TO_STAFF_NAME, MvcStatic.Staff.STAFF_LIST_URL);
         //model().attribute(MvcStatic.Staff.PARAM_INDEX_TO_STAFF_LIST,MvcStatic.Staff.PARAM_INDEX_TO_STAFF_LIST);
-        staffListForm.setId(1);
-        staffListForm.setName("test");
-        staffListForm.setPassword("pass");
-        staffListForm.setRadio("1");
+//        staffListForm.setId(1);
+//        staffListForm.setName("test");
+//        staffListForm.setPassword("pass");
+//        staffListForm.setRadio("1");
         model().attribute("staffListForm",staffListForm);
     }
 
@@ -77,9 +79,6 @@ public class StaffEditControllerModelTest {
     @DisplayName("02.スタッフ編集画面からスタッフ編集確認画面へ_Model確認")
     public void staffEditCheckToDoneModelTest() throws Exception
     {
-
-
-
         staffMvc.perform
                         (
                                 MockMvcRequestBuilders.post("/staff/staff_edit_check")
@@ -99,11 +98,23 @@ public class StaffEditControllerModelTest {
     public void staffEditCheckBackModelTest() throws Exception
     {
         //        null防止のため適当な値を入力
-        MStaff seletctedStaff = MStaff.builder().build();
-        seletctedStaff.setPassword("aaa");
-        seletctedStaff.setId(1);
-        seletctedStaff.setName("aaa");
+//        MStaff selectedStaff = MStaff.builder()
+//                .id(1)
+//                .name("ada")
+//                .password("dafsa")
+//                .build();
+//        StaffListForm form = new StaffListForm();
+//        StaffListForm form = new StaffListForm();
+//        form.setId(selectedStaff.getId());
+//        form.setName(selectedStaff.getName());
+//        form.setPassword(selectedStaff.getPassword());
+//        form.setRadio("1");
 
+        MStaff selectedStaff = MStaff.builder()
+                .id(1)
+                .name("ada")
+                .password("dafsa")
+                .build();
         staffMvc.perform
                         (
                                 MockMvcRequestBuilders.post("/staff/staff_edit")

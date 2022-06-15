@@ -5,6 +5,7 @@ import com.example.demo.form.StaffListForm;
 import com.example.demo.service.StaffService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,6 +22,8 @@ public class StaffEditController {
     private StaffService staffEditService;
     @Autowired
     private ModelMapper modelMapper;
+
+    MStaff selectedStaff = MStaff.builder().build();
 
     /**
      *スタッフ一覧画面からスタッフ編集画面に遷移するコントローラーです。<br>
@@ -165,30 +168,25 @@ public class StaffEditController {
      *
      */
     @RequestMapping(value = MvcStatic.Staff.Edit.STAFF_EDIT_URL, params = MvcStatic.Staff.Edit.PARAM_STAFF_EDIT_CHECK_BACK, method = RequestMethod.POST)
-    public String postStaffEditCheckBack(Model model, StaffListForm form)
+    public String postStaffEditCheckBack(Model model,@ModelAttribute StaffListForm form)
     {
         System.out.println("スタッフ編集確認画面からスタッフ編集画面に戻ります");
         //TODO フォームの値が入っていない。
         model.addAttribute(MvcStatic.Staff.Edit.STAFF_EDIT_CHECK_NAME, MvcStatic.Staff.Edit.STAFF_EDIT_CHECK_URL);
-        model.addAttribute(MvcStatic.Staff.Edit.PARAM_STAFF_EDIT_CHECK_TO_DONE, MvcStatic.Staff.Edit.PARAM_STAFF_EDIT_CHECK_TO_DONE);
+        model.addAttribute(MvcStatic.Staff.Edit.PARAM_STAFF_EDIT_TO_CHECK, MvcStatic.Staff.Edit.PARAM_STAFF_EDIT_TO_CHECK);
 
-        //System.out.println(form.getRadio());
-//        int selectedId = Integer.valueOf(form.getRadio());
-        MStaff selectedStaff = MStaff.builder().build();
+
         selectedStaff = staffEditService.getStaff(form.getId());
 
-        form.setId(selectedStaff.getId());
-        form.setName(selectedStaff.getName());
-        form.setPassword(selectedStaff.getPassword());
+         int Id= selectedStaff.getId();
+//        int Id =3;
+        form.setId(Id);
+//        form.setName(selectedStaff.getName());
+//        form.setPassword(selectedStaff.getPassword());
         model.addAttribute(form);
-        model.addAttribute("id", selectedStaff.getId());
-        model.addAttribute("name", selectedStaff.getName());
-        model.addAttribute("password", selectedStaff.getPassword());
-
-
-
-        model.addAttribute(MvcStatic.Staff.Edit.STAFF_EDIT_NAME, MvcStatic.Staff.Edit.STAFF_EDIT_URL);
-        model.addAttribute(MvcStatic.Staff.Edit.PARAM_STAFF_EDIT_TO_CHECK, MvcStatic.Staff.Edit.PARAM_STAFF_EDIT_TO_CHECK);
+//        model.addAttribute("id", selectedStaff.getId());
+//        model.addAttribute("name", selectedStaff.getName());
+//        model.addAttribute("password", selectedStaff.getPassword());
 
         model.addAttribute(MvcStatic.Staff.STAFF_LIST_NAME,MvcStatic.Staff.STAFF_LIST_URL);
         model.addAttribute(MvcStatic.Staff.PARAM_STAFF_LIST,MvcStatic.Staff.PARAM_STAFF_LIST);

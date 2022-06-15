@@ -103,6 +103,7 @@ public class ProductAddControllerTest
                                         .param("PARAM_PRODUCT_ADD_TO_CHECK","PARAM_PRODUCT_ADD_TO_CHECK")
                         )
                 .andDo(print())
+                .andExpect(status().isOk())
                 .andExpect(forwardedUrl("product/product_add_check")
                 );
         //todo テストコードでエラーになる 画像入出力用のコメントを書く

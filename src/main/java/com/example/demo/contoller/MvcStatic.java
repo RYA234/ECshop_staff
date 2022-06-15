@@ -52,7 +52,7 @@ public class MvcStatic
             public static final String PARAM_STAFF_EDIT_CHECK_BACK = "PARAM_STAFF_EDIT_CHECK_BACK";
             public static final String PARAM_STAFF_EDIT_DONE_BACK = "PARAM_STAFF_EDIT_DONE_BACK";
         }
-        class Delete
+       public class Delete
         {
             public static final String STAFF_DELETE_NAME = "STAFF_DELETE_NAME";
             public static final String STAFF_DELETE_URL = "staff/staff_delete";
@@ -65,7 +65,7 @@ public class MvcStatic
             public static final String PARAM_STAFF_DELETE_BACK = "PARAM_STAFF_DELETE_BACK";
             public static final String PARAM_STAFF_DELETE_DONE_BACK = "PARAM_STAFF_DELETE_DONE_BACK";
         }
-        class Reference
+        public class Reference
         {
             public static final String STAFF_REFERENCE_NAME ="STAFF_REFERENCE_NAME";
             public static final String STAFF_REFERENCE_URL ="staff/staff_reference";
@@ -119,7 +119,7 @@ public class MvcStatic
             public static final String PARAM_PRODUCT_EDIT_CHECK_BACK = "PARAM_PRODUCT_EDIT_CHECK_BACK";
             public static final String PARAM_PRODUCT_EDIT_DONE_BACK = "PARAM_PRODUCT_EDIT_DONE_BACK";
         }
-        class Delete
+       public class Delete
         {
             public static final String PRODUCT_DELETE_NAME = "PRODUCT_DELETE_NAME";
             public static final String PRODUCT_DELETE_URL = "product/product_delete";
@@ -132,7 +132,7 @@ public class MvcStatic
             public static final String PARAM_PRODUCT_DELETE_BACK = "PARAM_PRODUCT_DELETE_BACK";
             public static final String PARAM_PRODUCT_DELETE_DONE_BACK = "PARAM_PRODUCT_DELETE_DONE_BACK";
         }
-        class Reference
+        public class Reference
         {
             public static final String PRODUCT_REFERENCE_NAME ="PRODUCT_REFERENCE_NAME";
             public static final String PRODUCT_REFERENCE_URL ="product/product_reference";

@@ -26,7 +26,8 @@
             </button>
         </form>
         &nbsp;&nbsp;&nbsp;&nbsp;
-        <form method="post" th:action=${#strings.prepend(STAFF_EDIT_NAME,'/')} >
+        <form method="post" th:action=${#strings.prepend(STAFF_EDIT_NAME,'/')} th:object="${StaffListForm}" >
+            <input type ="hidden" name ="id" th:value="${id}">
             <button class="btn btn-primary" type="submit" th:name="${PARAM_STAFF_EDIT_CHECK_BACK}">
                 戻る
             </button>
