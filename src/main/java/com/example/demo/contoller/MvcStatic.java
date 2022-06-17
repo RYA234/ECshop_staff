@@ -143,6 +143,19 @@ public class MvcStatic
     }
     class Shop
     {
+        public static final String SHOP_LIST_NAME = "SHOP_LIST_NAME";
+        public static final String SHOP_LIST_URL = "shop/shop_list";
+
+        public static final String SHOP_CARTIN_NAME = "SHOP_LIST_CARTIN_NAME";
+        public static final String SHOP_CARTIN_URL = "shop/shop_cartin";
+
+        public static final String SHOP_CARTLOOK_NAME = "SHOP_CARTLOOK_NAME";
+        public static final String SHOP_CARTLOOK_URL = "shop/shop_cartlook";
+
+        public static final String SHOP_KAZU_CHANGE_NAME = "SHOP_KAZU_CHANGE_NAME";
+        public static final String SHOP_KAZU_CHANGE_URL = "shop/kazu_change";
+
+
 
     }
 }

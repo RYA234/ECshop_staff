@@ -10,5 +10,9 @@ public class ProductListForm
 
     private Integer price;
     private String gazou;
-    private Integer Count;
+    private Integer count;
+    public ProductListForm(){
+        this.count=1;
+    }
+
 }

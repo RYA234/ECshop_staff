@@ -14,9 +14,10 @@
 <div class="text-center">
     商品詳細画面です。
     </br>
-    <a  text="aaaa" href="/shop/shop_cartin">カートに入れる </a>
 
-    <form method="post" action="aaa" class="form-control" th:object="${productListForm}">
+
+    <form method="post" action="/shop/shop_cartin" class="form-control" th:object="${productListForm}">
+        <a  text="aaaa" href="/shop/shop_cartin">カートに入れる </a>
         商品コード
         <p th:text="*{code}" ></p>
         商品名
@@ -25,7 +26,11 @@
         <p th:text="*{price}" ></p>
         画像
         <p th:text="*{name}" ></p>
-        </div>
+        <input type ="hidden" name ="code" th:value="*{code}">
+            <button class="btn btn-primary" type="submit" th:name="cart">
+                カートに入れる
+            </button>
+</div>
     </form>
 </div>
 

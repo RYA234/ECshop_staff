@@ -11,4 +11,5 @@ public class MProduct
     String name;
     int price;
     String gazou;
+
 }

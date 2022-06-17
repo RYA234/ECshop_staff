@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>カート内情報</title>
+    <!-- 個別CSS読込 -->
+    <link th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css}" rel="stylesheet" >
+
+</head>
+<body>
+カート内情報です。
+<form method="post" action="/shop/kazu_change"}>
+<table class="table1"  width="300" border="1">
+    <thead>
+    <tr>
+        <th> 名前</th>
+        <th> 画像</th>
+        <th> 価格</th>
+        <th> 個数</th>
+    </tr>
+    </thead>
+    <tr th:each="item: ${listProduct}">
+        <td th:text="${item.gazou}"></td>
+        <td> <a th:text="${item.name}" th:href="@{'/shop/shop_product/' + ${item.code}}"> th:text="${item.name}">
+        </a>
+        </td>
+        <td th:text="${item.price}"></td>
+        <td> <input type="text" th:field="${item.count}"></td>
+    </tr>
+</table>
+
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <button class="btn btn-primary" type="submit" th:name="kazu_change">
+        数量変更
+    </button>
+</form>
+</body>
+</html>
