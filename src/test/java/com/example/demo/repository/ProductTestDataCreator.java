@@ -11,11 +11,12 @@ class ProductTestDataCreator {
     private ECShopMapper ecShopMapper;
 
     void create(
+            Integer code,
             String name,
             Integer price,
             String gazou
     ) {
-        MProduct product = TestProductFactory.create(name, price, gazou);
+        MProduct product = TestProductFactory.create(code, name, price, gazou);
         ecShopMapper.productInsertOne(product);
     }
 }
