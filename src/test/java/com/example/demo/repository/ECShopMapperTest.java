@@ -16,16 +16,12 @@ class ECShopMapperTest {
     @Autowired
     private ECShopMapper ecShopMapper;
 
+    @Autowired
+    private ProductTestDataCreator productTestDataCreator;
+
     @Test
     void shouldGetProductByCode() {
-        // FIXME : テストデータ用のファクトリクラスを作成して処理を移す
-        MProduct createdProduct = MProduct.builder()
-                .code(1)
-                .name("tanaka taro")
-                .price(1000)
-                .gazou("file/path")
-                .build();
-        ecShopMapper.productInsertOne(createdProduct);
+        productTestDataCreator.create("tanaka taro", 1000, "file/path");
 
         MProduct fetchedProduct = ecShopMapper.productFindOne(1);
 
@@ -43,3 +39,6 @@ class ECShopMapperTest {
         assertNull(fetchedProduct);
     }
 }
+
+
+
