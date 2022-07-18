@@ -16,19 +16,19 @@
     </br>
     <div th:text ="${name}" class="form-control" ></div> </br>
     <div style="display:inline-flex">
-        <form method="post" th:action=${#strings.prepend(STAFF_EDIT_DONE_NAME,'/')} th:object="${StaffListForm}">
+        <form method="post" action="/staff/staff_edit_done" th:object="${StaffListForm}">
 
             <input type ="hidden" name ="id" th:value="${id}">
             <input type ="hidden" name ="name" th:value="${name}">
             <input type ="hidden" name ="password" th:value="${password}">
-            <button class="btn btn-primary" type="submit" th:name="${PARAM_STAFF_EDIT_CHECK_TO_DONE}">
+            <button class="btn btn-primary" type="submit" th:name="PARAM_STAFF_EDIT_CHECK_TO_DONE">
                 OK
             </button>
         </form>
         &nbsp;&nbsp;&nbsp;&nbsp;
-        <form method="post" th:action=${#strings.prepend(STAFF_EDIT_NAME,'/')} th:object="${StaffListForm}" >
+        <form method="post" action="/staff/staff_edit" th:object="${StaffListForm}" >
             <input type ="hidden" name ="id" th:value="${id}">
-            <button class="btn btn-primary" type="submit" th:name="${PARAM_STAFF_EDIT_CHECK_BACK}">
+            <button class="btn btn-primary" type="submit" th:name="PARAM_STAFF_EDIT_CHECK_BACK">
                 戻る
             </button>
         </form>

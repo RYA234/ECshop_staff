@@ -8,14 +8,13 @@
     <link th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css}" rel="stylesheet" >
 
 </head>
-</head>
 <body>
 
 <div class="text-center">
     スタッフ編集画面です。
     </br>
     <!--th:objectについてstaffListFormはJavaのStaffListFormに相当（頭文字が小文字に変化するので注意） -->
-    <form method="post"  th:object="${staffListForm}" th:action=${#strings.prepend(STAFF_EDIT_CHECK_NAME,'/')} class="form-control" >
+    <form method="post"  th:object="${staffListForm}" action="/staff/staff_edit_check" class="form-control" >
         <div class="mb-6">
             <div class="row justify-content-center">
                 <div class="row">
@@ -32,13 +31,13 @@
             </div>
         </div>
         <div style="display:inline-flex">
-            <button class="btn btn-primary" type="submit" th:name="${PARAM_STAFF_EDIT_TO_CHECK}">
+            <button class="btn btn-primary" type="submit" name="PARAM_STAFF_EDIT_TO_CHECK">
                 OK
             </button>
     </form>
     &nbsp;&nbsp;&nbsp;&nbsp;
-    <form method="post" th:action=${#strings.prepend(STAFF_LIST_NAME,'/')} >
-        <button class="btn btn-primary" type="submit" th:name="${PARAM_STAFF_LIST}">
+    <form method="post" action="/staff/staff_list" >
+        <button class="btn btn-primary" type="submit" name="PARAM_STAFF_LIST">
                 戻る
             </button>
 

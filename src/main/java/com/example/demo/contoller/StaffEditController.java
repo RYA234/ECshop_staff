@@ -5,7 +5,6 @@ import com.example.demo.form.StaffListForm;
 import com.example.demo.service.StaffService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,8 +12,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import java.util.List;
 
 @Controller
 public class StaffEditController {
@@ -40,37 +37,22 @@ public class StaffEditController {
      *注意：ブラウザのURL上ではstaff/staff_listになります。
      *
      */
-    @RequestMapping(value = MvcStatic.Staff.STAFF_LIST_URL, params = MvcStatic.Staff.Edit.PARAM_STAFF_LIST_TO_EDIT, method = RequestMethod.POST)
+    @RequestMapping(value = "staff/staff_list", params = "PARAM_STAFF_LIST_TO_EDIT", method = RequestMethod.POST)
     public String postStaffListtoEdit(Model model,StaffListForm form) {
         System.out.println("スタッフ一覧画面からスタッフ編集画面に遷移します");
-        model.addAttribute(MvcStatic.Staff.Edit.STAFF_EDIT_CHECK_NAME, MvcStatic.Staff.Edit.STAFF_EDIT_CHECK_URL);
-        model.addAttribute(MvcStatic.Staff.Edit.PARAM_STAFF_EDIT_CHECK_TO_DONE, MvcStatic.Staff.Edit.PARAM_STAFF_EDIT_CHECK_TO_DONE);
-
-        System.out.println(form.getRadio());
+//        System.out.println(form.getRadio());
         int selectedId = Integer.valueOf(form.getRadio());
-        MStaff selectedStaff = MStaff.builder().build();
         selectedStaff = staffEditService.getStaff(selectedId);
 
         form.setId(selectedStaff.getId());
         form.setName(selectedStaff.getName());
         form.setPassword(selectedStaff.getPassword());
         model.addAttribute(form);
-
-
         model.addAttribute("id", selectedStaff.getId());
         model.addAttribute("name", selectedStaff.getName());
         model.addAttribute("password", selectedStaff.getPassword());
 
-        model.addAttribute(MvcStatic.Staff.Edit.STAFF_EDIT_NAME, MvcStatic.Staff.Edit.STAFF_EDIT_URL);
-        model.addAttribute(MvcStatic.Staff.Edit.PARAM_STAFF_EDIT_TO_CHECK, MvcStatic.Staff.Edit.PARAM_STAFF_EDIT_TO_CHECK);
-
-        model.addAttribute(MvcStatic.Staff.STAFF_LIST_NAME,MvcStatic.Staff.STAFF_LIST_URL);
-        model.addAttribute(MvcStatic.Staff.PARAM_STAFF_LIST,MvcStatic.Staff.PARAM_STAFF_LIST);
-        System.out.println(form);
-
-
-        return MvcStatic.Staff.Edit.STAFF_EDIT_URL;
-
+        return "staff/staff_edit";
     }
     /**
      *スタッフ編集画面からスタッフ編集確認画面に遷移するコントローラーです。<br>
@@ -87,35 +69,18 @@ public class StaffEditController {
      *
      *
      */
-    @RequestMapping(value = MvcStatic.Staff.Edit.STAFF_EDIT_CHECK_URL, params = MvcStatic.Staff.Edit.PARAM_STAFF_EDIT_TO_CHECK, method = RequestMethod.POST)
+    @RequestMapping(value = "staff/staff_edit_check", params = "PARAM_STAFF_EDIT_TO_CHECK", method = RequestMethod.POST)
     public String postStaffEditToCheck(Model model, @ModelAttribute @Validated StaffListForm form, BindingResult bindingResult) {
         System.out.println("staff_editからstaff_edit_checkに移動しました");
-        System.out.println(form.getName());
-        System.out.println(form.getId());
-        System.out.println(form.getPassword());
-
-        model.addAttribute(MvcStatic.Staff.Edit.STAFF_EDIT_DONE_NAME, MvcStatic.Staff.Edit.STAFF_EDIT_DONE_URL);
-        model.addAttribute(MvcStatic.Staff.Edit.PARAM_STAFF_EDIT_CHECK_TO_DONE,MvcStatic.Staff.Edit.PARAM_STAFF_EDIT_CHECK_TO_DONE);
-
-        model.addAttribute(MvcStatic.Staff.Edit.STAFF_EDIT_NAME, MvcStatic.Staff.Edit.STAFF_EDIT_URL);
-        model.addAttribute(MvcStatic.Staff.Edit.PARAM_STAFF_EDIT_CHECK_BACK,MvcStatic.Staff.Edit.PARAM_STAFF_EDIT_CHECK_BACK);
-
 
         if(bindingResult.hasErrors()){
-            model.addAttribute(MvcStatic.Staff.Edit.STAFF_EDIT_NAME, MvcStatic.Staff.Edit.STAFF_EDIT_URL);
-            model.addAttribute(MvcStatic.Staff.Edit.PARAM_STAFF_EDIT_TO_CHECK, MvcStatic.Staff.Edit.PARAM_STAFF_EDIT_TO_CHECK);
-
-            model.addAttribute(MvcStatic.Staff.STAFF_LIST_NAME,MvcStatic.Staff.STAFF_LIST_URL);
-            model.addAttribute(MvcStatic.Staff.PARAM_STAFF_LIST,MvcStatic.Staff.PARAM_STAFF_LIST);
-            return MvcStatic.Staff.Edit.STAFF_EDIT_URL;
+            return "staff/staff_edit";
         }
-
-
         model.addAttribute("id", form.getId());
         model.addAttribute("name", form.getName());
         model.addAttribute("password", form.getPassword());
 
-        return MvcStatic.Staff.Edit.STAFF_EDIT_CHECK_URL;
+        return "staff/staff_edit_check";
     }
 
     /**
@@ -133,12 +98,10 @@ public class StaffEditController {
      *
      *
      */
-    @RequestMapping(value = MvcStatic.Staff.Edit.STAFF_EDIT_DONE_URL, params = MvcStatic.Staff.Edit.PARAM_STAFF_EDIT_CHECK_TO_DONE, method = RequestMethod.POST)
+    @RequestMapping(value = "staff/staff_edit_done", params = "PARAM_STAFF_EDIT_CHECK_TO_DONE", method = RequestMethod.POST)
     public String postStaffEditCheckToDone(Model model, StaffListForm form)
     {
         System.out.println("スタッフ編集確認画面からスタッフ編集完了画面へ遷移します");
-        model.addAttribute(MvcStatic.Staff.STAFF_LIST_NAME,MvcStatic.Staff.STAFF_LIST_URL);
-        model.addAttribute(MvcStatic.Staff.PARAM_STAFF_LIST,MvcStatic.Staff.PARAM_STAFF_LIST);
         System.out.println(form.getName());
 
         int intId = Integer.valueOf(form.getId());
@@ -147,10 +110,9 @@ public class StaffEditController {
                         .name(form.getName())
                         .password(form.getPassword())
                         .build();
-        System.out.println(staff);
+//        System.out.println(staff);
         staffEditService.updateStaffone(intId,form.getName(), form.getPassword());
-
-        return MvcStatic.Staff.Edit.STAFF_EDIT_DONE_URL;
+        return "staff/staff_edit_done";
     }
     /**
      *スタッフ編集確認画面からスタッフ編集画面に戻るコントローラーです。<br>
@@ -167,30 +129,16 @@ public class StaffEditController {
      *
      *
      */
-    @RequestMapping(value = MvcStatic.Staff.Edit.STAFF_EDIT_URL, params = MvcStatic.Staff.Edit.PARAM_STAFF_EDIT_CHECK_BACK, method = RequestMethod.POST)
+    @RequestMapping(value = "staff/staff_edit", params = "PARAM_STAFF_EDIT_CHECK_BACK", method = RequestMethod.POST)
     public String postStaffEditCheckBack(Model model,@ModelAttribute StaffListForm form)
     {
         System.out.println("スタッフ編集確認画面からスタッフ編集画面に戻ります");
         //TODO フォームの値が入っていない。
-        model.addAttribute(MvcStatic.Staff.Edit.STAFF_EDIT_CHECK_NAME, MvcStatic.Staff.Edit.STAFF_EDIT_CHECK_URL);
-        model.addAttribute(MvcStatic.Staff.Edit.PARAM_STAFF_EDIT_TO_CHECK, MvcStatic.Staff.Edit.PARAM_STAFF_EDIT_TO_CHECK);
-
-
         selectedStaff = staffEditService.getStaff(form.getId());
-
-         int Id= selectedStaff.getId();
-//        int Id =3;
+        int Id= selectedStaff.getId();
         form.setId(Id);
-//        form.setName(selectedStaff.getName());
-//        form.setPassword(selectedStaff.getPassword());
         model.addAttribute(form);
-//        model.addAttribute("id", selectedStaff.getId());
-//        model.addAttribute("name", selectedStaff.getName());
-//        model.addAttribute("password", selectedStaff.getPassword());
-
-        model.addAttribute(MvcStatic.Staff.STAFF_LIST_NAME,MvcStatic.Staff.STAFF_LIST_URL);
-        model.addAttribute(MvcStatic.Staff.PARAM_STAFF_LIST,MvcStatic.Staff.PARAM_STAFF_LIST);
-        return MvcStatic.Staff.Edit.STAFF_EDIT_URL;
+        return "staff/staff_edit";
     }
 
 }
