@@ -17,9 +17,9 @@
 
     <div style="display:inline-flex">
 
-        <form method="post" th:action=${#strings.prepend(STAFF_LIST_NAME,'/')} >
+        <form method="post" action="/staff/staff_list" >
             &nbsp;&nbsp;&nbsp;&nbsp;
-            <button class="btn btn-primary" type="submit" th:name="${PARAM_STAFF_LIST}">
+            <button class="btn btn-primary" type="submit" name="PARAM_STAFF_LIST">
                 スタッフ一覧に戻る
             </button>
         </form>

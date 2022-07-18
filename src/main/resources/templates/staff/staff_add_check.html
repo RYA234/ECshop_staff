@@ -16,20 +16,20 @@
     </br>
     <div th:text ="${name}" class="form-control" ></div> </br>
     <div style="display:inline-flex">
-        <form method="post" th:action=${#strings.prepend(STAFF_ADD_DONE_NAME,'/')} th:object="${StaffListForm}">
+        <form method="post" action="/staff/staff_add_done" th:object="${StaffListForm}">
             <input type ="hidden" name ="name" th:value="${name}">
             <input type ="hidden" name ="password" th:value="${password}">
 
 <!--        <form method="post" th:action="${STAFF_ADD_DONE_NAME}">-->
 
-            <button class="btn btn-primary" type="submit" th:name="${PARAM_STAFF_CHECK_TO_DONE}">
+            <button class="btn btn-primary" type="submit" name="PARAM_STAFF_CHECK_TO_DONE">
                 OK
             </button>
         </form>
-        <form method="post" th:action=${#strings.prepend(STAFF_ADD_NAME,'/')}>
+        <form method="post" action="/staff/staff_add">
             &nbsp;&nbsp;&nbsp;&nbsp;
-            <button class="btn btn-primary" type="submit" th:name="${PARAM_STAFF_CHECK_BACK}">
-                戻る
+            <button class="btn btn-primary" type="submit" th:name="PARAM_STAFF_CHECK_BACK">
+                スタッフ追加画面に戻る
             </button>
         </form>
 

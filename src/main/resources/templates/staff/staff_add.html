@@ -17,7 +17,7 @@
 
     <!-- ↓formでも改行しない方法-->
 
-    <form method="post" th:action=${#strings.prepend(STAFF_ADD_CHECK_NAME,'/')} class="form-control" th:object="${StaffListForm}">
+    <form method="post" action="/staff/staff_add_check" class="form-control" th:object="${StaffListForm}">
 <!--    <form method="post" th:action="${STAFF_ADD_CHECK_NAME}">-->
         <div class="mb-6">
             </br>スタッフ名</br>
@@ -33,14 +33,14 @@
         </div>
 
         <div style="display:inline-flex">
-        <button class="btn btn-primary" type="submit" th:name="${PARAM_STAFF_ADD_TO_CHECK}">
+        <button class="btn btn-primary" type="submit" name="PARAM_STAFF_ADD_TO_CHECK">
             OK
         </button>
     </form>
         &nbsp;&nbsp;&nbsp;&nbsp;
-    <form method="post" th:action=${#strings.prepend(STAFF_LIST_NAME,'/')} >
-        <button class="btn btn-primary" type="submit" th:name="${PARAM_STAFF_LIST}">
-            戻る
+    <form method="post" action="/staff/staff_list" >
+        <button class="btn btn-primary" type="submit" name="PARAM_STAFF_LIST">
+            スタッフ一覧に戻る
         </button>
     </form>
 

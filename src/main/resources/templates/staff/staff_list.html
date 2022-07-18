@@ -32,23 +32,20 @@
         </tbody>>
     </table>
     </div>
-    <div th:text=${#strings.prepend(STAFF_ADD_NAME,'/')}></div>
-    <div th:text="${STAFF_ADD_NAME}"></div>
-
     <div style="display:inline-flex">
     <button class="btn btn-primary" type="submit" name="paramListToReference">
         参照
     </button>
         &nbsp;&nbsp;&nbsp;&nbsp;
-    <button class="btn btn-primary" type="submit" th:name="${PARAM_STAFF_LIST_TO_ADD}">
+    <button class="btn btn-primary" type="submit" name="PARAM_STAFF_LIST_TO_ADD">
         追加
     </button>
         &nbsp;&nbsp;&nbsp;&nbsp;
-    <button class="btn btn-primary" type="submit" th:name="${PARAM_STAFF_LIST_TO_EDIT}">
+    <button class="btn btn-primary" type="submit" name="PARAM_STAFF_LIST_TO_EDIT">
         編集
     </button>
             &nbsp;&nbsp;&nbsp;&nbsp;
-    <button class="btn btn-primary" type="submit" th:name="${PARAM_STAFF_LIST_TO_DELETE}">
+    <button class="btn btn-primary" type="submit" name="PARAM_STAFF_LIST_TO_DELETE">
         削除
     </button>
 
