@@ -3,35 +3,32 @@
 <head>
     <meta charset="UTF-8"></meta>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>スタッフ一覧</title>
+    <title>スタッフ追加画面</title>
     <!-- 個別CSS読込 -->
     <link th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css}" rel="stylesheet" >
 
 </head>
-</head>
 <body>
-
 <div class="text-center">
     スタッフ追加画面です。
     </br>
-
     <!-- ↓formでも改行しない方法-->
-
-    <form method="post" action="/staff/staff_add_check" class="form-control" th:object="${StaffListForm}">
+    <form method="post" action="/staff/staff_add_check" class="form-control" th:object="${staffListForm}">
 <!--    <form method="post" th:action="${STAFF_ADD_CHECK_NAME}">-->
         <div class="mb-6">
             </br>スタッフ名</br>
             <div class="row justify-content-center">
                 <div class="row">
                     <div class="col-xs-3">
-                        <input type ="text" name="name" class="form-control" ><br />
+                        <input type="text"  th:field ="*{name}" class="form-control" th:errorclass="is-invalid"> </br>
+                        <td class="invalid-feedback" th:errors="*{name}">Name Error</td>
                         パスワード</br>
-                        <input type ="password" name="password" class="form-control"><br />
+                        <input type ="password" name="password" value="password" th:field="*{password}"  class="form-control" th:errorclass="is-invalid"></br>
+                        <td class="invalid-feedback" th:errors="*{password}">Password Error</td>
                     </div>
                 </div>
             </div>
         </div>
-
         <div style="display:inline-flex">
         <button class="btn btn-primary" type="submit" name="PARAM_STAFF_ADD_TO_CHECK">
             OK

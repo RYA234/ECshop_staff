@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -56,7 +58,7 @@ public class StaffController
      *
      */
     @RequestMapping(value = "staff/staff_list",params = "PARAM_STAFF_LIST_TO_ADD", method = RequestMethod.POST)
-    public String postStaffListToAdd(Model model)
+    public String postStaffListToAdd(Model model,StaffListForm form)
     {
         System.out.println("スタッフ一覧からスタッフ追加画面に遷移します。");
         return "staff/staff_add";
@@ -87,8 +89,11 @@ public class StaffController
      *テストコード記入済み
      */
     @RequestMapping(value = "staff/staff_add_check", params = "PARAM_STAFF_ADD_TO_CHECK", method = RequestMethod.POST)
-    public String postStaffAddToCheck(Model model,@ModelAttribute StaffListForm form)
+    public String postStaffAddToCheck(Model model,@ModelAttribute @Validated StaffListForm form, BindingResult bindingResult)
     {
+        if(bindingResult.hasErrors()){
+            return "staff/staff_add";
+        }
         model.addAttribute("name",form.getName());
         model.addAttribute("password",form.getPassword());
         return "/staff/staff_add_check";
@@ -135,6 +140,7 @@ public class StaffController
      */
     @RequestMapping(value = "staff/staff_add", params = "PARAM_STAFF_CHECK_BACK", method = RequestMethod.POST)
     public String postStaffCheckBack(Model model) {
+
         return "staff/staff_add";
     }
 
