@@ -30,7 +30,8 @@ import java.util.List;
 
 public class StaffController
 {
-    StaffController(){};
+    StaffController(){}
+
     @Autowired
     private StaffService staffService;
     @Autowired
@@ -147,7 +148,7 @@ public class StaffController
      *
      *テストコード記入済み
      */
-    @RequestMapping(value = MvcStatic.Staff.STAFF_LIST_URL, params = MvcStatic.Staff.PARAM_STAFF_LIST, method = RequestMethod.POST)
+    @RequestMapping(value = MvcStatic.Staff.STAFF_LIST_URL, params = "PARAM_STAFF_LIST", method = RequestMethod.POST)
     public String postStaffList(Model model)
     {
         System.out.println("スタッフ一覧画面に遷移します。");

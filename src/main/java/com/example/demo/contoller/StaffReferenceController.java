@@ -14,26 +14,17 @@ public class StaffReferenceController
 {
     @Autowired
     private StaffService staffEditService;
-    @RequestMapping(value = MvcStatic.Staff.STAFF_LIST_URL, params = MvcStatic.Staff.Reference.PARAM_STAFF_LIST_TO_REFERENCE, method = RequestMethod.POST)
+    @RequestMapping(value = "staff/staff_list", params = "paramListToReference", method = RequestMethod.POST)
     public String postStaffListtoDelete(Model model, StaffListForm form)
     {
         System.out.println("スタッフ一覧画面からスタッフ参照画面に遷移します");
-
-        model.addAttribute(MvcStatic.Staff.PARAM_STAFF_LIST,MvcStatic.Staff.PARAM_STAFF_LIST);
-        model.addAttribute(MvcStatic.Staff.STAFF_LIST_NAME,MvcStatic.Staff.STAFF_LIST_URL);
-
-
-        int selectedId = Integer.valueOf(form.getRadio());
-        MStaff selectedStaff = MStaff.builder().build();
+        int selectedId = Integer.parseInt(form.getRadio());
+        MStaff selectedStaff;
         selectedStaff = staffEditService.getStaff(selectedId);
         model.addAttribute("name", selectedStaff.getName());
         model.addAttribute("id",selectedStaff.getId());
 
-//        model.addAttribute(MvcStatic.Staff.Delete);
-//        model.addAttribute();
-//        model.addAttribute();
-
-        return MvcStatic.Staff.Reference.STAFF_REFERENCE_URL;
+        return "staff/staff_reference";
     }
 
 }

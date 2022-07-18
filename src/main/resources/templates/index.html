@@ -1,3 +1,9 @@
+<!--/*-->
+<div>
+
+
+</div>
+<!--*/-->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
@@ -13,27 +19,25 @@
 <body>
 <div class="text-center">
     <div class="mb-6">
-<h2>ECショップ画面</h2>
+        <h2>ECショップ画面</h2>
 
 
-</br>
+        </br>
         <div style="display:inline-flex">
-
-<!--        <form method="post" th:action="${INDEX_TO_STAFF_NAME}">-->
-        <button class="btn btn-primary" type="submit" th:name="${PARAM_INDEX_TO_STAFF_LIST}">
-            スタッフ向け
-        </button>
+            <form method="post" action="/staff/staff_list">
+                <button class="btn btn-primary" type="submit" name="PARAM_STAFF_LIST">
+                    スタッフ機能
+                </button>
             </form>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <form method="post" action = "user/user_list">
-    <button class="btn btn-primary" type="submit" name="user">
-        ユーザー向け
-    </button>
-        </br>
-        github URL
-        </form>
-            <div th:text="${PARAM_INDEX_TO_STAFF_LIST}"></div>
-</div>
-</div>
+
+            <form method="post" th:action=${#strings.prepend(PRODUCT_LIST_NAME,'/')}>
+                <button class="btn btn-primary" type="submit" th:name="${PARAM_PRODUCT_LIST}">
+                    商品機能
+                </button>
+                </br>
+            </form>
+        </div>
+    </div>
 </body>
 </html>

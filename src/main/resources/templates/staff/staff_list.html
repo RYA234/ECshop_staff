@@ -1,20 +1,19 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"></meta>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>スタッフ一覧</title>
     <!-- 個別CSS読込 -->
     <link th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css}" rel="stylesheet" >
 
 </head>
-</head>
 <body>
 
 <div class="text-center">
     スタッフ一覧画面です。
-    </br>
-    <form method="post" th:action=${#strings.prepend(STAFF_LIST_NAME,'/')} class="form-control" th:object="${staffListForm}">
+    <br>
+    <form action="/staff/staff_list" class="form-control" method="post" th:object="${staffListForm}">
     <div>
         <table class="table table-sm">
         <thead>
@@ -37,7 +36,7 @@
     <div th:text="${STAFF_ADD_NAME}"></div>
 
     <div style="display:inline-flex">
-    <button class="btn btn-primary" type="submit" th:name="${PARAM_STAFF_LIST_TO_REFERENCE}">
+    <button class="btn btn-primary" type="submit" name="paramListToReference">
         参照
     </button>
         &nbsp;&nbsp;&nbsp;&nbsp;

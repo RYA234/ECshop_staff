@@ -2,32 +2,27 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"></meta>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>スタッフ一覧</title>
+    <title>スタッフ参照画面</title>
     <!-- 個別CSS読込 -->
     <link th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css}" rel="stylesheet" >
 
-</head>
 </head>
 <body>
 
 <div class="text-center">
     スタッフ参照画面です。
-    </br>
+    <br>
 
-
-    <!-- ↓formでも改行しない方法-->
-    &nbsp;&nbsp;&nbsp;&nbsp;
-    <form method="post" th:action=${#strings.prepend(STAFF_LIST_NAME,'/')} th:object="${StaffListForm}">
-        <div th:text ="${name}"> </div>
-        <div th:text ="${id}" name ="${id}"> </div>
-
-        <button class="btn btn-primary" type="submit" th:name="${PARAM_STAFF_LIST}">
+        スタッフ情報
+    <form action="/staff/staff_list" method="post" th:object="${StaffListForm}">
+        <div> ID： <a th:text="${id}" name ="${id}"></a></div>
+          <div> 名前： <a th:text ="${name}"></a></div>
+        <button class="btn btn-primary" type="submit" th:name="PARAM_STAFF_LIST">
             戻る
         </button>
     </form>
-
+</div>
 
 
 
