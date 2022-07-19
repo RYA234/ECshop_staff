@@ -5,6 +5,7 @@ import com.example.demo.form.StaffListForm;
 import com.example.demo.service.StaffService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,13 +42,18 @@ public class StaffDeleteController {
         System.out.println("スタッフ一覧画面からスタッフ削除画面に遷移します");
         int selectedId = Integer.valueOf(form.getRadio());
         MStaff selectedStaff = MStaff.builder().build();
-        selectedStaff = staffDeleteService.getStaff(selectedId);
-        model.addAttribute("name", selectedStaff.getName());
-        model.addAttribute("id",selectedStaff.getId());
+        try {
+            selectedStaff = staffDeleteService.getStaff(selectedId);
+            model.addAttribute("name", selectedStaff.getName());
+            model.addAttribute("id",selectedStaff.getId());
+        }catch (BadSqlGrammarException e){
+            return "error/SQLError";
+        }
+        catch (Exception e) {
+            return "error/NotSQLError";
+        }
         return "staff/staff_delete";
     }
-
-
     /**
      *スタッフ削除画面からスタッフ削除完了画面に遷移するコントローラーです。<br>
      *
@@ -66,8 +72,14 @@ public class StaffDeleteController {
     @RequestMapping(value = "staff/staff_delete_done", params = "PARAM_STAFF_DELETE_TO_DONE", method = RequestMethod.POST)
     public String postStaffDeleteToDone(Model model, StaffListForm form)
     {
-        System.out.println("スタッフ削除画面からスタッフ削除完了画面に遷移します");
-        staffDeleteService.deleteStaffone(form.getId());
+        try {
+            System.out.println("スタッフ削除画面からスタッフ削除完了画面に遷移します");
+            staffDeleteService.deleteStaffone(form.getId());
+        }catch (BadSqlGrammarException e){
+            return "error/SQLError";
+        } catch (Exception e) {
+            return "error/NotSQLError";
+        }
         return "staff/staff_delete_done";
     }
 
@@ -89,10 +101,16 @@ public class StaffDeleteController {
     @RequestMapping(value = "staff/staff_list", params = "PARAM_STAFF_DELETE_BACK", method = RequestMethod.POST)
     public String postStaffDeleteBack(Model model, StaffListForm form)
     {
-        System.out.println("スタッフ削除or完了画面からスタッフ一覧画面に遷移します");
-        List<MStaff> staffList = staffDeleteService.getStaffs();
+        try {
+            System.out.println("スタッフ削除or完了画面からスタッフ一覧画面に遷移します");
+            List<MStaff> staffList = staffDeleteService.getStaffs();
 //        System.out.println(staffList);
-        model.addAttribute("staffList", staffList);
+            model.addAttribute("staffList", staffList);
+        }catch (BadSqlGrammarException e){
+            return "error/SQLError";
+        } catch (Exception e) {
+            return "error/NotSQLError";
+        }
         return "staff/staff_list";
     }
 

@@ -6,6 +6,7 @@ import com.example.demo.service.StaffService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -66,11 +67,15 @@ public class StaffController
 
 
     @RequestMapping(value = "staff/staff_list", params = "PARAM_INDEX_TO_STAFF_LIST", method = RequestMethod.POST)
-    public String postStaffList(@ModelAttribute StaffListForm form, Model model)
-    {
-        List<MStaff> staffList = staffService.getStaffs();
-        model.addAttribute("staffList", staffList);
-
+    public String postStaffList(@ModelAttribute StaffListForm form, Model model) {
+        try {
+            List<MStaff> staffList = staffService.getStaffs();
+            model.addAttribute("staffList", staffList);
+        }catch (BadSqlGrammarException e){
+            return "error/SQLError";
+        } catch (Exception e) {
+            return "error/NotSQLError";
+        }
         return "staff/staff_list";
     }
     /**
@@ -89,8 +94,7 @@ public class StaffController
      *テストコード記入済み
      */
     @RequestMapping(value = "staff/staff_add_check", params = "PARAM_STAFF_ADD_TO_CHECK", method = RequestMethod.POST)
-    public String postStaffAddToCheck(Model model,@ModelAttribute @Validated StaffListForm form, BindingResult bindingResult)
-    {
+    public String postStaffAddToCheck(Model model,@ModelAttribute @Validated StaffListForm form, BindingResult bindingResult) {
         if(bindingResult.hasErrors()){
             return "staff/staff_add";
         }
@@ -115,12 +119,17 @@ public class StaffController
      *テストコード記入済み
      */
     @RequestMapping(value = "staff/staff_list", params = "PARAM_STAFF_LIST", method = RequestMethod.POST)
-    public String postStaffList(Model model)
-    {
-        System.out.println("スタッフ一覧画面に遷移します。");
-        List<MStaff> staffList = staffService.getStaffs();
-        System.out.println(staffList);
-        model.addAttribute("staffList", staffList);
+    public String postStaffList(Model model) {
+        try {
+            System.out.println("スタッフ一覧画面に遷移します。");
+            List<MStaff> staffList = staffService.getStaffs();
+            System.out.println(staffList);
+            model.addAttribute("staffList", staffList);
+        }catch (BadSqlGrammarException e){
+            return "error/SQLError";
+        } catch (Exception e) {
+            return "error/NotSQLError";
+        }
         return "staff/staff_list";
     }
     /**
@@ -140,42 +149,36 @@ public class StaffController
      */
     @RequestMapping(value = "staff/staff_add", params = "PARAM_STAFF_CHECK_BACK", method = RequestMethod.POST)
     public String postStaffCheckBack(Model model) {
-
         return "staff/staff_add";
     }
 
     /**
      *スタッフ追加確認画面からスタッフ追加完了画面に戻るコントローラーです。<br>
      *
-     * 遷移前URL：{@value com.example.demo.contoller.MvcStatic.Staff.Add#STAFF_ADD_CHECK_URL}	<br>
-     * 遷移後URL：{@value com.example.demo.contoller.MvcStatic.Staff.Add#STAFF_ADD_DONE_URL}		<br>
+     * 遷移前URL："staff/staff_add_check"	<br>
+     * 遷移後URL："staff/staff_add_done"	<br>
      *　html側のURLとform actionの変数はthymeleafを使ってJavaの変数から渡しています。
      *
      * @param model Viewに渡す変数
      * 　　　　　	<p>1.遷移先のURL<br>
      * 				     2.formアクションの値 </p>
-     *
-     * @return　STAFF_ADD_DONE_URL= {@value com.example.demo.contoller.MvcStatic.Staff.Add#STAFF_ADD_DONE_URL}:遷移先URL
-     *
-     *テストコード記入済み
      */
     @RequestMapping(value = "staff/staff_add_done", params = "PARAM_STAFF_CHECK_TO_DONE", method = RequestMethod.POST)
     public String postStaffCheckToDone(Model model,@ModelAttribute StaffListForm form)
     {
-        System.out.println("スタッフ追加確認画面からスタッフ追加完了画面に遷移しました。");
-        System.out.println(form.getName());
-        System.out.println(form.getPassword());
+        try {
+            System.out.println("スタッフ追加確認画面からスタッフ追加完了画面に遷移しました。");
 //       String encodePassword = passwordEncoder.encode(form.getPassword());
-        MStaff staff = MStaff.builder()
-                .name(form.getName())
-                .password(form.getPassword())
-                .build();
-        staffService.addStaff(staff);
+            MStaff staff = MStaff.builder()
+                    .name(form.getName())
+                    .password(form.getPassword())
+                    .build();
+            staffService.addStaff(staff);
+        }catch (BadSqlGrammarException e){
+            return "error/SQLError";
+        } catch (Exception e) {
+            return "error/NotSQLError";
+        }
         return "staff/staff_add_done";
     }
-
-
-
-
-
 }

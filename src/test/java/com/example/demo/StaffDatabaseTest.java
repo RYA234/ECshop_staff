@@ -35,8 +35,7 @@ public class StaffDatabaseTest
     @DisplayName("データベーススタッフが追加されるか確認")
     @DatabaseSetup("/testdata/StaffServiceTest/init-data")
     @ExpectedDatabase(value = "/testdata/StaffServiceTest/after-create-data", assertionMode = DatabaseAssertionMode.NON_STRICT_UNORDERED) // テスト実行後に１件データが追加されていること
-    void staffAddCheck()
-    {
+    void staffAddCheck() throws Exception {
         MStaff newStaff = MStaff.builder()
                 .id(3)
                 .name("zyx")
@@ -53,8 +52,7 @@ public class StaffDatabaseTest
     @DisplayName("データベーススタッフが更新されるか確認")
     @DatabaseSetup("/testdata/StaffServiceTest/init-data")
     @ExpectedDatabase(value = "/testdata/StaffServiceTest/after-update-data", assertionMode = DatabaseAssertionMode.NON_STRICT_UNORDERED) // テスト実行後に１件データが追加されていること
-    void staffUpdate()
-    {
+    void staffUpdate() throws Exception {
 
         staffService.updateStaffone(2,"oooo","iiiii");
 
@@ -68,8 +66,7 @@ public class StaffDatabaseTest
     @DisplayName("データベーススタッフが一件選択されるか確認")
     @DatabaseSetup("/testdata/StaffServiceTest/init-data")
     @ExpectedDatabase(value = "/testdata/StaffServiceTest/init-data", assertionMode = DatabaseAssertionMode.NON_STRICT_UNORDERED) // テスト実行後に１件データが追加されていること
-    void staffSelectOne()
-    {
+    void staffSelectOne() throws Exception {
         MStaff staff = staffService.getStaff(2);
 //        2,ffgsd,dfaas
         Assertions.assertEquals(2,staff.getId());
@@ -82,8 +79,7 @@ public class StaffDatabaseTest
     @DisplayName("データベーススタッフが全件選択されるか確認")
     @DatabaseSetup("/testdata/StaffServiceTest/init-data")
     @ExpectedDatabase(value = "/testdata/StaffServiceTest/init-data", assertionMode = DatabaseAssertionMode.NON_STRICT_UNORDERED) // テスト実行後に１件データが追加されていること
-    void staffSelectAll()
-    {
+    void staffSelectAll() throws Exception {
         List<MStaff> staff = staffService.getStaffs();
 
         Assertions.assertEquals("abcd", staff.get(0).getName());

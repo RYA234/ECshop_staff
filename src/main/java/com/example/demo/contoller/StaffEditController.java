@@ -5,6 +5,7 @@ import com.example.demo.form.StaffListForm;
 import com.example.demo.service.StaffService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -42,7 +43,11 @@ public class StaffEditController {
         System.out.println("スタッフ一覧画面からスタッフ編集画面に遷移します");
 //        System.out.println(form.getRadio());
         int selectedId = Integer.valueOf(form.getRadio());
-        selectedStaff = staffEditService.getStaff(selectedId);
+        try {
+            selectedStaff = staffEditService.getStaff(selectedId);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
         form.setId(selectedStaff.getId());
         form.setName(selectedStaff.getName());
@@ -101,17 +106,22 @@ public class StaffEditController {
     @RequestMapping(value = "staff/staff_edit_done", params = "PARAM_STAFF_EDIT_CHECK_TO_DONE", method = RequestMethod.POST)
     public String postStaffEditCheckToDone(Model model, StaffListForm form)
     {
-        System.out.println("スタッフ編集確認画面からスタッフ編集完了画面へ遷移します");
-        System.out.println(form.getName());
+        try {
+            System.out.println("スタッフ編集確認画面からスタッフ編集完了画面へ遷移します");
+            System.out.println(form.getName());
 
-        int intId = Integer.valueOf(form.getId());
-        MStaff staff = MStaff.builder()
-                        .id(intId)
-                        .name(form.getName())
-                        .password(form.getPassword())
-                        .build();
-//        System.out.println(staff);
-        staffEditService.updateStaffone(intId,form.getName(), form.getPassword());
+            int intId = Integer.valueOf(form.getId());
+            MStaff staff = MStaff.builder()
+                    .id(intId)
+                    .name(form.getName())
+                    .password(form.getPassword())
+                    .build();
+            staffEditService.updateStaffone(intId, form.getName(), form.getPassword());
+        }catch (BadSqlGrammarException e){
+            return "error/SQLError";
+        } catch (Exception e) {
+            return "error/NotSQLError";
+        }
         return "staff/staff_edit_done";
     }
     /**
@@ -134,7 +144,14 @@ public class StaffEditController {
     {
         System.out.println("スタッフ編集確認画面からスタッフ編集画面に戻ります");
         //TODO フォームの値が入っていない。
-        selectedStaff = staffEditService.getStaff(form.getId());
+        try {
+            selectedStaff = staffEditService.getStaff(form.getId());
+        } catch (BadSqlGrammarException e) {
+            return "error/SQLError";
+        }
+        catch (Exception e) {
+            return "error/NotSQLError";
+        }
         int Id= selectedStaff.getId();
         form.setId(Id);
         model.addAttribute(form);
