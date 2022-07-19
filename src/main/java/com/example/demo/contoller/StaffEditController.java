@@ -45,8 +45,10 @@ public class StaffEditController {
         int selectedId = Integer.valueOf(form.getRadio());
         try {
             selectedStaff = staffEditService.getStaff(selectedId);
+        }  catch (BadSqlGrammarException e){
+            return "error/SQLError";
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            return "error/NotSQLError";
         }
 
         form.setId(selectedStaff.getId());
