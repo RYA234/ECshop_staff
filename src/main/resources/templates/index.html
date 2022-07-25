@@ -31,8 +31,8 @@
             </form>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-            <form method="post" th:action=${#strings.prepend(PRODUCT_LIST_NAME,'/')}>
-                <button class="btn btn-primary" type="submit" th:name="${PARAM_PRODUCT_LIST}">
+            <form method="post" action="/product/product_list">
+                <button class="btn btn-primary" type="submit" name="PARAM_PRODUCT_LIST">
                     商品機能
                 </button>
                 </br>

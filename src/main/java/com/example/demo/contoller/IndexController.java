@@ -1,28 +1,41 @@
 package com.example.demo.contoller;
 
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.transfer.TransferManager;
+import com.amazonaws.services.s3.transfer.TransferManagerBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
+import org.springframework.core.io.WritableResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.io.*;
+
 @Controller
 public class IndexController {
+    @Autowired
+    private AmazonS3 amazonS3;
 
+    @Autowired
+    private ResourceLoader resourceLoader;
 
+//    private final AmazonS3 s3Client;
+//
+//    public IndexController(AmazonS3 s3Client) {
+//        this.s3Client = s3Client;
+//    }
     @GetMapping("/index")
     //public String home() {
-    public String home(Model model) {
+    public String home(Model model) throws IOException {
        String Hello ="aaa";
        String Hell = "bbad";
        String HELLO_NAME = "HELLO_NAME";
        String Hello_ATTRIBUTE = "hello";
-        //model.addAttribute(INDEX_TO_STAFF_NAME,STAFF_LIST_URL);
-       // model.addAttribute(HELLO_NAME, Hello_ATTRIBUTE);
+        File file = new File("s3upload/test.PNG");
+        amazonS3.putObject("ddadas","aaaasnnna.png",file);
 
-//        model.addAttribute(MvcStatic.Staff.STAFF_LIST_NAME, MvcStatic.Staff.STAFF_LIST_URL);
-//        model.addAttribute(MvcStatic.Staff.PARAM_STAFF_LIST,MvcStatic.Staff.PARAM_STAFF_LIST);
-//
-//        model.addAttribute(MvcStatic.Product.PRODUCT_LIST_NAME, MvcStatic.Product.PRODUCT_LIST_URL);
-//        model.addAttribute(MvcStatic.Product.PARAM_PRODUCT_LIST,MvcStatic.Product.PARAM_PRODUCT_LIST);
 
         return "staff/staff_list";
     }

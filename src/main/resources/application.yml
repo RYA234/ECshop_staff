@@ -27,3 +27,17 @@ mybatis:
   type-aliases-package: com.example.domain.model
 server:
   port: 5000
+
+  application: properties
+#spring:
+#    servlet:
+#        multipart: max-request-size=10MB
+#        multipart: multipart.max-file-size=10MB
+
+#  cloud.aws:
+#      credentials:
+#        accessKey: AKIARTKN2SQVKISVPFFL
+#         secretKey: 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
+#      region:
+#          auto: false
+#         static: ap-northeast-1

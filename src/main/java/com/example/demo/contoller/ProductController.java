@@ -55,7 +55,7 @@ public class ProductController
      *
      *
      */
-    @RequestMapping(value = MvcStatic.Product.PRODUCT_LIST_URL, params = MvcStatic.Product.PARAM_PRODUCT_LIST, method = RequestMethod.POST)
+    @RequestMapping(value ="product/product_list", params ="PARAM_PRODUCT_LIST", method = RequestMethod.POST)
     public String postProductToList(Model model, @ModelAttribute ProductListForm form)
     {
         System.out.println("商品一覧画面に遷移します。");
@@ -77,7 +77,7 @@ public class ProductController
         System.out.println(productList);
         model.addAttribute("productList", productList);
 
-        return MvcStatic.Product.PRODUCT_LIST_URL;
+        return "product/product_list";
     }
 
     /**

@@ -1,11 +1,13 @@
 package com.example.demo.contoller;
 
+import com.amazonaws.services.s3.AmazonS3;
 import com.example.demo.domain.model.MProduct;
 import com.example.demo.form.ProductListForm;
 import com.example.demo.service.ProductService;
-import com.example.demo.storage.StorageService;
+import com.example.demo.service.storage.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -13,7 +15,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,8 +22,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Random;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 //public class ControllerTemplate
 //{
@@ -63,6 +62,11 @@ public class ProductAddController {
     private final StorageService storageService;
 
     @Autowired
+    private AmazonS3 amazonS3;
+
+    @Autowired
+    private ResourceLoader resourceLoader;
+    @Autowired
     public ProductAddController(StorageService storageService) {
         this.storageService = storageService;
     }
@@ -93,9 +97,6 @@ public class ProductAddController {
         model.addAttribute(MvcStatic.Product.PRODUCT_LIST_NAME,MvcStatic.Product.PRODUCT_LIST_URL);
         model.addAttribute(MvcStatic.Product.PARAM_PRODUCT_LIST,MvcStatic.Product.PARAM_PRODUCT_LIST);
 
-//        model.addAttribute();
-//        model.addAttribute();
-//        model.addAttribute();
         return MvcStatic.Product.Add.PRODUCT_ADD_URL;
     }
 
@@ -141,7 +142,6 @@ public class ProductAddController {
          Path oldPath = Paths.get("upload-dir/"+form.getFile().getResource().getFilename());
         File oldFile = new File(goal.toString());
         Files.move(oldPath,oldPath.resolveSibling(newPath));
-
         form.setGazou(newPath);
         model.addAttribute(form);
         form.setGazou(newPath);
@@ -196,7 +196,9 @@ public class ProductAddController {
         String newPath = String.valueOf(random.nextInt(10000000)) +".png";
         Path oldPath = Paths.get("upload-dir",form.getGazou());
 //        File oldFile = new File(goal.toString());
-        Files.move (oldPath,oldPath.resolveSibling(newPath));
+//        Files.move (oldPath,oldPath.resolveSibling(newPath));
+        File file = new File("upload-dir/",form.getGazou());
+        amazonS3.putObject("ddadas",newPath,file);
         System.out.println("商品追加確認画面から商品追加完了画面に遷移します。");
         MProduct product = MProduct.builder()
                 .name(form.getName())

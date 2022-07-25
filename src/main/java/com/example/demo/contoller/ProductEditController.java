@@ -1,15 +1,12 @@
 package com.example.demo.contoller;
 
 import com.example.demo.domain.model.MProduct;
-import com.example.demo.domain.model.MStaff;
 import com.example.demo.form.ProductListForm;
-import com.example.demo.form.StaffListForm;
 import com.example.demo.service.ProductService;
-import com.example.demo.storage.StorageService;
-import org.apache.ibatis.annotations.Param;
+import com.example.demo.service.UploadService;
+import com.example.demo.service.storage.StorageService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.mongo.embedded.EmbeddedMongoProperties;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,7 +15,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -35,9 +31,10 @@ public class ProductEditController {
     private ModelMapper modelMapper;
 
     private  final StorageService storageService;
-
+    private final UploadService uploadService;
     @Autowired
-    public ProductEditController(StorageService storageService) {
+    public ProductEditController(UploadService uploadService, StorageService storageService) {
+        this.uploadService =  uploadService;
         this.storageService = storageService;
     }
 
