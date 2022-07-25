@@ -1,40 +1,42 @@
-# ddd-it-proj1<br>
-sample development of ec site(only japanese)<br>
+# ECショップ①ースタッフ向けシステム<br>
 
 ### アプリの概要<br>
-ECサイト
+分類としては販売管理のシステムです。<br>
+ECサイトの商品管理するシステムです。
+利用者は店員を想定しています。<br>
+できることは商品の管理とスタッフの管理です。
+
 ### 制作の背景・理由<br>
-
-### 技術スタック<br>
-開発環境： IntelliJ<br>
-使用言語： Java SE<br>
-フレームワーク：SpirngBoot　<br>
-DB：　　Mysql,MyBatis<br>
-サーバーサイド側：Thymeleaf, JUnit5<br>
-インフラ構築：AWS:EC2,RDS
+１．ドメイン分野（販売管理）の兼ねてるため。<br>
+ポピュラーなシステムを
+<br>２．手本となる本があったから。
+<br>システムの基本的な構成は「気づけばプロ並みPHP~ショッピングカート作りにチャレンジ!」を参考にしています。
+<br>この本はPHPかつフレームワーク無しのフルスクラッチで書かれていますが、それをJAVAかつSpringBootで作り直しています。
 
 
-### 開発及び本番環境の構成<br>
-#### 開発環境
-あああ
+### 開発環境<br>
 
-#### 本番環境
-zaa
+カテゴリー| 名称 | バージョン
+--- |----|-------
+OS| Windows |10
+IDE| IntelliJ |2022.1
+プログラム言語| Java |17
+フレームワーク| SpringBoot |aa
+データベース| MySQL |aa
 
-### どんな機能を実装したか<br>
+### 本番環境の構成<br>
+
+
+### 実装した機能<br>
 スタッフ機能 </br>
 商品登録機能　</br>
-ショッピングカート機能 </br>
+スタッフでログイン機能（まだ） </br>
 
 ### こだわったポイント等<br>
-JUnitを使ってテストコード導入 </br>
-サーバーを構築した。</br>
-助長性を持たせて稼働率をあげた
+JUnitを使って単体テストテストコード導入 </br>
+テストコードを書きやすいプロダクトコードにするためアーキテクチャーを意識した。キーワードはMVC Service Repositroy 責務など</br>
+Javadocで可読性を向上させた。</br>
 
-### SQL文メモ
-CREATE TABLE `db_name`.`m_product` (
-`code` INT NOT NULL AUTO_INCREMENT,
-`name` VARCHAR(45) NULL,
-`price` INT NULL,
-`gazou` VARCHAR(45) NULL,
-PRIMARY KEY (`code`));
+### 今後やりたいこと
+まだ未完なので終わらせる。（ログインの実装、デプロイ）</br>
+このプロジェクトを終わらせたら顧客が使うECショップをKotlinで作る。
