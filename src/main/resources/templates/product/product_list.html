@@ -11,7 +11,7 @@
 <body>
 <div class="text-center">
     商品一覧画面です。
-    <form method="post" th:action=${#strings.prepend(PRODUCT_LIST_NAME,'/')} class="form-control" th:object="${productListForm}">
+    <form method="post" action="/product/product_list" class="form-control" th:object="${productListForm}">
         <div>
             <table class="table table-sm">
                 <thead>
@@ -32,23 +32,20 @@
                 </tbody>>
             </table>
         </div>
-<!--        <div th:text=${#strings.prepend(STAFF_ADD_NAME,'/')}></div>-->
-<!--        <div th:text="${STAFF_ADD_NAME}"></div>-->
-
         <div style="display:inline-flex">
-            <button class="btn btn-primary" type="submit" th:name="${PARAM_PRODUCT_LIST_TO_REFERENCE}">
+            <button class="btn btn-primary" type="submit" name="PARAM_PRODUCT_LIST_TO_REFERENCE">
                 参照
             </button>
             &nbsp;&nbsp;&nbsp;&nbsp;
-            <button class="btn btn-primary" type="submit" th:name="${PARAM_PRODUCT_LIST_TO_ADD}">
+            <button class="btn btn-primary" type="submit" name="PARAM_PRODUCT_LIST_TO_ADD">
                 追加
             </button>
             &nbsp;&nbsp;&nbsp;&nbsp;
-            <button class="btn btn-primary" type="submit" th:name="${PARAM_PRODUCT_LIST_TO_EDIT}">
+            <button class="btn btn-primary" type="submit" name="PARAM_PRODUCT_LIST_TO_EDIT">
                 編集
             </button>
             &nbsp;&nbsp;&nbsp;&nbsp;
-            <button class="btn btn-primary" type="submit" th:name="${PARAM_PRODUCT_LIST_TO_DELETE}">
+            <button class="btn btn-primary" type="submit" name="PARAM_PRODUCT_LIST_TO_DELETE">
                 削除
             </button>
 

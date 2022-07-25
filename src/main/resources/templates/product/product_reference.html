@@ -16,7 +16,7 @@
 
   <!-- ↓formでも改行しない方法-->
 
-  &nbsp;&nbsp;&nbsp;&nbsp;
+
   <form method="post" th:action=${#strings.prepend(PRODUCT_LIST_NAME,'/')}　　th:object="${productListForm}" >
 
     </br>
@@ -27,8 +27,10 @@
       画像
     <div>
       <ul>
-        <img height="200" th:src="${file}" th:text="${file}" width="200"/>
+<!--        <img height="200" th:src="${file}" th:text="${file}" width="200"/>-->
+        &nbsp;&nbsp;&nbsp;&nbsp;<img src="https://ddadas.s3.ap-northeast-1.amazonaws.com/3017196.png">
       </ul>
+
     </div>
     <button class="btn btn-primary" type="submit" th:name="${PARAM_PRODUCT_LIST}">
       商品一覧へ戻る

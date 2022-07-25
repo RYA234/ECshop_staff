@@ -11,7 +11,7 @@
 <div class="text-center">
     商品追加確認画面です。
     <!-- ↓formでも改行しない方法-->
-        <form method="post"  th:action="${#strings.prepend(PRODUCT_ADD_DONE_NAME,'/')}" enctype="multipart/form-data" class="form-control" th:object ="${productListForm}">
+        <form method="post"  action="/product/product_add_done" enctype="multipart/form-data" class="form-control" th:object ="${productListForm}">
     <!--    <form method="post" th:action="${STAFF_ADD_CHECK_NAME}">-->
     商品名
     <div><p th:text="*{name}"></p></div>
@@ -35,13 +35,13 @@
     <div><input type="hidden" th:field="*{price}"></div>
     <div><input type="hidden" th:field="*{gazou}"></div>
     <div style="display:inline-flex">
-        <button class="btn btn-primary" type="submit" th:name="${PARAM_PRODUCT_CHECK_TO_DONE}">
+        <button class="btn btn-primary" type="submit" name="PARAM_PRODUCT_CHECK_TO_DONE">
             OK
         </button>
         </form>
     &nbsp;&nbsp;&nbsp;&nbsp;
-    <form method="post" th:action=${#strings.prepend(PRODUCT_ADD_NAME,'/')} >
-        <button class="btn btn-primary" type="submit" th:name="${PARAM_PRODUCT_CHECK_BACK}">
+    <form method="post" action="/product/product_add" >
+        <button class="btn btn-primary" type="submit" name="PARAM_PRODUCT_CHECK_BACK">
             戻る
         </button>
     </form>

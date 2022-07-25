@@ -59,20 +59,6 @@ public class ProductController
     public String postProductToList(Model model, @ModelAttribute ProductListForm form)
     {
         System.out.println("商品一覧画面に遷移します。");
-        model.addAttribute(MvcStatic.Product.PRODUCT_LIST_NAME,MvcStatic.Product.PRODUCT_LIST_URL);
-
-        model.addAttribute(MvcStatic.Product.Add.PRODUCT_ADD_NAME,MvcStatic.Product.Add.PRODUCT_ADD_URL);
-        model.addAttribute(MvcStatic.Product.Add.PARAM_PRODUCT_LIST_TO_ADD,MvcStatic.Product.Add.PARAM_PRODUCT_LIST_TO_ADD);
-
-        model.addAttribute(MvcStatic.Product.Edit.PRODUCT_EDIT_NAME,MvcStatic.Product.Edit.PRODUCT_EDIT_URL);
-        model.addAttribute(MvcStatic.Product.Edit.PARAM_PRODUCT_LIST_TO_EDIT,MvcStatic.Product.Edit.PARAM_PRODUCT_LIST_TO_EDIT);
-
-        model.addAttribute(MvcStatic.Product.Delete.PRODUCT_DELETE_NAME,MvcStatic.Product.Delete.PRODUCT_DELETE_URL);
-        model.addAttribute(MvcStatic.Product.Delete.PARAM_PRODUCT_LIST_TO_DELETE,MvcStatic.Product.Delete.PARAM_PRODUCT_LIST_TO_DELETE);
-
-        model.addAttribute(MvcStatic.Product.Reference.PRODUCT_REFERENCE_NAME,MvcStatic.Product.Reference.PRODUCT_REFERENCE_URL);
-        model.addAttribute(MvcStatic.Product.Reference.PARAM_PRODUCT_LIST_TO_REFERENCE,MvcStatic.Product.Reference.PARAM_PRODUCT_LIST_TO_REFERENCE);
-
         List<MProduct> productList = productService.getProducts();
         System.out.println(productList);
         model.addAttribute("productList", productList);
