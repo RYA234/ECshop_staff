@@ -3,7 +3,6 @@ package com.example.demo;
 
 import com.example.demo.contoller.MvcStatic;
 import com.example.demo.contoller.StaffController;
-import com.example.demo.form.StaffListForm;
 import com.example.demo.service.StaffService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -34,9 +33,6 @@ public class StaffControllerTest
     StaffController testIndexController;
     @Mock
     StaffService staffService;
-
-    StaffListForm staffListForm = new StaffListForm();
-
     @BeforeEach
     void setup()
     {
@@ -45,17 +41,13 @@ public class StaffControllerTest
         this.loginMvc = MockMvcBuilders.standaloneSetup(testIndexController).build();
         //model().attribute(MvcStatic.Staff.INDEX_TO_STAFF_NAME, MvcStatic.Staff.STAFF_LIST_URL);
         //model().attribute(MvcStatic.Staff.PARAM_INDEX_TO_STAFF_LIST,MvcStatic.Staff.PARAM_INDEX_TO_STAFF_LIST);
-        staffListForm.setId(1);
-        staffListForm.setName("test");
-        staffListForm.setPassword("pass");
-        staffListForm.setRadio("1");
-        model().attribute("staffListForm",staffListForm);
+
     }
 
 
 
     @Test
-    @DisplayName("01.indexのコントローラーテスト")
+    @DisplayName("indexのコントローラーテスト")
     public void indexControllerTest() throws Exception {
        System.out.println("aaa");
 
@@ -67,7 +59,7 @@ public class StaffControllerTest
 
     }
     @Test
-    @DisplayName("02.indexのコントローラーModelのテスト")
+    @DisplayName("indexのコントローラーModelのテスト")
     public void indexModelTest() throws Exception
 
     {
@@ -80,178 +72,52 @@ public class StaffControllerTest
                 );
     }
 
-
     @Test
-    @DisplayName("03.スタッフ一覧画面からスタッフ追加画面HTTPステータスコードと遷移先ページ確認")
-    public void staffListToAddControllerTest1() throws Exception
-    {
-        loginMvc.perform
-                        (
-                                MockMvcRequestBuilders.post("/staff/staff_list")
-                                        // .param(MvcStatic.Staff.Add.PARAM_STAFF_LIST_TO_ADD,MvcStatic.Staff.Add.PARAM_STAFF_LIST_TO_ADD)
-                                        .param(MvcStatic.Staff.Add.PARAM_STAFF_LIST_TO_ADD,MvcStatic.Staff.Add.PARAM_STAFF_LIST_TO_ADD)
-                        )
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(forwardedUrl("staff/staff_add")
-                );
-    }
-
-    @Test
-    @DisplayName("04.スタッフ追加画面からスタッフ一覧画面HTTPステータスコード確認")
-    public void staffAddBackControllerTest() throws Exception
-    {
-        loginMvc.perform
-                        (
-                                MockMvcRequestBuilders.post("/staff/staff_list")
-                                        // .param(MvcStatic.Staff.Add.PARAM_STAFF_LIST_TO_ADD,MvcStatic.Staff.Add.PARAM_STAFF_LIST_TO_ADD)
-                                        .param(MvcStatic.Staff.PARAM_STAFF_LIST,MvcStatic.Staff.PARAM_STAFF_LIST)
-                        )
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(forwardedUrl("staff/staff_list")
-                );
-    }
-
-    @Test
-    @DisplayName("05.スタッフ追加画面からスタッフ追加確認画面HTTPステータスコード確認")
-    public void staffAddToCheckControllerTest() throws Exception
-    {
-        loginMvc.perform
-                        (
-                                MockMvcRequestBuilders.post("/staff/staff_add_check")
-                                        .param(MvcStatic.Staff.Add.PARAM_STAFF_ADD_TO_CHECK,MvcStatic.Staff.Add.PARAM_STAFF_ADD_TO_CHECK)
-                        )
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(forwardedUrl("staff/staff_add_check")
-                );
-    }
-
-    @Test
-    @DisplayName("06.スタッフ追加確認画面からスタッフ追加画面HTTPステータスコード確認")
+    @DisplayName("スタッフ一覧画面からスタッフ追加画面へ_Viewのform_postからController")
     public void staffListToAddControllerTest() throws Exception
     {
         loginMvc.perform
                         (
         MockMvcRequestBuilders.post("/staff/staff_add")
-                .param(MvcStatic.Staff.Add.PARAM_STAFF_CHECK_BACK,MvcStatic.Staff.Add.PARAM_STAFF_CHECK_BACK)
-                        )
+                .param(MvcStatic.Staff.Add.PARAM_STAFF_LIST_TO_ADD,MvcStatic.Staff.Add.PARAM_STAFF_LIST_TO_ADD)
+                )
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(forwardedUrl("staff/staff_add")
+                .andExpect(model().attribute("STAFF_ADD_CHECK_NAME","staff/staff_add_check")
+
                 );
     }
-
     @Test
-    @DisplayName("07.スタッフ追加確認画面からスタッフ追加完了画面HTTPステータスコード確認")
-    public void staffListToAddCheckToDoneControllerTest() throws Exception
+    @DisplayName("スタッフ一覧画面からスタッフ追加画面へ_Model確認")
+
+    public void staffListToAddModelTest() throws Exception
     {
         loginMvc.perform
                         (
-                                MockMvcRequestBuilders.post("/staff/staff_add_done")
-                                        .param(MvcStatic.Staff.Add.PARAM_STAFF_CHECK_TO_DONE,MvcStatic.Staff.Add.PARAM_STAFF_CHECK_TO_DONE)
-                        )
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(forwardedUrl("staff/staff_add_done")
-                );
-    }
-
-
-    @Test
-    @DisplayName("08.スタッフ一覧画面からスタッフ追加画面へ_Model確認")
-    public void AstaffListToAddModelTest() throws Exception
-    {
-        loginMvc.perform
-                        (
-                                MockMvcRequestBuilders.post("/staff/staff_list")
+                                MockMvcRequestBuilders.post("/staff/staff_add")
                                         .param(MvcStatic.Staff.Add.PARAM_STAFF_LIST_TO_ADD,MvcStatic.Staff.Add.PARAM_STAFF_LIST_TO_ADD)
                         )
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(model().attribute("STAFF_ADD_CHECK_NAME","staff/staff_add_check"))
                 .andExpect(model().attribute("PARAM_STAFF_ADD_TO_CHECK","PARAM_STAFF_ADD_TO_CHECK"))
-
-                .andExpect(model().attribute("STAFF_LIST_NAME","staff/staff_list"))
-                .andExpect(model().attribute("PARAM_STAFF_LIST","PARAM_STAFF_LIST")
+                .andExpect(model().attribute("PARAM_STAFF_ADD_BACK","PARAM_STAFF_ADD_BACK")
                 );
     }
 
     @Test
-    @DisplayName("09.スタッフ追加画面からスタッフ一覧画面へ_Model確認")
-    public void AstaffLisssstToAddModelTest() throws Exception
-    {
-        loginMvc.perform
-                        (
-                                MockMvcRequestBuilders.post("/staff/staff_list")
-                                        .param(MvcStatic.Staff.PARAM_STAFF_LIST,MvcStatic.Staff.PARAM_STAFF_LIST)
-                        )
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(model().attribute("STAFF_ADD_NAME","staff/staff_add"))
-                .andExpect(model().attribute("PARAM_STAFF_LIST_TO_ADD","PARAM_STAFF_LIST_TO_ADD"))
-
-                .andExpect(model().attribute("STAFF_EDIT_NAME","staff/staff_edit"))
-                .andExpect(model().attribute("PARAM_STAFF_LIST_TO_EDIT","PARAM_STAFF_LIST_TO_EDIT"))
-
-                .andExpect(model().attribute("STAFF_DELETE_NAME","staff/staff_delete"))
-                .andExpect(model().attribute("PARAM_STAFF_LIST_TO_DELETE","PARAM_STAFF_LIST_TO_DELETE"))
-
-                .andExpect(model().attribute("PARAM_STAFF_LIST_TO_REFERENCE","PARAM_STAFF_LIST_TO_REFERENCE")
-                );
-    }
-
-    @Test
-    @DisplayName("10.スタッフ追加画面からスタッフ追加確認画面へ_Model確認")
-    public void staffAddToCheckModelTest() throws Exception
-    {
-        loginMvc.perform
-                        (
-                                MockMvcRequestBuilders.post("/staff/staff_add_check")
-                                        .param(MvcStatic.Staff.Add.PARAM_STAFF_ADD_TO_CHECK,MvcStatic.Staff.Add.PARAM_STAFF_ADD_TO_CHECK)
-                        )
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(model().attribute("STAFF_ADD_DONE_NAME","staff/staff_add_done"))
-                .andExpect(model().attribute("PARAM_STAFF_CHECK_TO_DONE","PARAM_STAFF_CHECK_TO_DONE"))
-
-                .andExpect(model().attribute("STAFF_ADD_NAME","staff/staff_add"))
-                .andExpect(model().attribute("PARAM_STAFF_CHECK_BACK","PARAM_STAFF_CHECK_BACK")
-                );
-    }
-
-    @Test
-    @DisplayName("11.スタッフ追加確認画面からスタッフ追加完了画面へ_Model確認")
-    public void staffCheckToDoneModelTest() throws Exception
-    {
-        loginMvc.perform
-                        (
-                                MockMvcRequestBuilders.post("/staff/staff_add_done")
-                                        .param(MvcStatic.Staff.Add.PARAM_STAFF_CHECK_TO_DONE,MvcStatic.Staff.Add.PARAM_STAFF_CHECK_TO_DONE)
-                        )
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(model().attribute("STAFF_LIST_NAME","staff/staff_list"))
-                .andExpect(model().attribute("PARAM_STAFF_LIST","PARAM_STAFF_LIST")
-                );
-    }
-    @Test
-    @DisplayName("12.スタッフ追加確認画面からスタッフ追加画面へ_Model確認")
-    public void staffCheckBackModelTest() throws Exception
+    @DisplayName("スタッフ一覧画面からスタッフ追加画面へ返り値の確認")
+    public void staffListToAddReturn() throws Exception
     {
         loginMvc.perform
                         (
                                 MockMvcRequestBuilders.post("/staff/staff_add")
-                                        .param(MvcStatic.Staff.Add.PARAM_STAFF_CHECK_BACK,MvcStatic.Staff.Add.PARAM_STAFF_CHECK_BACK)
+                                        .param(MvcStatic.Staff.Add.PARAM_STAFF_LIST_TO_ADD,MvcStatic.Staff.Add.PARAM_STAFF_LIST_TO_ADD)
                         )
                 .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(model().attribute("STAFF_ADD_CHECK_NAME","staff/staff_add_check"))
-                .andExpect(model().attribute("PARAM_STAFF_ADD_TO_CHECK","PARAM_STAFF_ADD_TO_CHECK"))
+                .andExpect(forwardedUrl("staff/staff_add")
 
-                .andExpect(model().attribute("STAFF_LIST_NAME","staff/staff_list"))
-                .andExpect(model().attribute("PARAM_STAFF_LIST","PARAM_STAFF_LIST")
                 );
     }
+
 }
