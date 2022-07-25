@@ -113,6 +113,4 @@ public class StaffDeleteController {
         }
         return "staff/staff_list";
     }
-
-
 }
