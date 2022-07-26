@@ -1,6 +1,7 @@
 package com.example.demo.contoller;
 
 import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.model.S3Object;
 import com.example.demo.domain.model.MProduct;
 import com.example.demo.form.ProductListForm;
 import com.example.demo.service.ProductService;
@@ -152,11 +153,13 @@ public class ProductEditController {
         String newPath = String.valueOf(random.nextInt(10000000)) +".png";
         Path oldPath = Paths.get("upload-dir",form.getTmpFileName());
 //        File oldFile = new File(goal.toString());
-        Files.move (oldPath,oldPath.resolveSibling(newPath));
-       Path deletePath = Paths.get("upload-dir",form.getGazou());
-        File file = new File("upload-dir/",form.getGazou());
+//        Files.move (oldPath,oldPath.resolveSibling(newPath));
+       Path deletePath = Paths.get("upload-dir",form.getTmpFileName());
+        File file = new File("upload-dir/",form.getTmpFileName());
         amazonS3.putObject("ddadas",newPath,file);
-        Files.delete(deletePath);
+        S3Object s3Object = amazonS3.getObject("a","aa");
+        s3Object.
+//        Files.delete(deletePath);
 
         productEditService.updateProductone(form.getCode(),
                 form.getName(),
