@@ -13,8 +13,8 @@
     商品編集完了しました。
 
 
-    <form method="post" th:action=${#strings.prepend(PRODUCT_LIST_NAME,'/')} class="form-control">
-            <button class="btn btn-primary" type="submit" th:name="${PARAM_PRODUCT_LIST}">
+    <form method="post" action="/product/product_list" class="form-control">
+            <button class="btn btn-primary" type="submit" name="PARAM_PRODUCT_LIST">
                 商品一覧に戻る
             </button>
     </form>

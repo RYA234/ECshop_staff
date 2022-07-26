@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
 
+
+
 @Controller
 public class StaffDeleteController {
 
@@ -24,15 +26,15 @@ public class StaffDeleteController {
     /**
      *スタッフ一覧画面からスタッフ削除画面に遷移するコントローラーです。<br>
      *
-     * 遷移前URL：{@value com.example.demo.contoller.MvcStatic.Staff#STAFF_LIST_URL}	<br>
-     * 遷移後URL：{@value com.example.demo.contoller.MvcStatic.Staff.Delete#STAFF_DELETE_URL}		<br>
-     *　html側のURLとform actionの変数はthymeleafを使ってJavaの変数から渡しています。
+     * 遷移前URL：staff/staff_list	<br>
+     * 遷移後URL：staff/staff_delete	<br>
+     *　
      *
-     * @param model Viewに渡す変数
-     * 　　　　　	<p>1.遷移先のURL<br>
-     * 				     2.formアクションの値 </p>
+     * @param model Viewに渡す変数:データベーススタッフから得た情を渡す。
+     * 　　　
      *
-     * @return　STAFF_DELETE_URL= {@value com.example.demo.contoller.MvcStatic.Staff.Delete#STAFF_DELETE_URL}:遷移先URL
+     *
+     * @return　staff/staff_delete　遷移先URL
      *
      *
      */

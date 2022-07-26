@@ -86,18 +86,13 @@ public class ProductAddController {
  *テストコード記入済み
  *
  */
-    @RequestMapping(value = MvcStatic.Product.PRODUCT_LIST_URL, params = MvcStatic.Product.Add.PARAM_PRODUCT_LIST_TO_ADD, method = RequestMethod.POST)
+    @RequestMapping(value ="product/product_list", params = "PARAM_PRODUCT_LIST_TO_ADD", method = RequestMethod.POST)
     public String postProductListToAdd(Model model, @ModelAttribute ProductListForm form){
 
         System.out.println("商品一覧画面から商品追加画面に遷移します。");
-        model.addAttribute(MvcStatic.Product.Add.PRODUCT_ADD_CHECK_NAME,MvcStatic.Product.Add.PRODUCT_ADD_CHECK_URL);
-        model.addAttribute(MvcStatic.Product.Add.PARAM_PRODUCT_ADD_TO_CHECK, MvcStatic.Product.Add.PARAM_PRODUCT_ADD_TO_CHECK);
-        //model.addAttribute(MvcStatic.Product.Add.PARAM_PRODUCT_CHECK_TO_DONE,MvcStatic.Product.Add.PARAM_PRODUCT_CHECK_TO_DONE);
 
-        model.addAttribute(MvcStatic.Product.PRODUCT_LIST_NAME,MvcStatic.Product.PRODUCT_LIST_URL);
-        model.addAttribute(MvcStatic.Product.PARAM_PRODUCT_LIST,MvcStatic.Product.PARAM_PRODUCT_LIST);
 
-        return MvcStatic.Product.Add.PRODUCT_ADD_URL;
+        return "/product/product_add";
     }
 
 
@@ -116,23 +111,14 @@ public class ProductAddController {
      *
      *
      */
-    @RequestMapping(value = MvcStatic.Product.Add.PRODUCT_ADD_CHECK_URL, params = MvcStatic.Product.Add.PARAM_PRODUCT_ADD_TO_CHECK, method = RequestMethod.POST)
+    @RequestMapping(value = "product/product_add_check",params = "PARAM_PRODUCT_ADD_TO_CHECK", method = RequestMethod.POST)
     public String postProductAddToCheck( Model model, @ModelAttribute @Validated ProductListForm form, BindingResult bindingResult) throws IOException {
 
         System.out.println("商品追加画面から商品追加確認画面に遷移します。");
-        model.addAttribute(MvcStatic.Product.Add.PRODUCT_ADD_DONE_NAME, MvcStatic.Product.Add.PRODUCT_ADD_DONE_URL);
-        model.addAttribute(MvcStatic.Product.Add.PARAM_PRODUCT_CHECK_TO_DONE,MvcStatic.Product.Add.PARAM_PRODUCT_CHECK_TO_DONE);
-
-        model.addAttribute(MvcStatic.Product.Add.PRODUCT_ADD_NAME, MvcStatic.Product.Add.PRODUCT_ADD_URL);
-        model.addAttribute(MvcStatic.Product.Add.PARAM_PRODUCT_CHECK_BACK, MvcStatic.Product.Add.PARAM_PRODUCT_CHECK_BACK);
         if(bindingResult.hasErrors())
         {
             System.out.println("エラーが発生しました。");
-            model.addAttribute(MvcStatic.Product.Add.PRODUCT_ADD_CHECK_NAME,MvcStatic.Product.Add.PRODUCT_ADD_CHECK_URL);
-            model.addAttribute(MvcStatic.Product.Add.PARAM_PRODUCT_ADD_TO_CHECK, MvcStatic.Product.Add.PARAM_PRODUCT_ADD_TO_CHECK);
-            model.addAttribute(MvcStatic.Product.PRODUCT_LIST_NAME,MvcStatic.Product.PRODUCT_LIST_URL);
-            model.addAttribute(MvcStatic.Product.PARAM_PRODUCT_LIST,MvcStatic.Product.PARAM_PRODUCT_LIST);
-            return MvcStatic.Product.Add.PRODUCT_ADD_URL;
+            return "product/product_add";
         }
 
         Random random = new Random();
@@ -158,7 +144,7 @@ public class ProductAddController {
         model.addAttribute("file", uploadURL);
         System.out.println("エラーが発生");
 
-        return MvcStatic.Product.Add.PRODUCT_ADD_CHECK_URL;
+        return "product/product_add_check";
     }
 
     @GetMapping("/files/{filename:.+}")
@@ -185,13 +171,11 @@ public class ProductAddController {
  *
  *
  */
-    @RequestMapping(value = MvcStatic.Product.Add.PRODUCT_ADD_DONE_URL, params = MvcStatic.Product.Add.PARAM_PRODUCT_CHECK_TO_DONE, method = RequestMethod.POST)
+    @RequestMapping(value = "product/product_add_done", params = "PARAM_PRODUCT_CHECK_TO_DONE", method = RequestMethod.POST)
     public String postProductCheckToDone(Model model, @ModelAttribute ProductListForm form) throws IOException {
 
         System.out.println("商品追加確認画面から商品追加完了画面に遷移します。");
         System.out.println(form);
-        model.addAttribute(MvcStatic.Product.PRODUCT_LIST_NAME, MvcStatic.Product.PRODUCT_LIST_URL);
-        model.addAttribute(MvcStatic.Product.PARAM_PRODUCT_LIST, MvcStatic.Product.PARAM_PRODUCT_LIST);
         Random random = new Random();
         String newPath = String.valueOf(random.nextInt(10000000)) +".png";
         Path oldPath = Paths.get("upload-dir",form.getGazou());
@@ -207,7 +191,7 @@ public class ProductAddController {
                 .build();
         productAddService.addProduct(product);
 
-        return MvcStatic.Product.Add.PRODUCT_ADD_DONE_URL;
+        return "product/product_add_done";
     }
 
     /**編集場所は記入数
@@ -225,17 +209,12 @@ public class ProductAddController {
      *
      *
      */
-    @RequestMapping(value = MvcStatic.Product.Add.PRODUCT_ADD_URL, params = MvcStatic.Product.Add.PARAM_PRODUCT_CHECK_BACK, method = RequestMethod.POST)
+    @RequestMapping(value = "product/product_add", params = "PARAM_PRODUCT_CHECK_BACK", method = RequestMethod.POST)
     public String postProductAddCheckBack(Model model, @ModelAttribute ProductListForm form){
 
         System.out.println("商品追加確認画面から商品追加画面に戻ります。");
-        model.addAttribute(MvcStatic.Product.Add.PRODUCT_ADD_CHECK_NAME,MvcStatic.Product.Add.PRODUCT_ADD_CHECK_URL);
-        model.addAttribute(MvcStatic.Product.Add.PARAM_PRODUCT_CHECK_TO_DONE,MvcStatic.Product.Add.PARAM_PRODUCT_CHECK_TO_DONE);
 
-        model.addAttribute(MvcStatic.Product.PRODUCT_LIST_NAME,MvcStatic.Product.PRODUCT_LIST_URL);
-        model.addAttribute(MvcStatic.Product.PARAM_PRODUCT_LIST,MvcStatic.Product.PARAM_PRODUCT_LIST);
-
-        return MvcStatic.Product.Add.PRODUCT_ADD_URL;
+        return "product/product_add";
     }
 
 

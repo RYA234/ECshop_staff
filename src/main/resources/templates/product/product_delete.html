@@ -15,7 +15,7 @@
     商品削除画面です。
     </br>
     <!-- ↓formでも改行しない方法-->
-    <form method="post" th:action=${#strings.prepend(PRODUCT_DELETE_DONE_NAME,'/')} class="form-control" th:object="${productListForm}">
+    <form method="post" action="/product/product_delete_done" class="form-control" th:object="${productListForm}">
 
         <div><input type="hidden" th:field = "*{code}"></div>
         <div><input type="hidden" th:field = "*{name}"></div>
@@ -34,13 +34,13 @@
         </div>
         <!--    <form method="post" th:action="${PRODUCT_ADD_CHECK_NAME}">-->
         <div style="display:inline-flex">
-            <button class="btn btn-primary" type="submit" th:name="${PARAM_PRODUCT_DELETE_TO_DONE}">
+            <button class="btn btn-primary" type="submit" name="PARAM_PRODUCT_DELETE_TO_DONE">
                 OK
             </button>
     </form>
     &nbsp;&nbsp;&nbsp;&nbsp;
-    <form method="post" th:action=${#strings.prepend(PRODUCT_LIST_NAME,'/')} >
-        <button class="btn btn-primary" type="submit" th:name="${PARAM_PRODUCT_DELETE_BACK}">
+    <form method="post" action="/product/product_list" >
+        <button class="btn btn-primary" type="submit" name="PARAM_PRODUCT_DELETE_BACK">
             戻る
         </button>
     </form>

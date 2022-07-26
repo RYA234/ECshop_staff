@@ -15,10 +15,10 @@
     </br>
     <!-- ↓formでも改行しない方法-->
 
-    <form method="post" th:action=${#strings.prepend(PRODUCT_LIST_NAME,'/')} >
+    <form method="post" action= "/product/product_list" >
         <!--    <form method="post" th:action="${PRODUCT_ADD_CHECK_NAME}">-->
         <div style="display:inline-flex">
-            <button class="btn btn-primary" type="submit" th:name="${PARAM_PRODUCT_LIST}">
+            <button class="btn btn-primary" type="submit" name="PARAM_PRODUCT_LIST">
                 商品一覧画面に戻る
             </button>
     </form>
